@@ -3,7 +3,7 @@
     <div class="container d-flex justify-content-between align-items-center">
         <!-- Logo dan Judul -->
         <a class="d-flex align-items-center text-white text-decoration-none" href="/">
-            <img src="logo.png" alt="Logo" width="50" class="me-2">
+            <img src="{{ asset('assets\vendor\img\logo.png') }}" alt="Logo" width="30" height="auto" class="me-2">
             <span class="fs-5 fw-bold">SISTEM INFORMASI KARIR IT DEL</span>
         </a>
         <!-- Form Search -->
@@ -20,15 +20,16 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mx-auto">
-                <li class="nav-item"><a class="nav-link active text-primary fw-bold" href="/">Home</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="/job-vacancy">Job Vacancy</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="/company-list">Company List</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="/events">Events</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="/news">News</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="/article">Article</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="/tracer-study">Tracer Study</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="/gallery">Gallery</a></li>
+            <ul>
+                <li><a href="/">Beranda</a></li>
+                <li><a href="{{ route('lowongan.kerja') }}">Lowongan Kerja</a></li>
+                <li><a href="/">Daftar Perusahaan</a></li>
+                <li><a href="/">Acara</a>
+                </li>
+                <li><a href="/">Berita</a></li>
+                <li><a href="/">Artikel</a></li>
+                <li><a href="/">Tracer Study</a></li>
+                <li><a href="/">Platform Kami</a></li>
             </ul>
         </div>
     </div>
