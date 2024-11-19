@@ -94,6 +94,17 @@
                 </div>
             </div>
         </div>
+
+        <!-- Copyright Area -->
+        <div class="it-copyright-area it-copyright-height">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <p>&copy; 2024 <a href="#">PPKHA IT Del</a>. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </footer>
 
     <!-- Skrip JavaScript -->
