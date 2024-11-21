@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/lowongan_kerja/tambah', [LowonganController::class, 'index3'])->name('lowongan_kerja/tambah');
 
     Route::get('/daftar_perusahaan', [DaftarPerusahaanController::class, 'index2'])->name('daftar_perusahaan');
+    Route::get('/daftar_perusahaan/tambah', [DaftarPerusahaanController::class, 'index3'])->name('daftar_perusahaan/tambah');
 
 
     Route::get('/acara_', [AcaraController::class, 'index2'])->name('acara_');

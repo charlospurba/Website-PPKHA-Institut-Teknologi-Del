@@ -45,13 +45,13 @@
                 <div class="container-fluid"> <!--begin::Row-->
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Tambah Acara</h3>
+                            <h3 class="mb-0">Tambah Daftar Perusahaan</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Acara
+                                    Daftar Perusahaan
                                 </li>
                             </ol>
                         </div>
@@ -63,20 +63,14 @@
                 <div class="card-header">
                     <form> <!--begin::Body-->
                       <div class="card-body">
-                          <div class="mb-3"> <label for="exampleInputEmail1" class="form-label">Judul Acara</label> <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                          <div class="mb-3"> <label for="exampleInputEmail1" class="form-label">Nama Perusahaan</label> <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                           </div>
 
-                          
+                          <div class="mb-3"> <label for="exampleInputEmail1" class="form-label">Link Perusahaan</label> <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                          </div>
 
-                          <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Detail Acara</label>
-                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" rows="4"></textarea>
-                        </div>
+                          <div class="input-group mb-3"> <input type="file" class="form-control" id="inputGroupFile02"> <label class="input-group-text" for="inputGroupFile02">Upload</label> </div>
 
-                          
-                        <div class="input-group mb-3"> <input type="file" class="form-control" id="inputGroupFile02"> <label class="input-group-text" for="inputGroupFile02">Upload</label> </div>
-
-                            
                       </div> <!--end::Body--> <!--begin::Footer-->
                       <div class="card-footer"> <button type="submit" class="btn btn-primary">Submit</button> </div> <!--end::Footer-->
                   </form>

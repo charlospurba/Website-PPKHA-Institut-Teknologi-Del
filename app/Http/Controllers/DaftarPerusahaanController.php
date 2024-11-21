@@ -24,7 +24,16 @@ class DaftarPerusahaanController extends Controller
     $perusahaan = Perusahaan::all();
 
     // Tampilkan view dengan data perusahaan
-    return view('SIK.DaftarPerusahaan', compact('perusahaan'));
+    return view('SIK.Daftarperusahaan.DaftarPerusahaan', compact('perusahaan'));
+  }
+
+  public function index3()
+  {
+    // Ambil semua data perusahaan dari model
+    $perusahaan = Perusahaan::all();
+
+    // Tampilkan view dengan data perusahaan
+    return view('SIK.Daftarperusahaan.TambahDaftarPerusahaan', compact('perusahaan'));
   }
 
   // Method untuk menyimpan data perusahaan

@@ -62,7 +62,7 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <div class="text-end">
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSarana">Tambah Data</button>
+                        <button class="btn btn-primary" data-bs-toggle="modal" onclick="location.href='{{ route('daftar_perusahaan/tambah') }}'">Tambah Data</button>
                     </div>
                 </div>
                 
