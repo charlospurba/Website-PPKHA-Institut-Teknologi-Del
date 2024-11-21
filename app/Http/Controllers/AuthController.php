@@ -39,4 +39,10 @@ class AuthController extends Controller
             'email' => 'Email atau kata sandi salah.',
         ]);
     }
+
+    public function getLogout(Request $request) 
+    { 
+        Auth::logout(); 
+        return redirect()->route("login"); 
+    } 
 }

@@ -19,12 +19,22 @@ Route::get('/', function () {
     return view('web.home');
 });
 
+
+//Route Tampilan Admin
 Route::prefix('auth')->group(function () {
     Route::get("/login", [AuthController::class, "getLogin"])->name("login");
     Route::post("/login", [AuthController::class, "postLogin"])->name("post.login");
+
+    Route::get("/logout", [AuthController::class, "getLogout"])->name("logout");
 });
 
-Route::get('/Dasbor', [DasborController::class, 'showDasbor'])->name('dasbor');
+Route::middleware('auth')->group(function () { 
+    Route::get('/Dasbor', [DasborController::class, 'showDasbor'])->name('dasbor');
+    Route::get('/lowongan_kerja', [LowonganController::class, 'index2'])->name('lowongan_kerja');
+
+}); 
+
+//Route Charlos
 
 Route::get('/lowongan-kerja', [LowonganController::class, 'index'])->name('lowongan.kerja');
 

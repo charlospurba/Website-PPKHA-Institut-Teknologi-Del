@@ -1,216 +1,250 @@
-<!doctype html>
-<html class="no-js" lang="zxx">
+<!DOCTYPE html>
+<html lang="en"> <!--begin::Head-->
+
+@include('components.header')
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>SMAN 1 Balige</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Navbar</title>
+    <style>
+        /* Gaya tombol utama */
+        .btn {
+            background-color: #098ECC !important;
+            color: white !important;
+            border-color: #098ECC !important;
+            transition: all 0.3s ease-in-out;
+        }
 
+        /* Gaya hover tombol */
+        .btn:hover {
+            background-color: #066D9E !important;
+            border-color: #066D9E !important;
+            color: white !important;
+        }
 
-
-    <!-- Place favicon.ico in the root directory -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo/favicon.png">
-
-    <!-- CSS here -->
-    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/animate.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/custom-animation.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/slick.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/nice-select.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/flaticon_xoft.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/swiper-bundle.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/meanmenu.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/font-awesome-pro.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/magnific-popup.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/spacing.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet" />
-
+        /* Gaya aktif atau fokus */
+        .btn:active,
+        .btn:focus {
+            background-color: #04577A !important;
+            border-color: #04577A !important;
+            color: white !important;
+            box-shadow: none !important;
+        }
+    </style>
 
 </head>
 
-<body>
+<body class="layout-fixed sidebar-expand-lg bg-body-tertiary"> <!--begin::App Wrapper-->
+    <div class="app-wrapper"> <!--begin::Header-->
 
-    @include('components.navbar')
+        @include('components.sidebar')
+        <!--end::Sidebar--> <!--begin::App Main-->
+        <main class="app-main"> <!--begin::App Content Header-->
+            <div class="app-content-header"> <!--begin::Container-->
+                <div class="container-fluid"> <!--begin::Row-->
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h3 class="mb-0">Dashboard v3</h3>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-end">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    Dashboard v3
+                                </li>
+                            </ol>
+                        </div>
+                    </div> <!--end::Row-->
+                </div> <!--end::Container-->
+            </div>
 
-    <main>
-        <!-- slider-area-start -->
-        <div class="it-hero-2-area it-hero-2-bg fix p-relative" data-background="assets/img/hero/hero-bg-1.jpg">
-            <div class="container">
-                <div class="row align-items-start" style="display: flex;">
-                    <div class="col-xl-6 col-lg-6">
-                        <div class="it-hero-2-content p-relative" style="padding-top: 10px;">
-                            <h1 class="it-hero-2-title">Bersama </br> SMA Negeri 1 Balige, Capai Impianmu</h1>
-                            <div class="it-hero-2-text">
-                                <p>Ketersediaan lingkungan yang nyaman dan guru yang berpengalaman akan mendorong kamu
-                                    dari awal hingga akhir proses pembelajaran.</p>
-                                <div class="it-hero-2-btn-box d-flex align-items-end" style="display: flex;">
-                                    <div class="it-hero-2-play">
-                                        <a class="popup-video" href="https://www.youtube.com/watch?v=PO_fBTkoznc">
-                                            <i class="fas fa-play"></i>
-                                        </a>
-                                        <span>Tentang SMA Negeri 1 Balige</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-relative">
-                            <div class="it-hero-2-funfact text-center d-none d-xl-block border-top border-3 border-primary"
-                                style="left: 0; top: 10px; padding-bottom: 15%;">
-                                <span class="theme">
-                                    <i class="purecounter" data-purecounter-duration="0"
-                                        data-purecounter-end="35+">0</i>
-                                </span>
-                                <span>Peserta Didik</span>
-                            </div>
-                            <div class="it-hero-2-funfact text-center d-none d-xl-block border-top border-3 border-primary"
-                                style="left: 275px; top: 10px; padding-bottom: 15%;">
-                                <span class="theme">
-                                    <i class="purecounter" data-purecounter-duration="0"
-                                        data-purecounter-end="35+">0</i>
-                                </span>
-                                <span>Guru & Tendik</span>
-                            </div>
-                            <div class="it-hero-2-funfact text-center d-none d-xl-block border-top border-3 border-primary"
-                                style="left: 550px; top: 10px; padding-bottom: 15%;">
-                                <span class="theme">
-                                    <i class="purecounter" data-purecounter-duration="0"
-                                        data-purecounter-end="35+">0</i>
-                                </span>
-                                <span>Kelas</span>
-                            </div>
-                        </div>
+            <div class="card mb-4">
+                <div class="card-header border-0">
+                    <div class="d-flex justify-content-between">
+                        <h3 class="card-title">Pengguna Baru</h3>
                     </div>
                 </div>
-                <div class="row align-items-end">
-                    <div class="col-xl-6 col-lg-6">
+                <div class="card-body">
+                    <div class="position-relative mb-4">
+                        <div id="user-chart"></div>
                     </div>
-                    <div class="col-xl-4 col-lg-4">
-                        <div class="it-hero-2-thumb-box p-relative" style="margin-top: -500px;">
-                            <!-- Menggunakan margin-top negatif -->
-                            <div class="it-hero-2-thumb p-relative">
-                                <img src="assets/img/hero/hero-2.png" alt="">
-                                <div class="it-hero-2-shape-1 d-none d-xl-block">
-                                    <img src="assets/img/hero/shape-2-6.png" alt="">
-                                </div>
-                                <div class="it-hero-2-shape-2 d-none d-xl-block">
-                                    <img src="assets/img/hero/shape-2-4.png" alt="">
-                                </div>
-                                <div class="it-hero-2-shape-3 d-none d-xl-block">
-                                    <img src="assets/img/hero/shape-2-5.png" alt="">
-                                </div>
-                            </div>
-                        </div>
+                    <div class="d-flex flex-row justify-content-end">
+                        <span class="me-2">
+                            <i class="bi bi-square-fill text-primary"></i> Jumlah Pengguna
+                        </span>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- slider-area-end -->
-    </main>
+            <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+           
 
 
-    <main>
-        <!-- Sambutan Kepala Sekolah -->
-        <section style="padding: 50px 0; background-color: #9ee6f0;">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-4" style="text-align: center;">
-                        <img src="resources\assets\img\kepsek\kepsek.png" alt="Kepala Sekolah"
-                            style="width: 250px; height: auto; border-radius: 8px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
-                        <p style="margin-top: 15px; font-weight: bold;">Aldon Samosir, S.Pd., M.Si<br><span
-                                style="font-weight: normal;">(Kepala Sekolah)</span></p>
-                    </div>
-                    <div class="col-md-8">
-                        <h2 style="font-size: 28px; font-weight: bold; color: #2b2b2b; margin-bottom: 20px;">Sambutan
-                            Kepala Sekolah</h2>
-                        <p style="font-size: 16px; color: #666;">Salam sejahtera untuk kita semua. Selamat datang di
-                            situs web SMAN 1 Balige. Situs ini dirancang sebagai sarana informasi dan komunikasi
-                            sekolah, sesuai dengan perkembangan teknologi industri 4.0, untuk memudahkan pencarian
-                            informasi tentang SMAN 1 Balige.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+        </main> <!--end::App Main--> <!--begin::Footer-->
+        <footer class="app-footer"> <!--begin::To the end-->
+            <div class="float-end d-none d-sm-inline"></div> <!--end::To the end-->
+            <!--begin::Copyright--> <strong>
+                Copyright &copy; k3-project-pabwe
+            </strong>
+            <!--end::Copyright-->
+        </footer> <!--end::Footer-->
+    </div> <!--end::App Wrapper--> <!--begin::Script--> <!--begin::Third Party Plugin(OverlayScrollbars)-->
+    <script src={{"https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/browser/overlayscrollbars.browser.es6.min.js"}}
+    integrity="sha256-H2VM7BKda+v2Z4+DRy69uknwxjyDRhszjXFhsL4gD3w=" crossorigin="anonymous"></script>
+<!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Required Plugin(popperjs for Bootstrap 5)-->
+<script src={{"https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"}}
+    integrity="sha256-whL0tQWoY1Ku1iskqPFvmZ+CHsvmRWx/PIoEvIeWh4I=" crossorigin="anonymous"></script>
+<!--end::Required Plugin(popperjs for Bootstrap 5)--><!--begin::Required Plugin(Bootstrap 5)-->
+<script src={{"https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"}}
+    integrity="sha256-YMa+wAM6QkVyz999odX7lPRxkoYAan8suedu4k2Zur8=" crossorigin="anonymous"></script>
+<!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
+<script src={{"../../dist/js/adminlte.js"}}></script>
+    <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
+    <script>
+        const SELECTOR_SIDEBAR_WRAPPER = ".sidebar-wrapper";
+        const Default = {
+            scrollbarTheme: "os-theme-light",
+            scrollbarAutoHide: "leave",
+            scrollbarClickScroll: true,
+        };
+        document.addEventListener("DOMContentLoaded", function() {
+            const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
+            if (
+                sidebarWrapper &&
+                typeof OverlayScrollbarsGlobal?.OverlayScrollbars !== "undefined"
+            ) {
+                OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
+                    scrollbars: {
+                        theme: Default.scrollbarTheme,
+                        autoHide: Default.scrollbarAutoHide,
+                        clickScroll: Default.scrollbarClickScroll,
+                    },
+                });
+            }
+        });
+    </script> <!--end::OverlayScrollbars Configure--> <!-- OPTIONAL SCRIPTS --> <!-- apexcharts -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.min.js"
+        integrity="sha256-+vh8GkaU7C9/wbSLIcwq82tQ2wTf44aOHA8HlBMwRI8=" crossorigin="anonymous"></script>
 
-    <main>
-        <!-- Testimonial Alumni -->
-        <section style="padding: 50px 0; background-color: #c0b9f0;">
-            <div class="container-fluid">
-                <div class="row justify-content-center">
-                    <div class="col-lg-10">
-                        <div style="text-align: center;">
-                            <h3 style="font-size: 28px; font-weight: bold; color: #2b2b2b; margin-bottom: 30px;">Apa
-                                Kata Alumni Kami?</h3>
-                        </div>
+    <script src="{{ asset('assets/js/adminlte.js') }}"></script>
+    <script>
+        // NOTICE!! DO NOT USE ANY OF THIS JAVASCRIPT
+        // IT'S ALL JUST JUNK FOR DEMO
+        // ++++++++++++++++++++++++++++++++++++++++++
 
-                        <!-- Testimonial 1 -->
-                        <div
-                            style="padding: 30px; border-left: 4px solid #007bff; background-color: #ffffff; box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); margin-bottom: 20px;">
-                            <blockquote
-                                style="font-size: 18px; font-style: italic; color: #555; margin-bottom: 20px; text-align: justify;">
-                                "Belajar di SMA Negeri 1 Balige adalah pengalaman luar biasa bagi saya. Lingkungan yang
-                                nyaman, guru-guru yang penuh perhatian, dan fasilitas yang mendukung benar-benar
-                                membantu saya berkembang. Sekolah ini memberikan fondasi yang kuat bagi saya untuk
-                                melanjutkan ke perguruan tinggi dan mencapai impian saya. Terima kasih SMAN 1 Balige!"
-                            </blockquote>
-                            <p style="font-size: 16px; font-weight: bold; text-align: right;">— Budi Santoso, Alumni
-                                Angkatan 2018</p>
-                        </div>
+        const visitors_chart_options = {
+            series: [{
+                    name: "High - 2023",
+                    data: [100, 120, 170, 167, 180, 177, 160],
+                },
+                {
+                    name: "Low - 2023",
+                    data: [60, 80, 70, 67, 80, 77, 100],
+                },
+            ],
+            chart: {
+                height: 200,
+                type: "line",
+                toolbar: {
+                    show: false,
+                },
+            },
+            colors: ["#0d6efd", "#adb5bd"],
+            stroke: {
+                curve: "smooth",
+            },
+            grid: {
+                borderColor: "#e7e7e7",
+                row: {
+                    colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
+                    opacity: 0.5,
+                },
+            },
+            legend: {
+                show: false,
+            },
+            markers: {
+                size: 1,
+            },
+            xaxis: {
+                categories: ["22th", "23th", "24th", "25th", "26th", "27th", "28th"],
+            },
+        };
 
-                        <!-- Testimonial 2 -->
-                        <div
-                            style="padding: 30px; border-left: 4px solid #007bff; background-color: #ffffff; box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); margin-bottom: 20px;">
-                            <blockquote
-                                style="font-size: 18px; font-style: italic; color: #555; margin-bottom: 20px; text-align: justify;">
-                                "SMA Negeri 1 Balige memberikan saya kesempatan untuk mengembangkan diri baik secara
-                                akademis maupun non-akademis. Saya mendapatkan banyak pengalaman berharga, seperti
-                                kegiatan ekstrakurikuler yang beragam dan bimbingan guru yang sangat peduli terhadap
-                                perkembangan siswa."
-                            </blockquote>
-                            <p style="font-size: 16px; font-weight: bold; text-align: right;">— Maria Simanjuntak,
-                                Alumni Angkatan 2019</p>
-                        </div>
+        const visitors_chart = new ApexCharts(
+            document.querySelector("#visitors-chart"),
+            visitors_chart_options
+        );
+        visitors_chart.render();
 
-                        <!-- Testimonial 3 -->
-                        <div
-                            style="padding: 30px; border-left: 4px solid #007bff; background-color: #ffffff; box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); margin-bottom: 20px;">
-                            <blockquote
-                                style="font-size: 18px; font-style: italic; color: #555; margin-bottom: 20px; text-align: justify;">
-                                "Pembelajaran di SMA Negeri 1 Balige sangat interaktif dan menyenangkan. Para guru
-                                selalu mendorong kami untuk berpikir kritis dan kreatif. Hal ini sangat membantu saya
-                                untuk lebih siap dalam menghadapi pendidikan tinggi dan dunia kerja."
-                            </blockquote>
-                            <p style="font-size: 16px; font-weight: bold; text-align: right;">— Andi Purba, Alumni
-                                Angkatan 2020</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+        const sales_chart_options = {
+            series: [{
+                    name: "Net Profit",
+                    data: [44, 55, 57, 56, 61, 58, 63, 60, 66],
+                },
+                {
+                    name: "Revenue",
+                    data: [76, 85, 101, 98, 87, 105, 91, 114, 94],
+                },
+                {
+                    name: "Free Cash Flow",
+                    data: [35, 41, 36, 26, 45, 48, 52, 53, 41],
+                },
+            ],
+            chart: {
+                type: "bar",
+                height: 200,
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: "55%",
+                    endingShape: "rounded",
+                },
+            },
+            legend: {
+                show: false,
+            },
+            colors: ["#0d6efd", "#20c997", "#ffc107"],
+            dataLabels: {
+                enabled: false,
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ["transparent"],
+            },
+            xaxis: {
+                categories: [
+                    "Feb",
+                    "Mar",
+                    "Apr",
+                    "May",
+                    "Jun",
+                    "Jul",
+                    "Aug",
+                    "Sep",
+                    "Oct",
+                ],
+            },
+            fill: {
+                opacity: 1,
+            },
+            tooltip: {
+                y: {
+                    formatter: function(val) {
+                        return "$ " + val + " thousands";
+                    },
+                },
+            },
+        };
 
-    @include('components.footer')
-
-    <!-- JS here -->
-    <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/waypoints.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/slick.min.js"></script>
-    <script src="assets/js/magnific-popup.js"></script>
-    <script src="assets/js/purecounter.js"></script>
-    <script src="assets/js/wow.js"></script>
-    <script src="assets/js/countdown.js"></script>
-    <script src="assets/js/nice-select.js"></script>
-    <script src="assets/js/swiper-bundle.js"></script>
-    <script src="assets/js/isotope-pkgd.js"></script>
-    <script src="assets/js/imagesloaded-pkgd.js"></script>
-    <script src="assets/js/ajax-form.js"></script>
-    <script src="assets/js/main.js"></script>
-
-
-
-</body>
+        const sales_chart = new ApexCharts(
+            document.querySelector("#sales-chart"),
+            sales_chart_options
+        );
+        sales_chart.render();
+    </script> <!--end::Script-->
+</body><!--end::Body-->
 
 </html>
