@@ -24,52 +24,59 @@
               <!-- Beranda -->
               <li class="nav-item">
                 <a href="{{ route('lowongan_kerja') }}" class="nav-link {{ request()->routeIs('lowongan_kerja') ? 'active' : '' }}">
+                    <i class="nav-icon bi bi-house-door-fill"></i>
+                    <p>
+                        Lowongan Kerja
+                    </p>
+                </a></li>
+
+                <li class="nav-item">
+                <a href="{{ route('daftar_perusahaan') }}" class="nav-link {{ request()->routeIs('daftar_perusahaan') ? 'active' : '' }}">
+                    <i class="nav-icon bi bi-house-door-fill"></i>
+                    <p>
+                        Daftar Perusahaan
+                    </p>
+                </a></li>
+
+                <li class="nav-item">
+                <a href="{{ route('acara_') }}" class="nav-link {{ request()->routeIs('acara_') ? 'active' : '' }}">
                     
                     <i class="nav-icon bi bi-house-door-fill"></i>
                     <p>
-                        Job Vacancy
+                       Acara
                     </p>
                 </a>
-                <a href="#" class="nav-link" data-bs-toggle="collapse" data-bs-target="#berandaMenu"
-                    aria-expanded="false">
+                </li>
+
+                <li class="nav-item">
+                <a href="{{ route('berita_') }}" class="nav-link {{ request()->routeIs('berita_') ? 'active' : '' }}">
+
                     <i class="nav-icon bi bi-house-door-fill"></i>
                     <p>
-                        Company List
+                        Berita
                     </p>
                 </a>
+              </li>
 
-                <a href="#" class="nav-link" data-bs-toggle="collapse" data-bs-target="#berandaMenu"
-                    aria-expanded="false">
-                    <i class="nav-icon bi bi-house-door-fill"></i>
-                    <p>
-                       Events
-                    </p>
-                </a>
+              <li class="nav-item">
+                <a href="{{ route('artikel_') }}" class="nav-link {{ request()->routeIs('artikel_') ? 'active' : '' }}">
 
-                <a href="#" class="nav-link" data-bs-toggle="collapse" data-bs-target="#berandaMenu"
-                    aria-expanded="false">
-                    <i class="nav-icon bi bi-house-door-fill"></i>
-                    <p>
-                        News
-                    </p>
-                </a>
-
-                <a href="#" class="nav-link" data-bs-toggle="collapse" data-bs-target="#berandaMenu"
-                    aria-expanded="false">
                     <i class="nav-icon bi bi-house-door-fill"></i>
                     <p>
                         Artikel
                     </p>
                 </a>
+              </li>
 
+              <li class="nav-item">
                 <a href="#" class="nav-link" data-bs-toggle="collapse" data-bs-target="#berandaMenu"
                     aria-expanded="false">
                     <i class="nav-icon bi bi-house-door-fill"></i>
                     <p>
-                        Galeri
+                        Platform Kami
                     </p>
                 </a>
-                
+
             </li>
 
               <!-- Profil -->

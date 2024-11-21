@@ -15,6 +15,13 @@ class BeritaController extends Controller
     return view('web.Berita', compact('berita'));
   }
 
+  // Display a listing of the berita
+  public function index2()
+  {
+    $berita = Berita::all();
+    return view('SIK.Berita', compact('berita'));
+  }
+
   // Show the form for creating a new berita
   public function create()
   {

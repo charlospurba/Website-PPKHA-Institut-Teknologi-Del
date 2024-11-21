@@ -17,6 +17,16 @@ class DaftarPerusahaanController extends Controller
     return view('web.DaftarPerusahaan', compact('perusahaan'));
   }
 
+  // Method untuk menampilkan halaman daftar perusahaan
+  public function index2()
+  {
+    // Ambil semua data perusahaan dari model
+    $perusahaan = Perusahaan::all();
+
+    // Tampilkan view dengan data perusahaan
+    return view('SIK.DaftarPerusahaan', compact('perusahaan'));
+  }
+
   // Method untuk menyimpan data perusahaan
   public function store(Request $request)
   {

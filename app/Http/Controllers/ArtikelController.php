@@ -15,6 +15,12 @@ class ArtikelController extends Controller
     return view('web.Artikel', compact('artikel'));
   }
 
+  public function index2()
+  {
+    $artikel = Artikel::all();
+    return view('SIK.Artikel', compact('artikel'));
+  }
+
   // Show the form for creating a new article
   public function create()
   {

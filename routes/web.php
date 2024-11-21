@@ -31,6 +31,10 @@ Route::prefix('auth')->group(function () {
 Route::middleware('auth')->group(function () { 
     Route::get('/Dasbor', [DasborController::class, 'showDasbor'])->name('dasbor');
     Route::get('/lowongan_kerja', [LowonganController::class, 'index2'])->name('lowongan_kerja');
+    Route::get('/daftar_perusahaan', [DaftarPerusahaanController::class, 'index2'])->name('daftar_perusahaan');
+    Route::get('/acara_', [AcaraController::class, 'index2'])->name('acara_');
+    Route::get('/berita_', [BeritaController::class, 'index2'])->name('berita_');
+    Route::get('/artikel_', [ArtikelController::class, 'index2'])->name('artikel_');
 
 }); 
 
