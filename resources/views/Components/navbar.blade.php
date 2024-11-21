@@ -7,10 +7,16 @@
             <span class="fs-5 fw-bold">SISTEM INFORMASI KARIR IT DEL</span>
         </a>
         <!-- Form Search -->
-        <form class="d-none d-md-block">
-            <input class="form-control form-control-sm text-white border-0" type="text" placeholder="Search..."
-                style="background-color: rgba(255, 255, 255, 0.2);">
+        <form class="d-flex align-items-center" style="max-width: 250px;">
+            <input class="form-control form-control-sm border-0" type="text" placeholder="Search..."
+                style="background-color: rgba(255, 255, 255, 0.2); height: 30px; font-size: 14px; color: white;">
+            <button type="submit"
+                class="btn btn-sm d-flex align-items-center justify-content-center text-white p-0 ms-1"
+                style="background-color: rgba(255, 255, 255, 0.2); width: 30px; height: 30px; border-radius: 5px;">
+                <i class="fas fa-search" style="font-size: 14px;"></i>
+            </button>
         </form>
+
     </div>
 </div>
 
@@ -42,7 +48,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/">
+                    <a class="nav-link" href="{{ route('daftar.perusahaan') }}">
                         @if (Request::is('daftar-perusahaan'))
                             <strong><u>Daftar Perusahaan</u></strong>
                         @else
@@ -51,7 +57,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/">
+                    <a class="nav-link" href="{{ route('acara.index') }}">
                         @if (Request::is('acara'))
                             <strong><u>Acara</u></strong>
                         @else
@@ -60,7 +66,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/">
+                    <a class="nav-link" href="{{ route('berita.index') }}">
                         @if (Request::is('berita'))
                             <strong><u>Berita</u></strong>
                         @else
@@ -69,7 +75,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/">
+                    <a class="nav-link" href="{{ route('artikel.index') }}">
                         @if (Request::is('artikel'))
                             <strong><u>Artikel</u></strong>
                         @else

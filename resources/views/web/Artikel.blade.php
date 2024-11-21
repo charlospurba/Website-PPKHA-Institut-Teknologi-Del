@@ -35,19 +35,39 @@
 
     @extends('layouts.app')
 
-    @section('title', 'Lowongan Kerja - PPKHA IT Del')
+    @section('title', 'Artikel - PPKHA IT Del')
 
+    <section id="artikel-content" class="container py-5">
+        <h1 class="text-center mb-5">Daftar Artikel</h1>
 
-    <section id="lowongan-content" class="container py-5">
-        <h1 class="text-center mb-5">Daftar Lowongan Kerja</h1>
+        <!-- Display success message -->
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
 
-        @if ($lowongan && $lowongan->lowongan)
-            <p class="text-center">{{ $lowongan->lowongan }}</p>
+        @if ($artikel && $artikel->count())
+            @foreach ($artikel as $item)
+                <div class="artikel-item mb-5">
+                    <h2 class="text-center">{{ $item->judul_artikel }}</h2>
+
+                    @if ($item->cover_artikel)
+                        <img src="{{ asset('storage/' . $item->cover_artikel) }}" alt="{{ $item->judul_artikel }}"
+                            class="img-fluid mb-3">
+                    @endif
+
+                    <p>{{ $item->isi_artikel }}</p>
+
+                    <!-- Action buttons if needed -->
+                    <a href="{{ route('artikel.show', $item->id) }}" class="btn btn-info">Lihat Detail</a>
+                </div>
+                <hr>
+            @endforeach
         @else
-            <p class="text-center"> Tidak ada data lowongan saat ini.</p>
+            <p class="text-center">Tidak ada Artikel saat ini.</p>
         @endif
     </section>
-
     @include('components.footer')
     <!-- JS here -->
     <script src="assets/js/jquery.js"></script>

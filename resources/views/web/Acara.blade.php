@@ -35,16 +35,46 @@
 
     @extends('layouts.app')
 
-    @section('title', 'Lowongan Kerja - PPKHA IT Del')
+    @section('title', 'Acara - PPKHA IT Del')
 
 
-    <section id="lowongan-content" class="container py-5">
-        <h1 class="text-center mb-5">Daftar Lowongan Kerja</h1>
+    <section id="acara-content" class="container py-5">
+        <h1 class="text-center mb-5">Daftar Acara</h1>
 
-        @if ($lowongan && $lowongan->lowongan)
-            <p class="text-center">{{ $lowongan->lowongan }}</p>
+        <!-- Display success message -->
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if ($acara && $acara->count())
+            @foreach ($acara as $item)
+                <div class="acara-item mb-5">
+                    <h2 class="text-center">{{ $item->judul_acara }}</h2>
+                    <p>{{ $item->detail_acara }}</p>
+
+                    @if ($item->lampiran)
+                        @php
+                            $extension = pathinfo($item->lampiran, PATHINFO_EXTENSION);
+                        @endphp
+
+                        @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
+                            <img src="{{ asset('storage/' . $item->lampiran) }}" alt="{{ $item->judul_acara }}"
+                                class="img-fluid mb-3">
+                        @else
+                            <a href="{{ asset('storage/' . $item->lampiran) }}" target="_blank"
+                                class="btn btn-secondary mb-3">Download Lampiran</a>
+                        @endif
+                    @endif
+
+                    <!-- Action buttons if needed -->
+                    <a href="{{ route('acara.show', $item->id) }}" class="btn btn-info">Lihat Detail</a>
+                </div>
+                <hr>
+            @endforeach
         @else
-            <p class="text-center"> Tidak ada data lowongan saat ini.</p>
+            <p class="text-center"> Tidak ada acara saat ini.</p>
         @endif
     </section>
 

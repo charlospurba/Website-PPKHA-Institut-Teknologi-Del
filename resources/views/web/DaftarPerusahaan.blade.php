@@ -35,18 +35,29 @@
 
     @extends('layouts.app')
 
-    @section('title', 'Lowongan Kerja - PPKHA IT Del')
+    @section('title', 'Daftar Perusahaan - PPKHA IT Del')
 
 
-    <section id="lowongan-content" class="container py-5">
-        <h1 class="text-center mb-5">Daftar Lowongan Kerja</h1>
+    <section id="perusahaan-content" class="container py-5">
+        <h1 class="text-center mb-5">Daftar Perusahaan</h1>
 
-        @if ($lowongan && $lowongan->lowongan)
-            <p class="text-center">{{ $lowongan->lowongan }}</p>
+        @if ($perusahaan && $perusahaan->count())
+            @foreach ($perusahaan as $item)
+                <div class="perusahaan-item text-center">
+                    <h2>{{ $item->nama_perusahaan }}</h2>
+                    @if ($item->cover)
+                        <img src="{{ asset('storage/' . $item->cover) }}" alt="{{ $item->nama_perusahaan }}">
+                    @endif
+                    @if ($item->link_perusahaan)
+                        <p><a href="{{ $item->link_perusahaan }}" target="_blank">Visit Website</a></p>
+                    @endif
+                </div>
+            @endforeach
         @else
-            <p class="text-center"> Tidak ada data lowongan saat ini.</p>
+            <p class="text-center">Tidak ada daftar perusahaan saat ini.</p>
         @endif
     </section>
+
 
     @include('components.footer')
     <!-- JS here -->
