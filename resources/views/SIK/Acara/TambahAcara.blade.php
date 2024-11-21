@@ -45,13 +45,13 @@
                 <div class="container-fluid"> <!--begin::Row-->
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Acara</h3>
+                            <h3 class="mb-0">Tambah Lowongan Kerja</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                  Acara
+                                    Lowongan Kerja
                                 </li>
                             </ol>
                         </div>
@@ -61,9 +61,25 @@
 
             <div class="card mb-4">
                 <div class="card-header">
-                    <div class="text-end">
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSarana">Tambah Data</button>
-                    </div>
+                    <form> <!--begin::Body-->
+                      <div class="card-body">
+                          <div class="mb-3"> <label for="exampleInputEmail1" class="form-label">Judul Acara</label> <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                          </div>
+
+                          
+
+                          <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Detail Acara</label>
+                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" rows="4"></textarea>
+                        </div>
+
+                          
+                        <div class="input-group mb-3"> <input type="file" class="form-control" id="inputGroupFile02"> <label class="input-group-text" for="inputGroupFile02">Upload</label> </div>
+
+                            
+                      </div> <!--end::Body--> <!--begin::Footer-->
+                      <div class="card-footer"> <button type="submit" class="btn btn-primary">Submit</button> </div> <!--end::Footer-->
+                  </form>
                 </div>
                 
             </div>
@@ -75,7 +91,7 @@
         <footer class="app-footer"> <!--begin::To the end-->
             <div class="float-end d-none d-sm-inline"></div> <!--end::To the end-->
             <!--begin::Copyright--> <strong>
-                Copyright &copy; k3-project-pabwe
+              © 2024 PPKHA IT Del. All rights reserved.
             </strong>
             <!--end::Copyright-->
         </footer> <!--end::Footer-->
@@ -119,7 +135,7 @@
 
     <script src="{{ asset('assets/js/adminlte.js') }}"></script>
    
-         <!--end::Script-->
+        <!--end::Script-->
 </body><!--end::Body-->
 
 </html>

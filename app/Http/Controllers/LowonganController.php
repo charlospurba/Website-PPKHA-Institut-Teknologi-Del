@@ -24,7 +24,25 @@ class LowonganController extends Controller
     $loker = Lowongan::first();
 
     // Tampilkan view LowonganKerja dengan data lowongan
-    return view('SIK.LowonganKerja', compact('loker'));
+    return view('SIK.Lowongankerja.LowonganKerja', compact('loker'));
+  }
+
+  public function index3()
+  {
+    // Ambil data lowongan dari model Lowongan
+    $loker = Lowongan::first();
+
+    // Tampilkan view LowonganKerja dengan data lowongan
+    return view('SIK.Lowongankerja.TambahLowonganKerja', compact('loker'));
+  }
+
+  public function index4()
+  {
+    // Ambil data lowongan dari model Lowongan
+    $loker = Lowongan::first();
+
+    // Tampilkan view LowonganKerja dengan data lowongan
+    return view('SIK.Lowongankerja.UbahLowonganKerja', compact('loker'));
   }
 
 }

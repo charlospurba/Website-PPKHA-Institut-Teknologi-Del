@@ -19,8 +19,16 @@ class AcaraController extends Controller
   public function index2()
   {
     $acara = Acara::all();
-    return view('SIK.Acara', compact('acara'));
+    return view('SIK.Acara.Acara', compact('acara'));
   }
+
+  public function index3()
+  {
+    $acara = Acara::all();
+    return view('SIK.Acara.TambahAcara', compact('acara'));
+  }
+
+
 
 
   // Show the form for creating a new acara
