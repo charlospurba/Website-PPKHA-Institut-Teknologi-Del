@@ -35,8 +35,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/lowongan_kerja/tambah', [LowonganController::class, 'index3'])->name('lowongan_kerja/tambah');
 
     Route::get('/daftar_perusahaan', [DaftarPerusahaanController::class, 'index2'])->name('daftar_perusahaan');
-    Route::get('/daftar_perusahaan/tambah', [DaftarPerusahaanController::class, 'index3'])->name('daftar_perusahaan/tambah');
-
+    Route::get('/daftar_perusahaan/tambah', [DaftarPerusahaanController::class, 'index3'])->name('daftar_perusahaan.tambah');
+    Route::post('/perusahaan', [DaftarPerusahaanController::class, 'store'])->name('perusahaan.store');
+    Route::get('/perusahaan/{id}/edit', [DaftarPerusahaanController::class, 'edit'])->name('perusahaan.edit');
+    Route::put('/perusahaan/{id}', [DaftarPerusahaanController::class, 'update'])->name('perusahaan.update');
 
     Route::get('/acara_', [AcaraController::class, 'index2'])->name('acara_');
     Route::get('/acara_/tambah', [AcaraController::class, 'index3'])->name('acara_/tambah');

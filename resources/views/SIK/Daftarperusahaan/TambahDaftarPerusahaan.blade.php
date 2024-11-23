@@ -61,20 +61,38 @@
 
             <div class="card mb-4">
                 <div class="card-header">
-                    <form> <!--begin::Body-->
-                      <div class="card-body">
-                          <div class="mb-3"> <label for="exampleInputEmail1" class="form-label">Nama Perusahaan</label> <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                          </div>
+                    <h3>Tambah Perusahaan</h3>
+    <form action="{{ route('perusahaan.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="mb-3">
+            <label for="nama_perusahaan" class="form-label">Nama Perusahaan</label>
+            <input type="text" name="nama_perusahaan" id="nama_perusahaan" class="form-control" value="{{ old('nama_perusahaan') }}" required>
+        </div>
 
-                          <div class="mb-3"> <label for="exampleInputEmail1" class="form-label">Link Perusahaan</label> <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                          </div>
+        <div class="mb-3">
+            <label for="daerah_perusahaan" class="form-label">Daerah Perusahaan</label>
+            <input type="text" name="daerah_perusahaan" id="daerah_perusahaan" class="form-control" value="{{ old('daerah_perusahaan') }}" required>
+        </div>
 
-                          <div class="input-group mb-3"> <input type="file" class="form-control" id="inputGroupFile02"> <label class="input-group-text" for="inputGroupFile02">Upload</label> </div>
+        <div class="mb-3">
+            <label for="link_perusahaan" class="form-label">Link Perusahaan</label>
+            <input type="url" name="link_perusahaan" id="link_perusahaan" class="form-control" value="{{ old('link_perusahaan') }}" required>
+        </div>
 
-                      </div> <!--end::Body--> <!--begin::Footer-->
-                      <div class="card-footer"> <button type="submit" class="btn btn-primary">Submit</button> </div> <!--end::Footer-->
-                  </form>
+        <div class="mb-3">
+            <label for="deskripsi_perusahaan" class="form-label">Deskripsi Perusahaan</label>
+            <input type="text" name="deskripsi_perusahaan" id="deskripsi_perusahaan" class="form-control" value="{{ old('deskripsi_perusahaan') }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="cover_perusahaan" class="form-label">Cover Perusahaan</label>
+            <input type="file" name="cover_perusahaan" id="cover_perusahaan" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Simpan</button>
+    </form>
                 </div>
+                
                 
             </div>
             <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>

@@ -9,13 +9,14 @@ class Perusahaan extends Model
 {
   use HasFactory;
 
-  // Nama tabel di database
   protected $table = 'perusahaan';
+    protected $primaryKey = 'id';
 
-  // Kolom-kolom yang bisa diisi secara massal
-  protected $fillable = [
-    'nama_perusahaan',
-    'link_perusahaan',
-    'cover',
-  ];
+    protected $fillable = [
+        'nama_perusahaan',
+        'daerah_perusahaan',
+        'link_perusahaan',
+        'deskripsi_perusahaan',
+        'cover_perusahaan',
+    ];
 }
