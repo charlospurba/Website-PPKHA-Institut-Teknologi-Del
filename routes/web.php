@@ -28,7 +28,7 @@ Route::prefix('auth')->group(function () {
     Route::get("/logout", [AuthController::class, "getLogout"])->name("logout");
 });
 
-Route::middleware('auth')->group(function () { 
+Route::middleware('auth')->group(function () {
     Route::get('/Dasbor', [DasborController::class, 'showDasbor'])->name('dasbor');
 
     Route::get('/lowongan_kerja', [LowonganController::class, 'index2'])->name('lowongan_kerja');
@@ -47,11 +47,18 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/artikel_', [ArtikelController::class, 'index2'])->name('artikel_');
 
-}); 
+});
 
 //Route Charlos
+Route::get('/lowongan-kerja', [LowonganController::class, 'index2'])->name('lowongan-kerja');
 
-Route::get('/lowongan-kerja', [LowonganController::class, 'index'])->name('lowongan.kerja');
+Route::get('/lowongan_kerja', [LowonganController::class, 'index'])->name('lowongan_kerja');
+Route::get('/lowongan/create', [LowonganController::class, 'create'])->name('lowongan.create');
+Route::post('/lowongan', [LowonganController::class, 'store'])->name('lowongan.store');
+Route::get('/lowongan/{id}/edit', [LowonganController::class, 'edit'])->name('lowongan.edit');
+Route::put('/lowongan/{id}', [LowonganController::class, 'update'])->name('lowongan.update');
+Route::delete('/lowongan/{id}', [LowonganController::class, 'destroy'])->name('lowongan.destroy');
+
 
 // Route untuk daftar perusahaan
 Route::get('/daftar-perusahaan', [DaftarPerusahaanController::class, 'index'])->name('daftar.perusahaan');
@@ -85,3 +92,5 @@ Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.s
 Route::get('/artikel/{id}/edit', [ArtikelController::class, 'edit'])->name('artikel.edit');
 Route::put('/artikel/{id}', [ArtikelController::class, 'update'])->name('artikel.update');
 Route::delete('/artikel/{id}', [ArtikelController::class, 'destroy'])->name('artikel.destroy');
+
+

@@ -39,7 +39,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('lowongan.kerja') }}">
+                    <a class="nav-link" href="{{ route('lowongan-kerja') }}">
                         @if (Request::is('lowongan-kerja'))
                             <strong><u>Lowongan Kerja</u></strong>
                         @else
