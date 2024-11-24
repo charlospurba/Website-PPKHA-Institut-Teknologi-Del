@@ -11,10 +11,14 @@ class Acara extends Model
 
   protected $table = 'acara';
 
-  // Mass assignable attributes
   protected $fillable = [
     'judul_acara',
     'detail_acara',
     'lampiran',
   ];
+
+  protected $casts = [
+    'lampiran' => 'array', // Cast lampiran column as array
+  ];
 }
+

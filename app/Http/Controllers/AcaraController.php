@@ -8,118 +8,113 @@ use Illuminate\Support\Facades\Storage;
 
 class AcaraController extends Controller
 {
-  // Display a listing of the acara
+  // Menampilkan halaman utama acara untuk admin
   public function index()
   {
-    $acara = Acara::all();
-    return view('web.Acara', compact('acara'));
+    $acara = Acara::all(); // Mengambil semua data acara
+    return view('SIK.Acara.Acara', compact('acara')); // View untuk admin
   }
 
-  // Display a listing of the acara
+  // Menampilkan halaman utama acara untuk user
   public function index2()
   {
-    $acara = Acara::all();
-    return view('SIK.Acara.Acara', compact('acara'));
+    $acara = Acara::all(); // Mengambil semua data acara
+    return view('web.Acara', compact('acara')); // Tampilkan ke view
   }
 
-  public function index3()
-  {
-    $acara = Acara::all();
-    return view('SIK.Acara.TambahAcara', compact('acara'));
-  }
-
-
-
-
-  // Show the form for creating a new acara
-  public function create()
-  {
-    return view('web.AcaraCreate');
-  }
-
-  // Store a newly created acara in storage
-  public function store(Request $request)
-  {
-    // Validate input
-    $request->validate([
-      'judul_acara' => 'required|string|max:255',
-      'detail_acara' => 'required|string',
-      'lampiran' => 'nullable|file|mimes:jpg,jpeg,png,gif,pdf,doc,docx|max:5120',
-    ]);
-
-    // Handle lampiran (attachment) upload
-    $lampiranPath = null;
-    if ($request->hasFile('lampiran')) {
-      $lampiranPath = $request->file('lampiran')->store('lampiran', 'public');
-    }
-
-    // Save acara to database
-    Acara::create([
-      'judul_acara' => $request->judul_acara,
-      'detail_acara' => $request->detail_acara,
-      'lampiran' => $lampiranPath,
-    ]);
-
-    return redirect()->route('acara.index')->with('success', 'Acara berhasil ditambahkan!');
-  }
-
-  // Display the specified acara
   public function show($id)
   {
     $acara = Acara::findOrFail($id);
-    return view('web.AcaraShow', compact('acara'));
+    return view('web.detailAcara', compact('acara'));
   }
 
-  // Show the form for editing the specified acara
-  public function edit($id)
+
+  // Menampilkan halaman tambah acara
+  public function create()
   {
-    $acara = Acara::findOrFail($id);
-    return view('web.AcaraEdit', compact('acara'));
+    return view('SIK.Acara.TambahAcara'); // View form tambah acara
   }
 
-  // Update the specified acara in storage
-  public function update(Request $request, $id)
+  // Menyimpan data acara baru
+  public function store(Request $request)
   {
-    // Validate input
-    $request->validate([
+    // Validasi input
+    $validatedData = $request->validate([
       'judul_acara' => 'required|string|max:255',
       'detail_acara' => 'required|string',
-      'lampiran' => 'nullable|file|mimes:jpg,jpeg,png,gif,pdf,doc,docx|max:5120',
+      'lampiran.*' => 'nullable|file|mimes:jpg,jpeg,png,gif,pdf,doc,docx,xlsx,xls|max:5120',
+    ]);
+
+    // Mengunggah lampiran jika ada
+    $lampiranPaths = [];
+    if ($request->hasFile('lampiran')) {
+      foreach ($request->file('lampiran') as $file) {
+        $lampiranPaths[] = $file->store('lampiran', 'public');
+      }
+    }
+
+    // Menyimpan data ke database
+    Acara::create([
+      'judul_acara' => $validatedData['judul_acara'],
+      'detail_acara' => $validatedData['detail_acara'],
+      'lampiran' => $lampiranPaths,
+    ]);
+
+    return redirect()->route('acara_')->with('success', 'Acara berhasil ditambahkan!');
+  }
+
+  // Menampilkan halaman edit acara
+  public function edit($id)
+  {
+    $acara = Acara::findOrFail($id); // Cari data berdasarkan ID
+    return view('SIK.Acara.EditAcara', compact('acara')); // View form edit acara
+  }
+
+  // Memperbarui data acara
+  public function update(Request $request, $id)
+  {
+    // Validasi input
+    $validatedData = $request->validate([
+      'judul_acara' => 'required|string|max:255',
+      'detail_acara' => 'required|string',
+      'lampiran.*' => 'nullable|file|mimes:jpg,jpeg,png,gif,pdf,doc,docx,xlsx,xls|max:5120',
     ]);
 
     $acara = Acara::findOrFail($id);
 
-    // Handle lampiran upload
+    // Menambahkan lampiran baru
+    $lampiranPaths = $acara->lampiran ?? [];
     if ($request->hasFile('lampiran')) {
-      // Delete old lampiran if exists
-      if ($acara->lampiran) {
-        Storage::disk('public')->delete($acara->lampiran);
+      foreach ($request->file('lampiran') as $file) {
+        $lampiranPaths[] = $file->store('lampiran', 'public');
       }
-      // Store new lampiran
-      $lampiranPath = $request->file('lampiran')->store('lampiran', 'public');
-      $acara->lampiran = $lampiranPath;
     }
 
-    // Update acara details
-    $acara->judul_acara = $request->judul_acara;
-    $acara->detail_acara = $request->detail_acara;
-    $acara->save();
+    // Memperbarui data
+    $acara->update([
+      'judul_acara' => $validatedData['judul_acara'],
+      'detail_acara' => $validatedData['detail_acara'],
+      'lampiran' => $lampiranPaths,
+    ]);
 
-    return redirect()->route('acara.index')->with('success', 'Acara berhasil diupdate!');
+    return redirect()->route('acara_')->with('success', 'Acara berhasil diperbarui!');
   }
 
-  // Remove the specified acara from storage
+  // Menghapus data acara
   public function destroy($id)
   {
     $acara = Acara::findOrFail($id);
 
-    // Delete lampiran if exists
+    // Hapus lampiran jika ada
     if ($acara->lampiran) {
-      Storage::disk('public')->delete($acara->lampiran);
+      foreach ($acara->lampiran as $file) {
+        Storage::disk('public')->delete($file);
+      }
     }
 
+    // Hapus data acara
     $acara->delete();
 
-    return redirect()->route('acara.index')->with('success', 'Acara berhasil dihapus!');
+    return response()->json(['success' => 'Acara berhasil dihapus!']);
   }
 }

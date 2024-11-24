@@ -68,14 +68,32 @@ Route::get('/daftar-perusahaan', [DaftarPerusahaanController::class, 'index'])->
 // Route untuk menyimpan data perusahaan
 Route::post('/daftar-perusahaan', [DaftarPerusahaanController::class, 'store'])->name('store.perusahaan');
 
-// Routes for Acara
-Route::get('/acara', [AcaraController::class, 'index'])->name('acara.index');
-Route::get('/acara/create', [AcaraController::class, 'create'])->name('acara.create');
-Route::post('/acara', [AcaraController::class, 'store'])->name('acara.store');
+// Rute untuk Admin Acara
+Route::prefix('SIK')->group(function () {
+    // Menampilkan semua acara
+    Route::get('/acara', [AcaraController::class, 'index'])->name('acara_');
+
+    // Menampilkan form tambah acara
+    Route::get('/acara_/create', [AcaraController::class, 'create'])->name('acara.create');
+
+    // Menyimpan acara baru
+    Route::post('/acara', [AcaraController::class, 'store'])->name('acara.store');
+
+    // Menampilkan form edit acara
+    Route::get('/acara/edit/{id}', [AcaraController::class, 'edit'])->name('acara.edit');
+
+    // Memperbarui acara yang ada
+    Route::put('/acara/update/{id}', [AcaraController::class, 'update'])->name('acara.update');
+
+    // Menghapus acara
+    Route::delete('/acara/delete/{id}', [AcaraController::class, 'destroy'])->name('acara.destroy');
+});
+
+// Rute untuk User
+Route::get('/acara', [AcaraController::class, 'index2'])->name('acara.index');
 Route::get('/acara/{id}', [AcaraController::class, 'show'])->name('acara.show');
-Route::get('/acara/{id}/edit', [AcaraController::class, 'edit'])->name('acara.edit');
-Route::put('/acara/{id}', [AcaraController::class, 'update'])->name('acara.update');
-Route::delete('/acara/{id}', [AcaraController::class, 'destroy'])->name('acara.destroy');
+
+
 
 // Routes for Berita
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');

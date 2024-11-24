@@ -1,141 +1,63 @@
 <!DOCTYPE html>
-<html lang="en"> <!--begin::Head-->
+<html lang="en">
 
 @include('components.header')
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enhanced Navbar</title>
-    <style>
-        /* Gaya tombol utama */
-        .btn {
-            background-color: #098ECC !important;
-            color: white !important;
-            border-color: #098ECC !important;
-            transition: all 0.3s ease-in-out;
-        }
-
-        /* Gaya hover tombol */
-        .btn:hover {
-            background-color: #066D9E !important;
-            border-color: #066D9E !important;
-            color: white !important;
-        }
-
-        /* Gaya aktif atau fokus */
-        .btn:active,
-        .btn:focus {
-            background-color: #04577A !important;
-            border-color: #04577A !important;
-            color: white !important;
-            box-shadow: none !important;
-        }
-    </style>
-
+    <title>Tambah Acara</title>
 </head>
 
-<body class="layout-fixed sidebar-expand-lg bg-body-tertiary"> <!--begin::App Wrapper-->
-    <div class="app-wrapper"> <!--begin::Header-->
-
+<body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
+    <div class="app-wrapper">
         @include('components.sidebar')
-        <!--end::Sidebar--> <!--begin::App Main-->
-        <main class="app-main"> <!--begin::App Content Header-->
-            <div class="app-content-header"> <!--begin::Container-->
-                <div class="container-fluid"> <!--begin::Row-->
+
+        <main class="app-main">
+            <!-- Header -->
+            <div class="app-content-header">
+                <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Tambah Acara</h3>
+                            <h3>Tambah Acara</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">
-                                    Acara
-                                </li>
+                                <li class="breadcrumb-item active">Tambah Acara</li>
                             </ol>
                         </div>
-                    </div> <!--end::Row-->
-                </div> <!--end::Container-->
-            </div>
-
-            <div class="card mb-4">
-                <div class="card-header">
-                    <form> <!--begin::Body-->
-                      <div class="card-body">
-                          <div class="mb-3"> <label for="exampleInputEmail1" class="form-label">Judul Acara</label> <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                          </div>
-
-                          
-
-                          <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Detail Acara</label>
-                            <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" rows="4"></textarea>
-                        </div>
-
-                          
-                        <div class="input-group mb-3"> <input type="file" class="form-control" id="inputGroupFile02"> <label class="input-group-text" for="inputGroupFile02">Upload</label> </div>
-
-                            
-                      </div> <!--end::Body--> <!--begin::Footer-->
-                      <div class="card-footer"> <button type="submit" class="btn btn-primary">Submit</button> </div> <!--end::Footer-->
-                  </form>
+                    </div>
                 </div>
-                
             </div>
-            <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-           
 
-
-        </main> <!--end::App Main--> <!--begin::Footer-->
-        <footer class="app-footer"> <!--begin::To the end-->
-            <div class="float-end d-none d-sm-inline"></div> <!--end::To the end-->
-            <!--begin::Copyright--> <strong>
-              © 2024 PPKHA IT Del. All rights reserved.
-            </strong>
-            <!--end::Copyright-->
-        </footer> <!--end::Footer-->
-    </div> <!--end::App Wrapper--> <!--begin::Script--> <!--begin::Third Party Plugin(OverlayScrollbars)-->
-    <script src={{"https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/browser/overlayscrollbars.browser.es6.min.js"}}
-        integrity="sha256-H2VM7BKda+v2Z4+DRy69uknwxjyDRhszjXFhsL4gD3w=" crossorigin="anonymous"></script>
-    <!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Required Plugin(popperjs for Bootstrap 5)-->
-    <script src={{"https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"}}
-        integrity="sha256-whL0tQWoY1Ku1iskqPFvmZ+CHsvmRWx/PIoEvIeWh4I=" crossorigin="anonymous"></script>
-    <!--end::Required Plugin(popperjs for Bootstrap 5)--><!--begin::Required Plugin(Bootstrap 5)-->
-    <script src={{"https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"}}
-        integrity="sha256-YMa+wAM6QkVyz999odX7lPRxkoYAan8suedu4k2Zur8=" crossorigin="anonymous"></script>
-    <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
-    <script src={{"../../dist/js/adminlte.js"}}></script>
-    <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
-    <script>
-        const SELECTOR_SIDEBAR_WRAPPER = ".sidebar-wrapper";
-        const Default = {
-            scrollbarTheme: "os-theme-light",
-            scrollbarAutoHide: "leave",
-            scrollbarClickScroll: true,
-        };
-        document.addEventListener("DOMContentLoaded", function() {
-            const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
-            if (
-                sidebarWrapper &&
-                typeof OverlayScrollbarsGlobal?.OverlayScrollbars !== "undefined"
-            ) {
-                OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
-                    scrollbars: {
-                        theme: Default.scrollbarTheme,
-                        autoHide: Default.scrollbarAutoHide,
-                        clickScroll: Default.scrollbarClickScroll,
-                    },
-                });
-            }
-        });
-    </script> <!--end::OverlayScrollbars Configure--> <!-- OPTIONAL SCRIPTS --> <!-- apexcharts -->
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.min.js"
-        integrity="sha256-+vh8GkaU7C9/wbSLIcwq82tQ2wTf44aOHA8HlBMwRI8=" crossorigin="anonymous"></script>
-
-    <script src="{{ asset('assets/js/adminlte.js') }}"></script>
-   
-        <!--end::Script-->
-</body><!--end::Body-->
+            <!-- Form Tambah Acara -->
+            <div class="container mt-3">
+                <form action="{{ route('acara.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="judul_acara">Judul Acara</label>
+                        <input type="text" class="form-control" id="judul_acara" name="judul_acara" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="detail_acara">Detail Acara</label>
+                        <textarea class="form-control" id="detail_acara" name="detail_acara" rows="4" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lampiran">Lampiran</label>
+                        <input type="file" class="form-control" id="lampiran" name="lampiran[]" multiple>
+                        <small>Format: jpg, png, pdf, docx, xlsx, dll.</small>
+                    </div>
+                    <!-- Tombol Simpan dan Batal -->
+                    <button type="submit" class="btn"
+                        style="background-color: #13C56B; color: white; border: none;">
+                        Simpan
+                    </button>
+                    <a href="{{ route('acara_') }}" class="btn btn-secondary">Batal</a>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
 
 </html>
