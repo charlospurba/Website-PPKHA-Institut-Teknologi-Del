@@ -33,6 +33,12 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/lowongan_kerja', [LowonganController::class, 'index2'])->name('lowongan_kerja');
     Route::get('/lowongan_kerja/tambah', [LowonganController::class, 'index3'])->name('lowongan_kerja/tambah');
+    
+Route::get('/lowongan/create', [LowonganController::class, 'create'])->name('lowongan.create');
+Route::post('/lowongan', [LowonganController::class, 'store'])->name('lowongan.store');
+Route::get('/lowongan/{id}/edit', [LowonganController::class, 'edit'])->name('lowongan.edit');
+Route::put('/lowongan/{id}', [LowonganController::class, 'update'])->name('lowongan.update');
+Route::delete('/lowongan/{id}', [LowonganController::class, 'destroy'])->name('lowongan.destroy');
 
     Route::get('/daftar_perusahaan', [DaftarPerusahaanController::class, 'index2'])->name('daftar_perusahaan');
     Route::get('/daftar_perusahaan/tambah', [DaftarPerusahaanController::class, 'index3'])->name('daftar_perusahaan.tambah');
@@ -40,6 +46,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/perusahaan/{id}/edit', [DaftarPerusahaanController::class, 'edit'])->name('perusahaan.edit');
     Route::put('/perusahaan/{id}', [DaftarPerusahaanController::class, 'update'])->name('perusahaan.update');
     Route::put('/perusahaan/{id}', [DaftarPerusahaanController::class, 'destroy'])->name('perusahaan.destroy');
+    Route::get('/perusahaan/{id}', [DaftarPerusahaanController::class, 'show'])->name('perusahaan.show');
+
 
     Route::get('/acara_', [AcaraController::class, 'index2'])->name('acara_');
     Route::get('/acara_/tambah', [AcaraController::class, 'index3'])->name('acara_/tambah');
@@ -104,12 +112,6 @@ Route::get('/acara/{id}', [AcaraController::class, 'show'])->name('acara.show');
 
 // Routes for Berita
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
-Route::get('/berita/create', [BeritaController::class, 'create'])->name('berita.create');
-Route::post('/berita', [BeritaController::class, 'store'])->name('berita.store');
-Route::get('/berita/{id}', [BeritaController::class, 'show'])->name('berita.show');
-Route::get('/berita/{id}/edit', [BeritaController::class, 'edit'])->name('berita.edit');
-Route::put('/berita/{id}', [BeritaController::class, 'update'])->name('berita.update');
-Route::delete('/berita/{id}', [BeritaController::class, 'destroy'])->name('berita.destroy');
 
 // Routes for Artikel
 Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index');

@@ -44,9 +44,10 @@
                                     required>
                             </div>
                             <div class="mb-3">
-                                <label>Nama Perusahaan</label>
-                                <input type="text" name="perusahaan" class="form-control"
-                                    value="{{ $lowongan->perusahaan }}" required>
+                                <label for="nama_perusahaan" class="form-label">Nama Perusahaan</label>
+                                <input type="text" id="nama_perusahaan" name="nama_perusahaan" 
+                                       class="form-control" 
+                                       value="{{ $lowongan->perusahaan->nama_perusahaan ?? '' }}">
                             </div>
                             <div class="mb-3">
                                 <label>Cover</label>

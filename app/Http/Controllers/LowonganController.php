@@ -34,7 +34,7 @@ class LowonganController extends Controller
   {
     $validatedData = $request->validate([
       'judul' => 'required|string|max:255',
-      'perusahaan' => 'required|string|max:255',
+      'nama_perusahaan' => 'required|string|max:255',
       'lokasi' => 'required|string|max:255',
       'deskripsi' => 'required|string',
       'jenis_pekerjaan' => 'required|string',
@@ -62,7 +62,7 @@ class LowonganController extends Controller
   {
     $validatedData = $request->validate([
       'judul' => 'required|string|max:255',
-      'perusahaan' => 'required|string|max:255',
+      'nama_perusahaan' => 'required|string|max:255',
       'lokasi' => 'required|string|max:255',
       'deskripsi' => 'required|string',
       'jenis_pekerjaan' => 'required|string',

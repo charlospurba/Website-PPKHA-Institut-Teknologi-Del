@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Perusahaan;
+use App\Models\Lowongan;
 use Illuminate\Support\Facades\Storage;
 
 class DaftarPerusahaanController extends Controller
@@ -13,6 +14,11 @@ class DaftarPerusahaanController extends Controller
   {
     // Ambil semua data perusahaan dari model
     $perusahaan = Perusahaan::all();
+
+    // Pastikan $perusahaan bukan null atau kosong
+    if ($perusahaan->isEmpty()) {
+        return view('web.DaftarPerusahaan', ['perusahaan' => null]); // Bisa tampilkan pesan kosong
+    }
 
     // Tampilkan view dengan data perusahaan
     return view('web.DaftarPerusahaan', compact('perusahaan'));
@@ -24,7 +30,10 @@ class DaftarPerusahaanController extends Controller
     // Ambil semua data perusahaan dari model
     $perusahaan = Perusahaan::all();
 
-    // Tampilkan view dengan data perusahaan
+    if ($perusahaan->isEmpty()) {
+        return view('SIK.Daftarperusahaan.DaftarPerusahaan', ['perusahaan' => null]);
+    }
+
     return view('SIK.Daftarperusahaan.DaftarPerusahaan', compact('perusahaan'));
   }
 
@@ -33,7 +42,10 @@ class DaftarPerusahaanController extends Controller
     // Ambil semua data perusahaan dari model
     $perusahaan = Perusahaan::all();
 
-    // Tampilkan view dengan data perusahaan
+    if ($perusahaan->isEmpty()) {
+        return view('SIK.Daftarperusahaan.TambahDaftarPerusahaan', ['perusahaan' => null]);
+    }
+
     return view('SIK.Daftarperusahaan.TambahDaftarPerusahaan', compact('perusahaan'));
   }
 
@@ -95,6 +107,14 @@ class DaftarPerusahaanController extends Controller
     $perusahaan->update($validated);
 
     return redirect()->route('daftar_perusahaan')->with('success', 'Perusahaan berhasil diperbarui.');
+}
+
+public function show($id)
+{
+  $perusahaan = Perusahaan::findOrFail($id);
+  $lowongan = Lowongan::where('nama_perusahaan', $perusahaan->nama_perusahaan)->get();
+
+  return view('web.DetailPerusahaan', compact('perusahaan', 'lowongan'));
 }
 
 

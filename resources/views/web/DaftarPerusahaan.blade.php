@@ -46,7 +46,9 @@
 
                             <!-- Konten di sebelah kanan -->
                             <div class="card-body">
-                                <h5 class="card-title mb-2">{{ $item->nama_perusahaan }}</h5>
+                                <h5 class="card-title mb-2"><a href="{{ route('perusahaan.show', $item->id) }}" class="text-dark text-decoration-none">
+                                    {{ $item->nama_perusahaan }}
+                                </a></h5>
                                 @if ($item->link_perusahaan)
                                     <a href="{{ $item->link_perusahaan }}" target="_blank" class="text-primary text-decoration-none">
                                         {{ $item->link_perusahaan }}

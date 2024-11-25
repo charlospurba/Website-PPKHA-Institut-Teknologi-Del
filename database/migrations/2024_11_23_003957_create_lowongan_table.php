@@ -10,7 +10,7 @@ return new class extends Migration {
         Schema::create('lowongan', function (Blueprint $table) {
             $table->id(); // Primary Key
             $table->string('judul');           // Kolom untuk judul lowongan
-            $table->string('perusahaan');      // Kolom untuk nama perusahaan
+            $table->string('nama_perusahaan');      // Kolom untuk nama perusahaan
             $table->string('cover')->nullable(); // Kolom untuk cover (gambar), bisa null
             $table->string('lokasi');          // Kolom untuk lokasi penempatan
             $table->text('deskripsi');         // Kolom untuk deskripsi lowongan

@@ -15,10 +15,16 @@ class Lowongan extends Model
   // Kolom-kolom yang bisa diisi secara massal
   protected $fillable = [
     'judul',           // Kolom untuk judul lowongan
-    'perusahaan',      // Kolom untuk nama perusahaan
+    'nama_perusahaan',      // Kolom untuk nama perusahaan
     'cover',           // Kolom untuk cover (gambar)
     'lokasi',          // Kolom untuk lokasi penempatan
     'deskripsi',       // Kolom untuk deskripsi lowongan
     'jenis_pekerjaan', // Kolom untuk jenis pekerjaan
   ];
+
+  public function perusahaan()
+{
+    return $this->belongsTo(Perusahaan::class, 'nama_perusahaan', 'nama_perusahaan');
 }
+}
+

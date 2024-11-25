@@ -19,4 +19,10 @@ class Perusahaan extends Model
         'deskripsi_perusahaan',
         'cover_perusahaan',
     ];
+  
+public function lowongan()
+{
+    return $this->hasMany(Lowongan::class, 'nama_perusahaan', 'nama_perusahaan');
 }
+}
+

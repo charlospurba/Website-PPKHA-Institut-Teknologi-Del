@@ -41,7 +41,7 @@
                             </div>
                             <div class="mb-3">
                                 <label>Nama Perusahaan</label>
-                                <input type="text" name="perusahaan" class="form-control" required>
+                                <input type="text" name="nama_perusahaan" class="form-control" required>
                             </div>
                             <div class="mb-3">
                                 <label>Cover</label>

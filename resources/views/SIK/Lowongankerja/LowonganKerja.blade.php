@@ -43,44 +43,46 @@
                 <div class="container mt-4">
                     <div class="row">
                         @foreach ($lowongan as $index => $loker)
-                            <div class="col-md-12 mb-3">
-                                <div class="card" style="background-color: #E6EDF4; border-radius: 8px;">
-                                    <div class="card-body d-flex align-items-center">
-                                        <!-- Cover -->
-                                        <div style="flex: 0 0 80px; margin-right: 16px;">
-                                            @if ($loker->cover)
-                                                <img src="{{ asset('storage/' . $loker->cover) }}" alt="Cover"
-                                                    style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
-                                            @else
-                                                <div
-                                                    style="width: 80px; height: 80px; background-color: #ddd; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
-                                                    <span>No Image</span>
-                                                </div>
-                                            @endif
-                                        </div>
+    <div class="col-md-12 mb-3">
+        <div class="card" style="background-color: #E6EDF4; border-radius: 8px;">
+            <div class="card-body d-flex align-items-center">
+                <!-- Cover -->
+                <div style="flex: 0 0 80px; margin-right: 16px;">
+                    @if ($loker->cover)
+                        <img src="{{ asset('storage/' . $loker->cover) }}" alt="Cover"
+                            style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
+                    @else
+                        <div style="width: 80px; height: 80px; background-color: #ddd; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                            <span>No Image</span>
+                        </div>
+                    @endif
+                </div>
 
-                                        <!-- Content -->
-                                        <div style="flex: 1;">
-                                            <h5 style="font-weight: bold; color: #2c3e50;">{{ $loker->judul }}</h5>
-                                            <p style="color: #6c757d; margin: 0;">{{ $loker->perusahaan }}</p>
-                                        </div>
+                <!-- Content -->
+                <div style="flex: 1;">
+                    <h5 style="font-weight: bold; color: #2c3e50;">{{ $loker->judul }}</h5>
+                    <p style="color: #6c757d; margin: 0;">
+                        {{ $loker->perusahaan->nama_perusahaan ?? 'Perusahaan Tidak Diketahui' }}
+                    </p>
+                </div>
 
-                                        <!-- Actions -->
-                                        <div style="flex: 0 0 auto; display: flex; gap: 8px;">
-                                            <a href="{{ route('lowongan.edit', $loker->id) }}" class="btn btn-sm"
-                                                style="background-color: #13C56B; color: white; border: 1px solid #13C56B;">
-                                                Edit
-                                            </a>
-                                            <button class="btn btn-sm"
-                                                style="background-color: #FF0000; color: white; border: 1px solid #FF0000;"
-                                                onclick="openDeleteModal({{ $loker->id }}, '{{ $loker->judul }}')">
-                                                Hapus
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
+                <!-- Actions -->
+                <div style="flex: 0 0 auto; display: flex; gap: 8px;">
+                    <a href="{{ route('lowongan.edit', $loker->id) }}" class="btn btn-sm"
+                        style="background-color: #13C56B; color: white; border: 1px solid #13C56B;">
+                        Edit
+                    </a>
+                    <button class="btn btn-sm"
+                        style="background-color: #FF0000; color: white; border: 1px solid #FF0000;"
+                        onclick="openDeleteModal({{ $loker->id }}, '{{ $loker->judul }}')">
+                        Hapus
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach
+
                     </div>
                 </div>
 
