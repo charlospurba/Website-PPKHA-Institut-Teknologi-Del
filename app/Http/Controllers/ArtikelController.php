@@ -8,108 +8,102 @@ use Illuminate\Support\Facades\Storage;
 
 class ArtikelController extends Controller
 {
-  // Display a listing of the articles
   public function index()
   {
     $artikel = Artikel::all();
-    return view('web.Artikel', compact('artikel'));
+    return view('web.Artikel', compact('artikel')); // View untuk user
   }
 
   public function index2()
   {
     $artikel = Artikel::all();
-    return view('SIK.Artikel', compact('artikel'));
+    return view('SIK.Artikel.Artikel', compact('artikel')); // View untuk admin
   }
 
-  // Show the form for creating a new article
   public function create()
   {
-    return view('web.ArtikelCreate');
+    return view('SIK.Artikel.TambahArtikel');
   }
 
-  // Store a newly created article in storage
   public function store(Request $request)
   {
-    // Validate input
     $request->validate([
       'judul_artikel' => 'required|string|max:255',
       'isi_artikel' => 'required|string',
       'cover_artikel' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+      'sumber_artikel' => 'nullable|string|max:255',
     ]);
 
-    // Handle cover_artikel upload
-    $coverArtikelPath = null;
+    // Proses upload cover artikel jika ada
+    $coverPath = null;
     if ($request->hasFile('cover_artikel')) {
-      $coverArtikelPath = $request->file('cover_artikel')->store('cover_artikel', 'public');
+      $coverPath = $request->file('cover_artikel')->store('cover_artikel', 'public');
     }
 
-    // Save article to database
+    // Simpan data artikel ke database
     Artikel::create([
       'judul_artikel' => $request->judul_artikel,
       'isi_artikel' => $request->isi_artikel,
-      'cover_artikel' => $coverArtikelPath,
+      'cover_artikel' => $coverPath,
+      'sumber_artikel' => $request->sumber_artikel,
     ]);
 
-    return redirect()->route('artikel.index')->with('success', 'Artikel berhasil ditambahkan!');
+    // Redirect kembali ke halaman admin (index2)
+    return redirect()->route('admin.artikel.index')->with('success', 'Artikel berhasil ditambahkan!');
   }
 
-  // Display the specified article
-  public function show($id)
-  {
-    $artikel = Artikel::findOrFail($id);
-    return view('web.ArtikelShow', compact('artikel'));
-  }
-
-  // Show the form for editing the specified article
   public function edit($id)
   {
     $artikel = Artikel::findOrFail($id);
-    return view('web.ArtikelEdit', compact('artikel'));
+    return view('SIK.Artikel..EditArtikel', compact('artikel'));
   }
 
-  // Update the specified article in storage
   public function update(Request $request, $id)
   {
-    // Validate input
     $request->validate([
       'judul_artikel' => 'required|string|max:255',
       'isi_artikel' => 'required|string',
       'cover_artikel' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+      'sumber_artikel' => 'nullable|string|max:255',
     ]);
 
     $artikel = Artikel::findOrFail($id);
 
-    // Handle cover_artikel upload
     if ($request->hasFile('cover_artikel')) {
-      // Delete old cover_artikel if exists
       if ($artikel->cover_artikel) {
         Storage::disk('public')->delete($artikel->cover_artikel);
       }
-      // Store new cover_artikel
-      $coverArtikelPath = $request->file('cover_artikel')->store('cover_artikel', 'public');
-      $artikel->cover_artikel = $coverArtikelPath;
+      $coverPath = $request->file('cover_artikel')->store('cover_artikel', 'public');
+      $artikel->cover_artikel = $coverPath;
     }
 
-    // Update article details
     $artikel->judul_artikel = $request->judul_artikel;
     $artikel->isi_artikel = $request->isi_artikel;
+    $artikel->sumber_artikel = $request->sumber_artikel;
     $artikel->save();
 
-    return redirect()->route('artikel.index')->with('success', 'Artikel berhasil diupdate!');
+    return redirect()->route('admin.artikel.index')->with('success', 'Artikel berhasil diperbarui!');
   }
 
-  // Remove the specified article from storage
   public function destroy($id)
   {
     $artikel = Artikel::findOrFail($id);
 
-    // Delete cover_artikel if exists
+    // Hapus cover jika ada
     if ($artikel->cover_artikel) {
       Storage::disk('public')->delete($artikel->cover_artikel);
     }
 
+    // Hapus data artikel
     $artikel->delete();
 
-    return redirect()->route('artikel.index')->with('success', 'Artikel berhasil dihapus!');
+    return response()->json(['success' => 'Artikel berhasil dihapus!']);
   }
+
+  public function show($id)
+  {
+    $artikel = Artikel::findOrFail($id); // Cari artikel berdasarkan ID
+    return view('web.DetailArtikel', compact('artikel')); // Tampilkan halaman detail
+  }
+
 }

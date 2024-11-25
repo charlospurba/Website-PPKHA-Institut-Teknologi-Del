@@ -33,12 +33,12 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/lowongan_kerja', [LowonganController::class, 'index2'])->name('lowongan_kerja');
     Route::get('/lowongan_kerja/tambah', [LowonganController::class, 'index3'])->name('lowongan_kerja/tambah');
-    
-Route::get('/lowongan/create', [LowonganController::class, 'create'])->name('lowongan.create');
-Route::post('/lowongan', [LowonganController::class, 'store'])->name('lowongan.store');
-Route::get('/lowongan/{id}/edit', [LowonganController::class, 'edit'])->name('lowongan.edit');
-Route::put('/lowongan/{id}', [LowonganController::class, 'update'])->name('lowongan.update');
-Route::delete('/lowongan/{id}', [LowonganController::class, 'destroy'])->name('lowongan.destroy');
+
+    Route::get('/lowongan/create', [LowonganController::class, 'create'])->name('lowongan.create');
+    Route::post('/lowongan', [LowonganController::class, 'store'])->name('lowongan.store');
+    Route::get('/lowongan/{id}/edit', [LowonganController::class, 'edit'])->name('lowongan.edit');
+    Route::put('/lowongan/{id}', [LowonganController::class, 'update'])->name('lowongan.update');
+    Route::delete('/lowongan/{id}', [LowonganController::class, 'destroy'])->name('lowongan.destroy');
 
     Route::get('/daftar_perusahaan', [DaftarPerusahaanController::class, 'index2'])->name('daftar_perusahaan');
     Route::get('/daftar_perusahaan/tambah', [DaftarPerusahaanController::class, 'index3'])->name('daftar_perusahaan.tambah');
@@ -114,12 +114,18 @@ Route::get('/acara/{id}', [AcaraController::class, 'show'])->name('acara.show');
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
 
 // Routes for Artikel
+Route::prefix('admin')->group(function () {
+    Route::get('/artikel', [ArtikelController::class, 'index2'])->name('admin.artikel.index');
+    Route::get('/artikel/create', [ArtikelController::class, 'create'])->name('artikel.create');
+    Route::post('/artikel', [ArtikelController::class, 'store'])->name('artikel.store');
+    Route::get('/artikel/{id}/edit', [ArtikelController::class, 'edit'])->name('artikel.edit');
+    Route::put('/artikel/{id}', [ArtikelController::class, 'update'])->name('artikel.update');
+    Route::delete('/artikel/{id}', [ArtikelController::class, 'destroy'])->name('artikel.destroy');
+    Route::delete('/artikel/delete/{id}', [ArtikelController::class, 'destroy'])->name('artikel.destroy');
+
+});
+
 Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index');
-Route::get('/artikel/create', [ArtikelController::class, 'create'])->name('artikel.create');
-Route::post('/artikel', [ArtikelController::class, 'store'])->name('artikel.store');
 Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.show');
-Route::get('/artikel/{id}/edit', [ArtikelController::class, 'edit'])->name('artikel.edit');
-Route::put('/artikel/{id}', [ArtikelController::class, 'update'])->name('artikel.update');
-Route::delete('/artikel/{id}', [ArtikelController::class, 'destroy'])->name('artikel.destroy');
 
 
