@@ -39,12 +39,19 @@ Route::middleware('auth')->group(function () {
     Route::post('/perusahaan', [DaftarPerusahaanController::class, 'store'])->name('perusahaan.store');
     Route::get('/perusahaan/{id}/edit', [DaftarPerusahaanController::class, 'edit'])->name('perusahaan.edit');
     Route::put('/perusahaan/{id}', [DaftarPerusahaanController::class, 'update'])->name('perusahaan.update');
+    Route::put('/perusahaan/{id}', [DaftarPerusahaanController::class, 'destroy'])->name('perusahaan.destroy');
 
     Route::get('/acara_', [AcaraController::class, 'index2'])->name('acara_');
     Route::get('/acara_/tambah', [AcaraController::class, 'index3'])->name('acara_/tambah');
 
 
     Route::get('/berita_', [BeritaController::class, 'index2'])->name('berita_');
+    Route::get('/berita_/tambah', [BeritaController::class, 'index3'])->name('berita_.tambah');
+    Route::post('/berita', [BeritaController::class, 'store'])->name('berita.store');
+    Route::get('/berita/{id}/edit', [BeritaController::class, 'edit'])->name('berita.edit');
+    Route::put('berita/{id}', [BeritaController::class, 'update'])->name('berita.update');
+    Route::put('berita/{id}', [BeritaController::class, 'destroy'])->name('berita.destroy');
+
 
 
     Route::get('/artikel_', [ArtikelController::class, 'index2'])->name('artikel_');

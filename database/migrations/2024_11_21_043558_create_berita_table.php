@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('berita', function (Blueprint $table) {
             $table->id();
+            $table->string('judul_berita');
+            $table->text('detail_berita');
+            $table->json('gambar')->nullable(); // JSON for multiple images/files
             $table->timestamps();
         });
     }

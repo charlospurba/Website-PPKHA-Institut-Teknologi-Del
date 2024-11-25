@@ -19,7 +19,19 @@ class BeritaController extends Controller
   public function index2()
   {
     $berita = Berita::all();
-    return view('SIK.Berita', compact('berita'));
+    return view('SIK.Berita.Berita', compact('berita'));
+  }
+
+  public function index3()
+  {
+    $berita = Berita::all();
+    return view('SIK.Berita.TambahBerita', compact('berita'));
+  }
+
+  public function index4()
+  {
+    $berita = Berita::all();
+    return view('SIK.Berita.EditBerita', compact('berita'));
   }
 
   // Show the form for creating a new berita
@@ -31,27 +43,26 @@ class BeritaController extends Controller
   // Store a newly created berita in storage
   public function store(Request $request)
   {
-    // Validate input
-    $request->validate([
-      'judul_berita' => 'required|string|max:255',
+    // Validasi input
+    $validatedData = $request->validate([
+      'judul_berita' => 'required|string',
       'detail_berita' => 'required|string',
-      'cover_berita' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+      'gambar.*' => 'nullable|file|mimes:jpg,jpeg,png,gif,pdf,doc,docx,xlsx,xls|max:5120',
     ]);
 
-    // Handle cover_berita upload
-    $coverBeritaPath = null;
-    if ($request->hasFile('cover_berita')) {
-      $coverBeritaPath = $request->file('cover_berita')->store('cover_berita', 'public');
+    // Mengunggah lampiran jika ada
+    $gambarPaths = [];
+    if ($request->hasFile('gambar')) {
+      foreach ($request->file('gambar') as $file) {
+        $gambarPaths[] = $file->store('gambar', 'public');
+      }
     }
 
-    // Save berita to database
-    Berita::create([
-      'judul_berita' => $request->judul_berita,
-      'detail_berita' => $request->detail_berita,
-      'cover_berita' => $coverBeritaPath,
-    ]);
+    // Menyimpan data ke database
+    Berita::create($validatedData);
+      
 
-    return redirect()->route('berita.index')->with('success', 'Berita berhasil ditambahkan!');
+    return redirect()->route('berita_')->with('success', 'Berita berhasil ditambahkan!');
   }
 
   // Display the specified berita
@@ -65,7 +76,7 @@ class BeritaController extends Controller
   public function edit($id)
   {
     $berita = Berita::findOrFail($id);
-    return view('web.BeritaEdit', compact('berita'));
+    return view('SIK.Berita.EditBerita', compact('berita'));
   }
 
   // Update the specified berita in storage
@@ -81,14 +92,14 @@ class BeritaController extends Controller
     $berita = Berita::findOrFail($id);
 
     // Handle cover_berita upload
-    if ($request->hasFile('cover_berita')) {
+    if ($request->hasFile('gambar')) {
       // Delete old cover_berita if exists
-      if ($berita->cover_berita) {
-        Storage::disk('public')->delete($berita->cover_berita);
+      if ($berita->gambar) {
+        Storage::disk('public')->delete($berita->gambar);
       }
       // Store new cover_berita
-      $coverBeritaPath = $request->file('cover_berita')->store('cover_berita', 'public');
-      $berita->cover_berita = $coverBeritaPath;
+      $coverBeritaPath = $request->file('gambar')->store('gambar', 'public');
+      $berita->gambar = $coverBeritaPath;
     }
 
     // Update berita details
@@ -96,21 +107,19 @@ class BeritaController extends Controller
     $berita->detail_berita = $request->detail_berita;
     $berita->save();
 
-    return redirect()->route('berita.index')->with('success', 'Berita berhasil diupdate!');
+    return redirect()->route('berita_')->with('success', 'Berita berhasil diupdate!');
   }
 
   // Remove the specified berita from storage
   public function destroy($id)
-  {
-    $berita = Berita::findOrFail($id);
+{
+    $berita = Berita::find($id);
 
-    // Delete cover_berita if exists
-    if ($berita->cover_berita) {
-      Storage::disk('public')->delete($berita->cover_berita);
+    if ($berita) {
+        $berita->delete();
+        return response()->json(['success' => true]);
     }
 
-    $berita->delete();
-
-    return redirect()->route('berita.index')->with('success', 'Berita berhasil dihapus!');
-  }
+    return response()->json(['success' => false, 'message' => 'Berita tidak ditemukan'], 404);
+}
 }

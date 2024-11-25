@@ -123,6 +123,70 @@
             <!--end::Copyright-->
         </footer> <!--end::Footer-->
     </div> <!--end::App Wrapper--> <!--begin::Script--> <!--begin::Third Party Plugin(OverlayScrollbars)-->
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus Data</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah Anda yakin ingin menghapus <strong id="dataTitle"></strong>? Tindakan ini tidak dapat dibatalkan.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteButton">Hapus</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <script>
+        let selectedId = null;
+
+function openDeleteModal(id, title) {
+    // Simpan ID yang akan dihapus
+    selectedId = id;
+
+    // Set judul data dalam modal
+    document.getElementById('dataTitle').innerText = title;
+
+    // Tampilkan modal
+    const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+    deleteModal.show();
+}
+
+// Tambahkan event listener ke tombol konfirmasi
+document.getElementById('confirmDeleteButton').addEventListener('click', function () {
+    if (!selectedId) return;
+
+    fetch(`/perusahaan/${selectedId}`, {
+        method: 'DELETE',
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Refresh halaman jika penghapusan berhasil
+                location.reload();
+            } else {
+                // Tampilkan pesan error
+                alert('Gagal menghapus data: ' + (data.message || 'Terjadi kesalahan'));
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Terjadi kesalahan saat mencoba menghapus data.');
+        });
+});
+
+    
+    </script>
     <script src={{"https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/browser/overlayscrollbars.browser.es6.min.js"}}
         integrity="sha256-H2VM7BKda+v2Z4+DRy69uknwxjyDRhszjXFhsL4gD3w=" crossorigin="anonymous"></script>
     <!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Required Plugin(popperjs for Bootstrap 5)-->

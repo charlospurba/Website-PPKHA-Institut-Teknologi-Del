@@ -101,14 +101,13 @@ class DaftarPerusahaanController extends Controller
     
     public function destroy($id)
     {
-        $perusahaan = Perusahaan::findOrFail($id);
+      $perusahaan = Perusahaan::find($id);
 
-        if ($perusahaan->cover_perusahaan) {
-            Storage::disk('public')->delete($perusahaan->cover_perusahaan);
-        }
-
-        $perusahaan->delete();
-
-        return redirect()->route('daftar_perusahaan')->with('success', 'Perusahaan berhasil dihapus.');
+      if ($perusahaan) {
+          $perusahaan->delete();
+          return response()->json(['success' => true], 200);
+      }
+  
+      return response()->json(['success' => false, 'message' => 'Data tidak ditemukan'], 404);
     }
 }

@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enhanced Navbar</title>
+    <link rel="stylesheet" href={{"https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"}}>
     <style>
         /* Gaya tombol utama */
         .btn {
@@ -62,7 +63,52 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <div class="text-end">
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSarana">Tambah Data</button>
+                        <button class="btn btn-primary" data-bs-toggle="modal" onclick="location.href='{{ route('berita_.tambah') }}'">Tambah Data</button>
+                    </div>
+                </div>
+                <div class="container mt-4">
+                    <div class="row">
+                        @foreach ($berita as $index => $item)
+                            <div class="col-md-12 mb-3">
+                                <div class="card" style="background-color: #E6EDF4; border-radius: 8px;">
+                                    <div class="card-body d-flex align-items-center">
+                                        <!-- Cover -->
+                                        <div style="flex: 0 0 80px; margin-right: 16px;">
+                                            @if ($item->gambar)
+                                                <img src="{{ asset('storage/' . $item->gambar) }}" alt="Cover"
+                                                    style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
+                                            @else
+                                                <div
+                                                    style="width: 80px; height: 80px; background-color: #ddd; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                                    <span>No Image</span>
+                                                </div>
+                                            @endif
+                                        </div>
+
+                                        <!-- Content -->
+                                        <div style="flex: 1;">
+                                            <h5 style="font-weight: bold; color: #2c3e50;">{{ $item->judul_berita }}</h5>
+                                            <p style="color: #6c757d; margin: 0;">{{ $item->detail_berita }}</p>
+                                        </div>
+
+                                        <!-- Actions -->
+                                        <div style="flex: 0 0 auto; display: flex; gap: 8px;">
+                                            <a href="{{ route('berita.edit', $item->id) }}" class="btn btn-sm"
+                                                style="background-color: #13C56B; color: white; border: 1px solid #13C56B;">
+                                                Edit
+                                            </a>
+                                            <button class="btn btn-sm"
+                                                style="background-color: #FF0000; color: white; border: 1px solid #FF0000;"
+                                                onclick="openDeleteModal({{ $item->id }}, '{{ $item->judul_berita }}')">
+                                                Hapus
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                           
+                        @endforeach
                     </div>
                 </div>
                 
@@ -80,6 +126,63 @@
             <!--end::Copyright-->
         </footer> <!--end::Footer-->
     </div> <!--end::App Wrapper--> <!--begin::Script--> <!--begin::Third Party Plugin(OverlayScrollbars)-->
+
+   <!-- Modal Hapus -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-top"> <!-- Menempatkan modal di atas -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Hapus Data Berita</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Apakah kamu yakin ingin menghapus data berita <b id="beritaTitle"></b>?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" style="background-color: #6c757d; color: white;" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn" style="background-color: #FF0000; color: white;" id="confirmDeleteButton">
+                    Ya, Tetap Hapus
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let selectedId = null;
+
+function openDeleteModal(id, title) {
+    selectedId = id; // Simpan ID yang akan dihapus
+    document.getElementById('beritaTitle').innerText = title; // Set judul ke dalam modal
+    const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+    deleteModal.show();
+}
+
+document.getElementById('confirmDeleteButton').addEventListener('click', function () {
+    fetch(`/berita/${selectedId}`, {
+        method: 'DELETE',
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}', // Pastikan CSRF token dimasukkan dengan benar
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            location.reload(); // Refresh halaman
+        } else {
+            alert('Gagal menghapus data: ' + (data.message || 'Error tidak diketahui'));
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Terjadi kesalahan saat mencoba menghapus data.');
+    });
+});
+
+</script>
+    
+
     <script src={{"https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/browser/overlayscrollbars.browser.es6.min.js"}}
         integrity="sha256-H2VM7BKda+v2Z4+DRy69uknwxjyDRhszjXFhsL4gD3w=" crossorigin="anonymous"></script>
     <!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Required Plugin(popperjs for Bootstrap 5)-->
