@@ -50,11 +50,21 @@
 
                             <!-- Bagian Konten -->
                             <div style="flex: 1;">
-                                <h5 style="font-weight: bold;">{{ $loker->judul }}</h5>
-                                <p><strong>Perusahaan:</strong> {{ $loker->perusahaan->nama_perusahaan ?? 'Tidak Diketahui' }}</p>
-                                <p><strong>Lokasi:</strong> {{ $loker->lokasi }}</p>
-                                <p><strong>Jenis Pekerjaan:</strong> {{ $loker->jenis_pekerjaan }}</p>
-                                <a href="#" class="btn btn-primary">Lihat Detail</a>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <h5 style="font-weight: bold; margin: 0;">
+                                        {{ $loker->perusahaan->nama_perusahaan ?? 'Tidak Diketahui' }}
+                                    </h5>
+                                    <a href="#" class="btn btn-primary" style="font-size: 14px;">Lihat Detail</a>
+                                </div>
+                                <p> {{ $loker->judul }}</p>
+                                <p class="card-text text-truncate">
+                                    {{ Str::limit($loker->deskripsi, 100) }}
+                                     </p>
+                                <p> <span style="display: inline-block; background-color: #C19A6B; color: white; padding: 3px 5px; border-radius: 10px; font-weight: bold;">
+                                        {{ $loker->jenis_pekerjaan }}
+                                    </span>
+                                </p>
+                               
                             </div>
                         </div>
                     </div>

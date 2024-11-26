@@ -33,7 +33,7 @@
                             <!-- Gambar di sebelah kiri -->
                             @if ($item->cover)
                                 <div style="flex: 0 0 150px; overflow: hidden; border-top-left-radius: 10px; border-bottom-left-radius: 10px;">
-                                    <img src="{{ asset('storage/' . $item->cover) }}" 
+                                    <img src="{{ asset('storage/' . $item->cover_perusahaan) }}" 
                                          alt="{{ $item->nama_perusahaan }}" 
                                          class="img-fluid" 
                                          style="height: 100%; width: 150px; object-fit: cover;">
@@ -49,13 +49,13 @@
                                 <h5 class="card-title mb-2"><a href="{{ route('perusahaan.show', $item->id) }}" class="text-dark text-decoration-none">
                                     {{ $item->nama_perusahaan }}
                                 </a></h5>
-                                @if ($item->link_perusahaan)
-                                    <a href="{{ $item->link_perusahaan }}" target="_blank" class="text-primary text-decoration-none">
-                                        {{ $item->link_perusahaan }}
-                                    </a>
-                                @else
-                                    <p class="text-muted">Link tidak tersedia</p>
-                                @endif
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p class="card-text mb-0">{{ $item->daerah_perusahaan }}</p>
+                                    <a href="{{ route('perusahaan.show', $item->id) }}" class="text-primary text-decoration-none">Detail -></a>
+                                </div>
+                                <p class="card-text text-truncate">
+                                    {{ Str::limit($item->deskripsi_perusahaan, 100) }}
+                                     </p>
                                
                             </div>
                         </div>

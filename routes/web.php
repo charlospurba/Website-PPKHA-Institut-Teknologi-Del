@@ -79,6 +79,7 @@ Route::delete('/lowongan/{id}', [LowonganController::class, 'destroy'])->name('l
 
 // Route untuk daftar perusahaan
 Route::get('/daftar-perusahaan', [DaftarPerusahaanController::class, 'index'])->name('daftar.perusahaan');
+Route::get('/perusahaan/{id}', [DaftarPerusahaanController::class, 'show'])->name('perusahaan.show');
 
 // Route untuk menyimpan data perusahaan
 Route::post('/daftar-perusahaan', [DaftarPerusahaanController::class, 'store'])->name('store.perusahaan');
@@ -123,6 +124,10 @@ Route::prefix('admin')->group(function () {
     Route::delete('/artikel/{id}', [ArtikelController::class, 'destroy'])->name('artikel.destroy');
     Route::delete('/artikel/delete/{id}', [ArtikelController::class, 'destroy'])->name('artikel.destroy');
 
+
+    Route::put('/perusahaan/{id}', [DaftarPerusahaanController::class, 'update'])->name('perusahaan.update');
+
+    Route::put('berita/{id}', [BeritaController::class, 'update'])->name('berita.update');
 });
 
 Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index');
