@@ -28,7 +28,7 @@ class DaftarPerusahaanController extends Controller
   public function index2()
   {
     // Ambil semua data perusahaan dari model
-    $perusahaan = Perusahaan::all();
+    $perusahaan = Perusahaan::all() ?? collect();
 
     if ($perusahaan->isEmpty()) {
         return view('SIK.Daftarperusahaan.DaftarPerusahaan', ['perusahaan' => null]);

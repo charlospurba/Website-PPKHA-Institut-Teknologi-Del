@@ -67,47 +67,54 @@
                 </div>
                 <div class="container mt-4">
                     <div class="row">
-                        @foreach ($perusahaan as $index => $item)
-                            <div class="col-md-12 mb-3">
-                                <div class="card" style="background-color: #E6EDF4; border-radius: 8px;">
-                                    <div class="card-body d-flex align-items-center">
-                                        <!-- Cover -->
-                                        <div style="flex: 0 0 80px; margin-right: 16px;">
-                                            @if ($item->cover_perusahaan)
-                                                <img src="{{ asset('storage/' . $item->cover_perusahaan) }}" alt="Cover"
-                                                    style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
-                                            @else
-                                                <div
-                                                    style="width: 80px; height: 80px; background-color: #ddd; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
-                                                    <span>No Image</span>
-                                                </div>
-                                            @endif
-                                        </div>
-
-                                        <!-- Content -->
-                                        <div style="flex: 1;">
-                                            <h5 style="font-weight: bold; color: #2c3e50;">{{ $item->nama_perusahaan }}</h5>
-                                            <p style="color: #6c757d; margin: 0;">{{ $item->link_perusahaan }}</p>
-                                        </div>
-
-                                        <!-- Actions -->
-                                        <div style="flex: 0 0 auto; display: flex; gap: 8px;">
-                                            <a href="{{ route('perusahaan.edit', $item->id) }}" class="btn btn-sm"
-                                                style="background-color: #13C56B; color: white; border: 1px solid #13C56B;">
-                                                Edit
-                                            </a>
-                                            <button class="btn btn-sm"
-                                                style="background-color: #FF0000; color: white; border: 1px solid #FF0000;"
-                                                onclick="openDeleteModal({{ $item->id }}, '{{ $item->nama_perusahaan }}')">
-                                                Hapus
-                                            </button>
+                        @if ($perusahaan && $perusahaan->isNotEmpty())
+                            @foreach ($perusahaan as $index => $item)
+                                <div class="col-md-12 mb-3">
+                                    <div class="card" style="background-color: #E6EDF4; border-radius: 8px;">
+                                        <div class="card-body d-flex align-items-center">
+                                            <!-- Cover -->
+                                            <div style="flex: 0 0 80px; margin-right: 16px;">
+                                                @if ($item->cover_perusahaan)
+                                                    <img src="{{ asset('storage/' . $item->cover_perusahaan) }}" alt="Cover"
+                                                        style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
+                                                @else
+                                                    <div
+                                                        style="width: 80px; height: 80px; background-color: #ddd; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                                        <span>No Image</span>
+                                                    </div>
+                                                @endif
+                                            </div>
+                
+                                            <!-- Content -->
+                                            <div style="flex: 1;">
+                                                <h5 style="font-weight: bold; color: #2c3e50;">{{ $item->nama_perusahaan }}</h5>
+                                                <p style="color: #6c757d; margin: 0;">{{ $item->link_perusahaan }}</p>
+                                            </div>
+                
+                                            <!-- Actions -->
+                                            <div style="flex: 0 0 auto; display: flex; gap: 8px;">
+                                                <a href="{{ route('perusahaan.edit', $item->id) }}" class="btn btn-sm"
+                                                    style="background-color: #13C56B; color: white; border: 1px solid #13C56B;">
+                                                    Edit
+                                                </a>
+                                                <button class="btn btn-sm"
+                                                    style="background-color: #FF0000; color: white; border: 1px solid #FF0000;"
+                                                    onclick="openDeleteModal({{ $item->id }}, '{{ $item->nama_perusahaan }}')">
+                                                    Hapus
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                            @endforeach
+                        @else
+                            <div class="col-md-12">
+                                <p class="text-center">Tidak ada data perusahaan yang tersedia.</p>
                             </div>
-                        @endforeach
+                        @endif
                     </div>
                 </div>
+                
                 
             </div>
             <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>

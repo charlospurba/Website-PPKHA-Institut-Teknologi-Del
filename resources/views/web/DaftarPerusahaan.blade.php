@@ -51,7 +51,7 @@
                                 </a></h5>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <p class="card-text mb-0">{{ $item->daerah_perusahaan }}</p>
-                                    <a href="{{ route('perusahaan.show', $item->id) }}" class="text-primary text-decoration-none">Detail -></a>
+                                    <a href="{{ route('perusahaan.show', $item->id) }}" class="text-primary text-decoration-none">Detail</a>
                                 </div>
                                 <p class="card-text text-truncate">
                                     {{ Str::limit($item->deskripsi_perusahaan, 100) }}
