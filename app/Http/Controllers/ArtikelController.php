@@ -10,14 +10,27 @@ class ArtikelController extends Controller
 {
   public function index()
   {
-    $artikel = Artikel::all();
-    return view('web.Artikel', compact('artikel')); // View untuk user
+    // Paginate the articles with 9 items per page and order by the most recent
+    $artikel = Artikel::latest()->paginate(12);
+
+    return view('web.artikel', compact('artikel'));
   }
+
 
   public function index2()
   {
     $artikel = Artikel::all();
     return view('SIK.Artikel.Artikel', compact('artikel')); // View untuk admin
+  }
+
+  public function search(Request $request)
+  {
+    $query = $request->input('query');
+    $artikel = Artikel::where('judul_artikel', 'like', "%{$query}%")
+      ->orderBy('created_at', 'desc')  // Mengurutkan berdasarkan created_at, 'desc' untuk descending (terbaru)
+      ->paginate(12);
+
+    return view('web.artikel', compact('artikel'));  // Pastikan ini sesuai dengan path view Anda
   }
 
   public function create()
@@ -102,8 +115,14 @@ class ArtikelController extends Controller
 
   public function show($id)
   {
-    $artikel = Artikel::findOrFail($id); // Cari artikel berdasarkan ID
-    return view('web.DetailArtikel', compact('artikel')); // Tampilkan halaman detail
+    // Fetch the article by ID
+    $artikel = Artikel::findOrFail($id);
+
+    // Fetch 3 random articles for recommendations
+    $random_articles = Artikel::inRandomOrder()->limit(3)->get();
+
+    // Return the view with the article and the random articles
+    return view('web.DetailArtikel', compact('artikel', 'random_articles'));
   }
 
 }

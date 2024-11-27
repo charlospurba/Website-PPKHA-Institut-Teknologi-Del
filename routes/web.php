@@ -130,7 +130,10 @@ Route::prefix('admin')->group(function () {
     Route::put('berita/{id}', [BeritaController::class, 'update'])->name('berita.update');
 });
 
+// Routes for Artikel
+Route::get('/artikel/cari', [ArtikelController::class, 'search'])->name('artikel.search');
+
+// Route untuk daftar artikel
 Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index');
 Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.show');
-
 
