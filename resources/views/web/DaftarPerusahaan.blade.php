@@ -13,7 +13,7 @@
 
     <!-- CSS here -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet" />
+
 </head>
 
 <body>
@@ -31,18 +31,17 @@
                     <div class="col-md-12">
                         <div class="card shadow-sm d-flex flex-row align-items-center" style="border-radius: 10px;">
                             <!-- Gambar di sebelah kiri -->
-                            @if ($item->cover)
-                                <div style="flex: 0 0 150px; overflow: hidden; border-top-left-radius: 10px; border-bottom-left-radius: 10px;">
-                                    <img src="{{ asset('storage/' . $item->cover_perusahaan) }}" 
-                                         alt="{{ $item->nama_perusahaan }}" 
-                                         class="img-fluid" 
-                                         style="height: 100%; width: 150px; object-fit: cover;">
-                                </div>
-                            @else
-                                <div style="flex: 0 0 150px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; height: 100%; border-top-left-radius: 10px; border-bottom-left-radius: 10px;">
-                                    <span>No Image</span>
-                                </div>
-                            @endif
+                            <div style="flex: 0 0 80px; margin-right: 16px;">
+                @if ($item->cover_perusahaan)
+                    <img src="{{ asset('storage/' . $item->cover_perusahaan) }}" alt="Cover"
+                        style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
+                @else
+                    <div
+                        style="width: 80px; height: 80px; background-color: #ddd; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                        <span>No Image</span>
+                    </div>
+                @endif
+            </div>
 
                             <!-- Konten di sebelah kanan -->
                             <div class="card-body">
