@@ -60,7 +60,7 @@ class BeritaController extends Controller
 
     // Menyimpan data ke database
     Berita::create($validatedData);
-      
+
 
     return redirect()->route('berita_')->with('success', 'Berita berhasil ditambahkan!');
   }
@@ -68,9 +68,12 @@ class BeritaController extends Controller
   // Display the specified berita
   public function show($id)
   {
+
     $berita = Berita::findOrFail($id);
-    return view('web.BeritaShow', compact('berita'));
+    return view('web.DetailBerita', compact('berita'));
   }
+
+
 
   // Show the form for editing the specified berita
   public function edit($id)
@@ -112,14 +115,14 @@ class BeritaController extends Controller
 
   // Remove the specified berita from storage
   public function destroy($id)
-{
+  {
     $berita = Berita::find($id);
 
     if ($berita) {
-        $berita->delete();
-        return response()->json(['success' => true]);
+      $berita->delete();
+      return response()->json(['success' => true]);
     }
 
     return response()->json(['success' => false, 'message' => 'Berita tidak ditemukan'], 404);
-}
+  }
 }

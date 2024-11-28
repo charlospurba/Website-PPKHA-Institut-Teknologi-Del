@@ -63,7 +63,6 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/artikel_', [ArtikelController::class, 'index2'])->name('artikel_');
-
 });
 
 //Route Charlos
@@ -137,3 +136,5 @@ Route::get('/artikel/cari', [ArtikelController::class, 'search'])->name('artikel
 Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index');
 Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.show');
 
+//Route untuk berita
+Route::get('/berita/{id}', [BeritaController::class, 'show'])->name('berita.show');
