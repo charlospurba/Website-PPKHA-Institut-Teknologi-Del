@@ -51,27 +51,32 @@
                         <label for="detail_berita">Detail Berita</label>
                         <textarea class="form-control" id="detail_berita" name="detail_berita" rows="4" required>{{ $berita->detail_berita }}</textarea>
                     </div>
+
                     <div class="mb-3">
-                        <label for="gambar"></label>
-                        <input type="file" class="form-control" id="gambar" name="gambar[]" multiple>
+                        <label for="gambar">Tambah Gambar</label>
+                        <div id="new-gambar-container">
+                            <!-- Input baru akan ditambahkan di sini -->
+                        </div>
+                        <button type="button" class="btn btn-sm btn-primary" onclick="addNewInput()">Tambah Gambar</button>
                         <small>Format: jpg, png, pdf, docx, xlsx, dll.</small>
                     </div>
+                    
                     <div class="mb-3">
                         <p>Lampiran Lama:</p>
                         @if ($berita->gambar)
                             @foreach ($berita->gambar as $index => $file)
-                                <div id="lampiran-item-{{ $index }}" style="margin-bottom: 10px;">
-                                    <a href="{{ asset('storage/' . $file) }}" target="_blank">Lihat Lampiran</a>
-                                    <button type="button" class="btn btn-sm"
-                                        style="background-color: #FF0000; color: white; border: none; margin-left: 10px;"
-                                        onclick="removeAttachment({{ $index }})">X</button>
-                                    <input type="hidden" name="existing_lampiran[]" value="{{ $file }}">
+                                <div id="lampiran-item-{{ $index }}" class="d-flex align-items-center mb-2">
+                                    <a href="{{ asset('storage/' . $file) }}" target="_blank" class="me-2">Lihat Lampiran</a>
+                                    <label>
+                                        <input type="checkbox" name="hapus_gambar[]" value="{{ $file }}"> Hapus
+                                    </label>
                                 </div>
                             @endforeach
                         @else
                             Tidak ada gambar
                         @endif
                     </div>
+                    
                     <!-- Tombol Perbarui dan Batal -->
                     <button type="submit" class="btn"
                         style="background-color: #13C56B; color: white; border: none;">
@@ -83,5 +88,30 @@
         </main>
     </div>
 </body>
+
+<script>
+    let newInputIndex = 0;
+
+    function addNewInput() {
+        const container = document.getElementById('new-gambar-container');
+        const newInput = document.createElement('div');
+        newInput.classList.add('mb-2');
+        newInput.id = `new-input-${newInputIndex}`;
+        newInput.innerHTML = `
+            <input type="file" class="form-control" name="gambar[]" required>
+            <button type="button" class="btn btn-sm btn-danger mt-1" onclick="removeNewInput(${newInputIndex})">Hapus</button>
+        `;
+        container.appendChild(newInput);
+        newInputIndex++;
+    }
+
+    function removeNewInput(index) {
+        const inputToRemove = document.getElementById(`new-input-${index}`);
+        if (inputToRemove) {
+            inputToRemove.remove();
+        }
+    }
+</script>
+
 
 </html>

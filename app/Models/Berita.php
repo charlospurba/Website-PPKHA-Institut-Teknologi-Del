@@ -15,6 +15,10 @@ class Berita extends Model
   protected $fillable = [
     'judul_berita',
     'detail_berita',
-    'cover_berita',
+    'gambar',
+  ];
+
+  protected $casts = [
+    'gambar' => 'array', // Cast lampiran column as array
   ];
 }

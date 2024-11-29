@@ -50,7 +50,7 @@
                         ['name' => 'Berita', 'route' => route('berita.index'), 'active' => Request::is('berita')],
                         ['name' => 'Artikel', 'route' => route('artikel.index'), 'active' => Request::is('artikel')],
                         ['name' => 'Tracer Study', 'route' => '/', 'active' => Request::is('tracer-study')],
-                        ['name' => 'Platform Kami', 'route' => '/', 'active' => Request::is('platform-kami')],
+                        ['name' => 'Platform Kami', 'route' => route('login'), 'active' => Request::is('platform-kami')],
                     ];
                 @endphp
                 @foreach ($navItems as $item)

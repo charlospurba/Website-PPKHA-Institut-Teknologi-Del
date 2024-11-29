@@ -1,3 +1,4 @@
+//sik.tambahberita
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,7 +45,7 @@
                         <textarea class="form-control" id="detail_berita" name="detail_berita" rows="4" required></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="gambar">Lampiran</label>
+                        <label for="gambar">gambar</label>
                         <input type="file" class="form-control" id="gambar" name="gambar[]" multiple>
                         <small>Format: jpg, png, pdf, docx, xlsx, dll.</small>
                     </div>
@@ -61,3 +62,4 @@
 </body>
 
 </html>
+

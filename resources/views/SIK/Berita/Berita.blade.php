@@ -73,32 +73,31 @@
                                 <div class="card" style="background-color: #E6EDF4; border-radius: 8px;">
                                     <div class="card-body d-flex align-items-center">
                                         <!-- Cover -->
-                                        <div style="flex: 0 0 80px; margin-right: 16px;">
-                                            @if ($item->gambar)
-                                                <img src="{{ asset('storage/' . $item->gambar) }}" alt="Cover"
-                                                    style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
-                                            @else
-                                                <div
-                                                    style="width: 80px; height: 80px; background-color: #ddd; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
-                                                    <span>No Image</span>
-                                                </div>
-                                            @endif
-                                        </div>
+                                        
 
                                         <!-- Content -->
                                         <div style="flex: 1;">
                                             <h5 style="font-weight: bold; color: #2c3e50;">{{ $item->judul_berita }}</h5>
-                                            <p style="color: #6c757d; margin: 0;">{{ $item->detail_berita }}</p>
+                                            <p style="
+        color: #6c757d; 
+        margin: 0; 
+        display: -webkit-box; 
+        -webkit-line-clamp: 2; 
+        -webkit-box-orient: vertical; 
+        overflow: hidden; 
+        text-overflow: ellipsis;">
+        {{ $item->detail_berita }}
+    </p>
                                         </div>
 
                                         <!-- Actions -->
                                         <div style="flex: 0 0 auto; display: flex; gap: 8px;">
                                             <a href="{{ route('berita.edit', $item->id) }}" class="btn btn-sm"
-                                                style="background-color: #13C56B; color: white; border: 1px solid #13C56B;">
+                                                style="background-color: #13C56B !important; color: white !important; border: 1px solid #13C56B !important;">
                                                 Edit
                                             </a>
                                             <button class="btn btn-sm"
-                                                style="background-color: #FF0000; color: white; border: 1px solid #FF0000;"
+                                                style="background-color: #FF0000 !important; color: white !important; border: 1px solid #FF0000 !important;"
                                                 onclick="openDeleteModal({{ $item->id }}, '{{ $item->judul_berita }}')">
                                                 Hapus
                                             </button>
@@ -128,28 +127,28 @@
     </div> <!--end::App Wrapper--> <!--begin::Script--> <!--begin::Third Party Plugin(OverlayScrollbars)-->
 
    <!-- Modal Hapus -->
+<!-- Modal Hapus -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-top"> <!-- Menempatkan modal di atas -->
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Hapus Data Berita</h5>
+                <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus Berita</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Apakah kamu yakin ingin menghapus data berita <b id="beritaTitle"></b>?</p>
+                <p>Apakah Anda yakin ingin menghapus berita <b id="beritaTitle"></b>?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn" style="background-color: #6c757d; color: white;" data-bs-dismiss="modal">Batal</button>
-                <button type="button" class="btn" style="background-color: #FF0000; color: white;" id="confirmDeleteButton">
-                    Ya, Tetap Hapus
-                </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteButton">Hapus</button>
             </div>
         </div>
     </div>
 </div>
 
+
 <script>
-    let selectedId = null;
+   let selectedId = null;
 
 function openDeleteModal(id, title) {
     selectedId = id; // Simpan ID yang akan dihapus
@@ -159,6 +158,7 @@ function openDeleteModal(id, title) {
 }
 
 document.getElementById('confirmDeleteButton').addEventListener('click', function () {
+    // Kirim permintaan DELETE ke server
     fetch(`/berita/${selectedId}`, {
         method: 'DELETE',
         headers: {
@@ -166,19 +166,28 @@ document.getElementById('confirmDeleteButton').addEventListener('click', functio
             'Content-Type': 'application/json',
         },
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Gagal menghapus data.');
+        }
+        return response.json();
+    })
     .then(data => {
         if (data.success) {
-            location.reload(); // Refresh halaman
+            // Jika berhasil, langsung refresh halaman tanpa notifikasi
+            window.location.href = '{{ route("berita_") }}'; // Redirect ke halaman berita
         } else {
-            alert('Gagal menghapus data: ' + (data.message || 'Error tidak diketahui'));
+            // Tangani error dari server
+            console.error(data.message);
         }
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('Terjadi kesalahan saat mencoba menghapus data.');
+        // Tampilkan error di console untuk debugging
     });
 });
+
+
 
 </script>
     

@@ -59,8 +59,12 @@ class BeritaController extends Controller
     }
 
     // Menyimpan data ke database
-    Berita::create($validatedData);
-
+    Berita::create([
+      'judul_berita' => $validatedData['judul_berita'],
+      'detail_berita' => $validatedData['detail_berita'],
+      'gambar' => $gambarPaths,
+    ]);
+      
 
     return redirect()->route('berita_')->with('success', 'Berita berhasil ditambahkan!');
   }
@@ -68,12 +72,9 @@ class BeritaController extends Controller
   // Display the specified berita
   public function show($id)
   {
-
     $berita = Berita::findOrFail($id);
     return view('web.DetailBerita', compact('berita'));
   }
-
-
 
   // Show the form for editing the specified berita
   public function edit($id)
@@ -85,44 +86,57 @@ class BeritaController extends Controller
   // Update the specified berita in storage
   public function update(Request $request, $id)
   {
-    // Validate input
-    $request->validate([
-      'judul_berita' => 'required|string|max:255',
-      'detail_berita' => 'required|string',
-      'cover_berita' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
-    ]);
-
-    $berita = Berita::findOrFail($id);
-
-    // Handle cover_berita upload
-    if ($request->hasFile('gambar')) {
-      // Delete old cover_berita if exists
-      if ($berita->gambar) {
-        Storage::disk('public')->delete($berita->gambar);
+      $validatedData = $request->validate([
+          'judul_berita' => 'required|string',
+          'detail_berita' => 'required|string',
+          'gambar.*' => 'nullable|file|mimes:jpg,jpeg,png,gif,pdf,doc,docx,xlsx,xls|max:5120',
+      ]);
+  
+      $berita = Berita::findOrFail($id);
+  
+      // Hapus gambar lama jika dicentang
+      if ($request->has('hapus_gambar')) {
+          foreach ($request->hapus_gambar as $file) {
+              if (Storage::disk('public')->exists($file)) {
+                  Storage::disk('public')->delete($file);
+              }
+          }
+  
+          // Filter gambar yang tidak dihapus
+          $berita->gambar = array_diff($berita->gambar ?? [], $request->hapus_gambar);
       }
-      // Store new cover_berita
-      $coverBeritaPath = $request->file('gambar')->store('gambar', 'public');
-      $berita->gambar = $coverBeritaPath;
-    }
-
-    // Update berita details
-    $berita->judul_berita = $request->judul_berita;
-    $berita->detail_berita = $request->detail_berita;
-    $berita->save();
-
-    return redirect()->route('berita_')->with('success', 'Berita berhasil diupdate!');
+  
+      // Tambah gambar baru
+      $gambarPaths = $berita->gambar ?? [];
+      if ($request->hasFile('gambar')) {
+          foreach ($request->file('gambar') as $file) {
+              $gambarPaths[] = $file->store('gambar', 'public');
+          }
+      }
+  
+      // Update berita
+      $berita->update([
+          'judul_berita' => $validatedData['judul_berita'],
+          'detail_berita' => $validatedData['detail_berita'],
+          'gambar' => $gambarPaths,
+      ]);
+  
+      return redirect()->route('berita_')->with('success', 'Berita berhasil diupdate!');
   }
+  
 
   // Remove the specified berita from storage
   public function destroy($id)
   {
-    $berita = Berita::find($id);
-
-    if ($berita) {
-      $berita->delete();
-      return response()->json(['success' => true]);
-    }
-
-    return response()->json(['success' => false, 'message' => 'Berita tidak ditemukan'], 404);
+      try {
+          $berita = Berita::findOrFail($id);
+          $berita->delete();
+  
+          return response()->json(['success' => true]);
+      } catch (\Exception $e) {
+          return response()->json(['success' => false, 'message' => 'Gagal menghapus berita.'], 500);
+      }
   }
+  
+  
 }
