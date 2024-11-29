@@ -54,7 +54,9 @@
                                     <h5 style="font-weight: bold; margin: 0;">
                                         {{ $loker->perusahaan->nama_perusahaan ?? 'Tidak Diketahui' }}
                                     </h5>
-                                    <a href="#" class="btn btn-primary" style="font-size: 14px;">Lihat Detail</a>
+                                    <a href="{{ route('lowongan.show', $loker->id) }}" class="btn btn-primary">
+                                        Lihat Detail
+                                      </a>
                                 </div>
                                 <p> {{ $loker->judul }}</p>
                                 <p class="card-text text-truncate">

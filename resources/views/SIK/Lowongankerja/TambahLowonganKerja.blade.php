@@ -51,10 +51,27 @@
                                 <label>Lokasi Penempatan</label>
                                 <input type="text" name="lokasi" class="form-control" required>
                             </div>
+
+                            <div class="mb-3">
+                                <label for="link_perusahaan" class="form-label">Link Perusahaan</label>
+                                <input type="url" name="link_perusahaan" id="link_perusahaan" class="form-control" value="{{ old('link_perusahaan') }}" required>
+                            </div>
+                            
                             <div class="mb-3">
                                 <label>Deskripsi Lowongan</label>
                                 <textarea name="deskripsi" class="form-control" rows="4" required></textarea>
                             </div>
+
+                            <div class="mb-3">
+                                <label>Kualifikasi</label>
+                                <textarea name="kualifikasi" class="form-control" rows="4" required></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Benefit</label>
+                                <textarea name="benefit" class="form-control" rows="4" required></textarea>
+                            </div>
+
                             <div class="mb-3">
                                 <label>Jenis Pekerjaan</label>
                                 <select name="jenis_pekerjaan" class="form-select" required>
