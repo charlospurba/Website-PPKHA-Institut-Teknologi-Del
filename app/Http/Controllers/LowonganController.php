@@ -29,14 +29,30 @@ class LowonganController extends Controller
     return view('SIK.Lowongankerja.TambahLowonganKerja');
   }
 
+  public function show($id)
+  {
+      // Pastikan hanya mendapatkan satu data
+      $lowongan = Lowongan::find($id);
+  
+      if (!$lowongan) {
+          return abort(404, 'Lowongan tidak ditemukan');
+      }
+  
+      return view('web.DetailLowongan', compact('lowongan'));
+  }
+  
+
+
   // Menyimpan data baru
   public function store(Request $request)
   {
     $validatedData = $request->validate([
-      'judul' => 'required|string|max:255',
-      'nama_perusahaan' => 'required|string|max:255',
-      'lokasi' => 'required|string|max:255',
+      'judul' => 'required|string',
+      'nama_perusahaan' => 'required|string',
+      'lokasi' => 'required|string',
       'deskripsi' => 'required|string',
+      'kualifikasi' => 'required|string',
+      'benefit' => 'required|string',
       'jenis_pekerjaan' => 'required|string',
       'cover' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
     ]);

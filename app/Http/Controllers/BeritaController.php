@@ -18,7 +18,7 @@ class BeritaController extends Controller
   // Display a listing of the berita
   public function index2()
   {
-    $berita = Berita::all();
+    $berita = Berita::orderBy('created_at', 'desc')->get();
     return view('SIK.Berita.Berita', compact('berita'));
   }
 

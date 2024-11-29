@@ -18,7 +18,9 @@ class Lowongan extends Model
     'nama_perusahaan',      // Kolom untuk nama perusahaan
     'cover',           // Kolom untuk cover (gambar)
     'lokasi',          // Kolom untuk lokasi penempatan
-    'deskripsi',       // Kolom untuk deskripsi lowongan
+    'deskripsi', 
+    'kualifikasi',
+    'benefit',      // Kolom untuk deskripsi lowongan
     'jenis_pekerjaan', // Kolom untuk jenis pekerjaan
   ];
 

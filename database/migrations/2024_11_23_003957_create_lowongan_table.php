@@ -13,7 +13,9 @@ return new class extends Migration {
             $table->string('nama_perusahaan');      // Kolom untuk nama perusahaan
             $table->string('cover')->nullable(); // Kolom untuk cover (gambar), bisa null
             $table->string('lokasi');          // Kolom untuk lokasi penempatan
-            $table->text('deskripsi');         // Kolom untuk deskripsi lowongan
+            $table->text('deskripsi');      // Kolom untuk deskripsi lowongan
+            $table->text('kualifikasi');
+            $table->text('benefit');      
             $table->string('jenis_pekerjaan'); // Kolom untuk jenis pekerjaan (dropdown)
             $table->timestamps();             // Kolom created_at dan updated_at
         });

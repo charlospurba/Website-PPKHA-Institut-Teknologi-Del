@@ -33,7 +33,7 @@
   <section id="detail-perusahaan" class="container py-5">
     <div class="card mb-4">
       <div class="card-body">
-        <div class="job-detail-container d-flex align-items-center gap-3">
+        <div class="job-detail-container d-flex align-items-center gap-3" style="display: flex; align-items: center;">
           <!-- Gambar -->
           @if ($lowongan->cover)
             <img src="{{ asset('storage/' . $lowongan->cover) }}" alt="Cover"
@@ -44,26 +44,27 @@
               <span>No Image</span>
             </div>
           @endif
-
+      
           <!-- Detail Perusahaan dan Job Info -->
-          <div>
+          <div style="flex-grow: 1;">
             <h1 class="job-title" style="font-size: 24px; margin: 0; color: #354A7B">{{ $lowongan->nama_perusahaan }}</h1>
-            <p class="job-info" style="margin: 4px 0;  color: #354A7B"> {{ $lowongan->judul }}</p>
+            <p class="job-info" style="margin: 4px 0; color: #354A7B"> {{ $lowongan->judul }}</p>
             <button class="btn" style="background-color: #B9965B; color: white">
               {{ $lowongan->jenis_pekerjaan }}
-          </button>
-          <div>
-            <p style="font-size: 14px; margin-bottom: 4px;"><strong>Lokasi:</strong> {{ $lowongan->lokasi }}</p>
-          <p class="text-muted">Tanggal Publish {{ $lowongan->created_at->format('d F Y') }}</p>
+            </button>
+            <div>
+              <p style="font-size: 14px; margin-bottom: 4px;"><strong>Lokasi:</strong> {{ $lowongan->lokasi }}</p>
+              <p class="text-muted">Tanggal Publish {{ $lowongan->created_at->format('d F Y') }}</p>
+            </div>
           </div>
-          </div>
-
+      
           <!-- Tombol Apply -->
-          <div class="ms-auto">
+          <div style="margin-left: auto;">
             <button class="btn" style="background-color: #9BBDDC; color: white" onclick="window.location.href='#'">Apply</button>
           </div>
         </div>
       </div>
+      
     </div>
 
     <!-- Deskripsi Lowongan Card -->

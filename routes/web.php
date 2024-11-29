@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/lowongan/{id}', [LowonganController::class, 'update'])->name('lowongan.update');
     Route::delete('/lowongan/{id}', [LowonganController::class, 'destroy'])->name('lowongan.destroy');
 
+
     Route::get('/daftar_perusahaan', [DaftarPerusahaanController::class, 'index2'])->name('daftar_perusahaan');
     Route::get('/daftar_perusahaan/tambah', [DaftarPerusahaanController::class, 'index3'])->name('daftar_perusahaan.tambah');
     Route::post('/perusahaan', [DaftarPerusahaanController::class, 'store'])->name('perusahaan.store');
@@ -75,7 +76,7 @@ Route::post('/lowongan', [LowonganController::class, 'store'])->name('lowongan.s
 Route::get('/lowongan/{id}/edit', [LowonganController::class, 'edit'])->name('lowongan.edit');
 Route::put('/lowongan/{id}', [LowonganController::class, 'update'])->name('lowongan.update');
 Route::delete('/lowongan/{id}', [LowonganController::class, 'destroy'])->name('lowongan.destroy');
-
+Route::get('/lowongan/{id}', [LowonganController::class, 'show'])->name('lowongan.show');
 
 // Route untuk daftar perusahaan
 Route::get('/daftar-perusahaan', [DaftarPerusahaanController::class, 'index'])->name('daftar.perusahaan');
