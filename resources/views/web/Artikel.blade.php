@@ -14,7 +14,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 
-<body>
+<body style="background-color: #F0F0F0;">
     @include('components.navbar')
 
     <section id="artikel-content" class="container py-5 mt-4">
@@ -24,18 +24,18 @@
         </h1>
         <hr style="border-top: 2px solid #FF6347; width: 70%; margin: 20px auto;">
 
-        <!-- Search Form in a Card -->
-        <section class="container py-3">
+        <!-- Form Section -->
+        <section class="container py-3 mb-5">
             <div class="d-flex justify-content-end">
                 <div class="card shadow-sm border-0" style="border-radius: 8px; width: auto;">
                     <div class="card-body p-0">
                         <form action="{{ route('artikel.search') }}" method="GET" class="d-flex">
-                            <!-- Input field with search icon inside -->
-                            <div class="input-group" style="max-width: 350px;">
+                            <div class="input-group" style="max-width: 300px;"> <!-- Adjusted max-width -->
                                 <input type="text" name="query" class="form-control" placeholder="Cari artikel..."
-                                    aria-label="Search" style="border-radius: 5px; padding-left: 30px;">
+                                    aria-label="Search"
+                                    style="padding-left: 10px; height: 36px; border: 1px solid #ddd;">
                                 <button type="submit" class="btn btn-primary"
-                                    style="border-radius: 5px; border: none;">
+                                    style="border: 1px solid #ddd; height: 36px; padding: 0 12px; background-color: #007bff; border-radius: 0;">
                                     <i class="fas fa-search" style="font-size: 18px;"></i>
                                 </button>
                             </div>

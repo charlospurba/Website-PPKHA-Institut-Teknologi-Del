@@ -107,10 +107,10 @@ Route::prefix('SIK')->group(function () {
 });
 
 // Rute untuk User
+Route::get('/acara/cari', [AcaraController::class, 'search'])->name('acara.search');
+
 Route::get('/acara', [AcaraController::class, 'index2'])->name('acara.index');
 Route::get('/acara/{id}', [AcaraController::class, 'show'])->name('acara.show');
-
-
 
 // Routes for Berita
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');

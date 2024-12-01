@@ -18,7 +18,7 @@ class AcaraController extends Controller
   // Menampilkan halaman utama acara untuk user
   public function index2()
   {
-    $acara = Acara::all(); // Mengambil semua data acara
+    $acara = Acara::orderBy('created_at', 'desc')->paginate(10);
     return view('web.Acara', compact('acara')); // Tampilkan ke view
   }
 
@@ -116,5 +116,15 @@ class AcaraController extends Controller
     $acara->delete();
 
     return response()->json(['success' => 'Acara berhasil dihapus!']);
+  }
+
+  public function search(Request $request)
+  {
+    $query = $request->input('query');
+    $acara = Acara::where('judul_acara', 'like', "%{$query}%")
+      ->orderBy('created_at', 'desc')
+      ->paginate(10);
+
+    return view('web.acara', compact('acara'));
   }
 }

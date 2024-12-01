@@ -15,7 +15,7 @@
 
     <!-- Article Detail Section -->
     <section id="detail-artikel"
-        style="max-width: 900px; margin: 0 auto; padding: 30px 20px; background-color: #ffffff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px; margin-top: 30px;">
+        style="max-width: 1000px; margin: 0 auto; padding: 30px 20px; background-color: #ffffff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px; margin-top: 30px;">
         <div class="row">
             <div class="col-md-12">
                 <!-- Title Section -->
@@ -52,7 +52,7 @@
 
                 <!-- Article Source -->
                 @if ($artikel->sumber_artikel)
-                    <div style="font-size: 1rem; color: #666; text-align: none;">
+                    <div style="font-size: 1rem; color: #666; text-align: center;">
                         <strong style="color: #333;">Sumber: </strong>
                         <a href="{{ $artikel->sumber_artikel }}" target="_blank"
                             style="color: #007bff; text-decoration: none;">
