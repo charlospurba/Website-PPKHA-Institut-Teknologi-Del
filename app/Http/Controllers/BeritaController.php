@@ -9,11 +9,21 @@ use Illuminate\Support\Facades\Storage;
 class BeritaController extends Controller
 {
   // Display a listing of the berita
-  public function index()
-  {
-    $berita = Berita::all();
+  // Display a listing of the berita with search functionality
+public function index(Request $request)
+{
+    // Ambil parameter pencarian
+    $search = $request->input('search');
+
+    // Query berita, filter jika ada input pencarian
+    $berita = Berita::when($search, function ($query, $search) {
+        return $query->where('judul_berita', 'like', '%' . $search . '%');
+    })->orderBy('created_at', 'desc')->get();
+
+    // Return ke view dengan data berita
     return view('web.Berita', compact('berita'));
-  }
+}
+
 
   // Display a listing of the berita
   public function index2()

@@ -19,20 +19,18 @@
         {{ $berita->judul_berita }}
       </h1>
       <p class="text-muted">Tanggal Publish {{ $berita->created_at->format('d F Y') }}</p>
-
     </div>
 
     <!-- Gambar -->
     @if ($berita->gambar && count($berita->gambar))
-    <div id="beritaCarousel" class="carousel slide" data-bs-ride="carousel" style="max-width: 800px; margin: 0 auto;">
+    <div id="beritaCarousel" class="carousel slide" data-bs-ride="carousel" style="max-width: 600px; margin: 0 auto;">
       <div class="carousel-inner">
         @foreach ($berita->gambar as $index => $file)
         @if (Storage::disk('public')->exists($file))
         <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
           <img src="{{ asset('storage/' . $file) }}"
             class="d-block w-100"
-            alt="{{ basename($file) }}"
-            style="max-height: 7000px; object-fit: cover;">
+            alt="{{ basename($file) }}">
         </div>
         @else
         <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
@@ -56,17 +54,13 @@
     </div>
     @endif
 
-
     <!-- Konten Berita -->
     <div class="card-body">
       <p class="card-text" style="text-align: justify; font-size: 1.1rem;">
         {!! nl2br(e($berita->detail_berita)) !!}
       </p>
     </div>
-    </div>
   </section>
-
-
 
   @include('components.footer')
 
