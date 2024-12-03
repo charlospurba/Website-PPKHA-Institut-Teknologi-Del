@@ -19,6 +19,7 @@ Route::get('/', function () {
     return view('web.home');
 });
 
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 //Route Tampilan Admin
 Route::prefix('auth')->group(function () {
