@@ -89,22 +89,20 @@
 
     <!-- Modal Hapus -->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-top">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="deleteModalLabel">Hapus Data Acara</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Apakah kamu yakin ingin menghapus data acara <b id="acaraTitle"></b>?</p>
+                    <p>Apakah Kamu yakin ingin menghapus data acara <b id="acaraTitle"></b>?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn" style="background-color: #6c757d; color: white;"
-                        data-bs-dismiss="modal">Batal</button>
-                    <button type="button" class="btn" style="background-color: #FF0000; color: white;"
-                        id="confirmDeleteButton">
-                        Ya, Tetap Hapus
-                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-sm" 
+                        style="background-color: #FF0000 !important; color: white !important; border: 1px solid #FF0000 !important;"
+                        id="confirmDeleteButton">Ya, Tetap Hapus</button>
                 </div>
             </div>
         </div>
@@ -114,22 +112,33 @@
         let selectedId = null;
 
         function openDeleteModal(id, title) {
-            selectedId = id; // Simpan ID acara yang akan dihapus
-            document.getElementById('acaraTitle').innerText = title; // Set judul acara di dalam modal
-            var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+            selectedId = id; // Simpan ID yang akan dihapus
+            document.getElementById('acaraTitle').innerText = title; // Set judul ke dalam modal
+            const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
             deleteModal.show();
         }
 
-        document.getElementById('confirmDeleteButton').addEventListener('click', function() {
-            fetch(`/acara/${selectedId}`, {
+        document.getElementById('confirmDeleteButton').addEventListener('click', function () {
+            fetch(`{{ url('acara') }}/${selectedId}`, {
                 method: 'DELETE',
                 headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}', // Pastikan CSRF token dimasukkan dengan benar
+                    'Content-Type': 'application/json',
                 },
-            }).then(response => response.json()).then(data => {
+            })
+            .then(response => response.json())
+            .then(data => {
                 if (data.success) {
-                    location.reload();
+                    // Jika berhasil, langsung refresh halaman
+                    window.location.href = '{{ route("acara_") }}';
+                } else {
+                    // Tampilkan error dari server
+                    alert(data.message || 'Terjadi kesalahan saat menghapus.');
                 }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Gagal menghapus data. Silakan coba lagi.');
             });
         });
     </script>

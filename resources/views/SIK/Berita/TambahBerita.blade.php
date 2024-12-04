@@ -1,4 +1,3 @@
-//sik.tambahberita
 <!DOCTYPE html>
 <html lang="en">
 

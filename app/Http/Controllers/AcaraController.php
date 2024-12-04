@@ -70,8 +70,7 @@ class AcaraController extends Controller
     return view('SIK.Acara.EditAcara', compact('acara')); // View form edit acara
   }
 
-
-  // Memperbarui data acara setelah form di-submit
+  // Memperbarui data acara
   public function update(Request $request, $id)
   {
     // Validasi input
@@ -81,57 +80,38 @@ class AcaraController extends Controller
       'lampiran.*' => 'nullable|file|mimes:jpg,jpeg,png,gif,pdf,doc,docx,xlsx,xls|max:5120',
     ]);
 
-    $acara = Acara::findOrFail($id); // Cari data acara berdasarkan ID
+    $acara = Acara::findOrFail($id);
 
-    // Menambahkan lampiran baru jika ada
-    $lampiranPaths = $acara->lampiran ?? []; // Lampiran yang sudah ada
+    // Menambahkan lampiran baru
+    $lampiranPaths = $acara->lampiran ?? [];
     if ($request->hasFile('lampiran')) {
       foreach ($request->file('lampiran') as $file) {
-        $lampiranPaths[] = $file->store('lampiran', 'public'); // Menyimpan lampiran baru
+        $lampiranPaths[] = $file->store('lampiran', 'public');
       }
     }
 
-    // Menangani lampiran yang dihapus jika ada
-    if ($request->has('deleted_lampiran')) {
-      $deletedFiles = $request->input('deleted_lampiran');
-      foreach ($deletedFiles as $file) {
-        // Menghapus file dari storage
-        Storage::delete('public/' . $file);
-      }
-
-      // Mengupdate daftar lampiran setelah penghapusan
-      $lampiranPaths = array_diff($lampiranPaths, $deletedFiles);
-    }
-
-    // Memperbarui data acara
+    // Memperbarui data
     $acara->update([
       'judul_acara' => $validatedData['judul_acara'],
       'detail_acara' => $validatedData['detail_acara'],
       'lampiran' => $lampiranPaths,
     ]);
 
-    // Redirect ke halaman daftar acara setelah update
     return redirect()->route('acara_')->with('success', 'Acara berhasil diperbarui!');
   }
 
-
   // Menghapus data acara
   public function destroy($id)
-  {
-    $acara = Acara::findOrFail($id);
-
-    // Hapus lampiran jika ada
-    if ($acara->lampiran) {
-      foreach ($acara->lampiran as $file) {
-        Storage::disk('public')->delete($file);
-      }
+{
+    $acara = Acara::find($id);
+    if ($acara) {
+        $acara->delete();
+        return response()->json(['success' => true]);
     }
+    return response()->json(['success' => false, 'message' => 'Data tidak ditemukan.']);
+}
 
-    // Hapus data acara
-    $acara->delete();
 
-    return response()->json(['success' => 'Acara berhasil dihapus!']);
-  }
 
   public function search(Request $request)
   {

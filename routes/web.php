@@ -53,6 +53,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/acara_', [AcaraController::class, 'index2'])->name('acara_');
     Route::get('/acara_/tambah', [AcaraController::class, 'index3'])->name('acara_/tambah');
+    Route::delete('/acara/{id}', [AcaraController::class, 'destroy'])->name('acara.destroy');
+
 
 
     Route::get('/berita_', [BeritaController::class, 'index2'])->name('berita_');
@@ -104,7 +106,7 @@ Route::prefix('SIK')->group(function () {
     Route::put('/acara/update/{id}', [AcaraController::class, 'update'])->name('acara.update');
 
     // Menghapus acara
-    Route::delete('/acara/delete/{id}', [AcaraController::class, 'destroy'])->name('acara.destroy');
+    Route::delete('/acara/{id}', [AcaraController::class, 'destroy'])->name('acara.destroy');
 });
 
 // Rute untuk User

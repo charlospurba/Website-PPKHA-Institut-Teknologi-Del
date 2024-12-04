@@ -62,7 +62,7 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <div class="text-end">
-                        <button class="btn btn-primary" data-bs-toggle="modal" onclick="location.href='{{ route('daftar_perusahaan.tambah') }}'">Tambah Data</button>
+                        <button class="btn btn-primary" data-bs-toggle="modal"  style="background-color: #13C56B !important; color: white !important; border: 1px solid #13C56B !important;" onclick="location.href='{{ route('daftar_perusahaan.tambah') }}'">Tambah Data</button>
                     </div>
                 </div>
                 <div class="container mt-4">
@@ -94,11 +94,11 @@
                                             <!-- Actions -->
                                             <div style="flex: 0 0 auto; display: flex; gap: 8px;">
                                                 <a href="{{ route('perusahaan.edit', $item->id) }}" class="btn btn-sm"
-                                                    style="background-color: #13C56B; color: white; border: 1px solid #13C56B;">
+                                                    style="background-color: #13C56B !important; color: white !important; border: 1px solid #13C56B !important;">
                                                     Edit
                                                 </a>
                                                 <button class="btn btn-sm"
-                                                    style="background-color: #FF0000; color: white; border: 1px solid #FF0000;"
+                                                    style="background-color: #FF0000 !important; color: white !important; border: 1px solid #FF0000!important;"
                                                     onclick="openDeleteModal({{ $item->id }}, '{{ $item->nama_perusahaan }}')">
                                                     Hapus
                                                 </button>
