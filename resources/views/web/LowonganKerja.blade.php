@@ -13,17 +13,6 @@
 
     <!-- CSS here -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/animate.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/custom-animation.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/slick.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/nice-select.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/flaticon_xoft.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/swiper-bundle.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/meanmenu.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/font-awesome-pro.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/magnific-popup.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/spacing.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet" />
 </head>
 
 <body>
@@ -39,38 +28,39 @@
             <!-- Looping data lowongan -->
             <div class="row">
                 @foreach ($lowongan as $loker)
-                <div class="col-md-12 mb-3">
-                    <div class="card" style="background-color: #E6EDF4; border-radius: 8px;">
-                        <div class="card-body d-flex align-items-center">
-                            <!-- Bagian Gambar -->
-                            <div style="flex: 0 0 150px; margin-right: 20px;">
-                                <img src="{{ asset('storage/' . $loker->cover) }}" alt="Cover"
-                                     style="width: 150px; height: 150px; object-fit: cover; border-radius: 8px;">
-                            </div>
-
-                            <!-- Bagian Konten -->
-                            <div style="flex: 1;">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <h5 style="font-weight: bold; margin: 0;">
-                                        {{ $loker->perusahaan->nama_perusahaan ?? 'Tidak Diketahui' }}
-                                    </h5>
-                                    <a href="{{ route('lowongan.show', $loker->id) }}" class="btn btn-primary">
-                                        Lihat Detail
-                                      </a>
+                    <div class="col-md-12 mb-3">
+                        <div class="card" style="background-color: #E6EDF4; border-radius: 8px;">
+                            <div class="card-body d-flex align-items-center">
+                                <!-- Bagian Gambar -->
+                                <div style="flex: 0 0 150px; margin-right: 20px;">
+                                    <img src="{{ asset('storage/' . $loker->cover) }}" alt="Cover"
+                                        style="width: 150px; height: 150px; object-fit: cover; border-radius: 8px;">
                                 </div>
-                                <p> {{ $loker->judul }}</p>
-                                <p class="card-text text-truncate">
-                                    {{ Str::limit($loker->deskripsi, 100) }}
-                                     </p>
-                                <p> <span style="display: inline-block; background-color: #C19A6B; color: white; padding: 3px 5px; border-radius: 10px; font-weight: bold;">
-                                        {{ $loker->jenis_pekerjaan }}
-                                    </span>
-                                </p>
-                               
+
+                                <!-- Bagian Konten -->
+                                <div style="flex: 1;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <h5 style="font-weight: bold; margin: 0;">
+                                            {{ $loker->perusahaan->nama_perusahaan ?? 'Tidak Diketahui' }}
+                                        </h5>
+                                        <a href="{{ route('lowongan.show', $loker->id) }}" class="btn btn-primary">
+                                            Lihat Detail
+                                        </a>
+                                    </div>
+                                    <p> {{ $loker->judul }}</p>
+                                    <p class="card-text text-truncate">
+                                        {{ Str::limit($loker->deskripsi, 100) }}
+                                    </p>
+                                    <p> <span
+                                            style="display: inline-block; background-color: #C19A6B; color: white; padding: 3px 5px; border-radius: 10px; font-weight: bold;">
+                                            {{ $loker->jenis_pekerjaan }}
+                                        </span>
+                                    </p>
+
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 @endforeach
             </div>
         @endif

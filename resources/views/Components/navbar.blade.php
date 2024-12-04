@@ -6,16 +6,6 @@
             <img src="{{ asset('assets/vendor/img/logo.png') }}" alt="Logo" width="40" height="auto" class="me-3">
             <span class="fs-4 fw-bold">SISTEM INFORMASI KARIR IT DEL</span>
         </a>
-        <!-- Form Search -->
-        <form class="d-flex align-items-center" style="max-width: 300px;">
-            <input class="form-control form-control-sm border-0" type="text" placeholder="Search..."
-                style="background-color: rgba(255, 255, 255, 0.2); height: 35px; font-size: 14px; color: white;">
-            <button type="submit"
-                class="btn btn-sm d-flex align-items-center justify-content-center text-white p-0 ms-2"
-                style="background-color: rgba(255, 255, 255, 0.2); width: 35px; height: 35px; border-radius: 5px;">
-                <i class="fas fa-search" style="font-size: 16px;"></i>
-            </button>
-        </form>
     </div>
 </div>
 
@@ -50,7 +40,11 @@
                         ['name' => 'Berita', 'route' => route('berita.index'), 'active' => Request::is('berita')],
                         ['name' => 'Artikel', 'route' => route('artikel.index'), 'active' => Request::is('artikel')],
                         ['name' => 'Tracer Study', 'route' => '/', 'active' => Request::is('tracer-study')],
-                        ['name' => 'Platform Kami', 'route' => route('login'), 'active' => Request::is('platform-kami')],
+                        [
+                            'name' => 'Platform Kami',
+                            'route' => route('login'),
+                            'active' => Request::is('platform-kami'),
+                        ],
                     ];
                 @endphp
                 @foreach ($navItems as $item)

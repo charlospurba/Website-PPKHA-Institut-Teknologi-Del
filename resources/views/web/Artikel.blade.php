@@ -9,7 +9,6 @@
 
     <!-- CSS -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet" />
     <!-- Font Awesome for the search icon -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
@@ -82,7 +81,7 @@
                                     </h5>
                                     <p class="card-text text-muted"
                                         style="font-size: 0.9rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                                        {{ Str::limit(strip_tags($item->isi_artikel), 100, '...') }}
+                                        {{ Str::limit(strip_tags($item->isi_artikel), 200, '...') }}
                                     </p>
                                     <p class="card-text mt-auto" style="font-size: 0.85rem; color: #777;">
                                         <small>{{ $item->created_at->format('d F Y') }}</small>
