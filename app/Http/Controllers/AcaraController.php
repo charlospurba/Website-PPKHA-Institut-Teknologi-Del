@@ -70,7 +70,8 @@ class AcaraController extends Controller
     return view('SIK.Acara.EditAcara', compact('acara')); // View form edit acara
   }
 
-  // Memperbarui data acara
+
+  // Memperbarui data acara setelah form di-submit
   public function update(Request $request, $id)
   {
     // Validasi input
@@ -80,25 +81,39 @@ class AcaraController extends Controller
       'lampiran.*' => 'nullable|file|mimes:jpg,jpeg,png,gif,pdf,doc,docx,xlsx,xls|max:5120',
     ]);
 
-    $acara = Acara::findOrFail($id);
+    $acara = Acara::findOrFail($id); // Cari data acara berdasarkan ID
 
-    // Menambahkan lampiran baru
-    $lampiranPaths = $acara->lampiran ?? [];
+    // Menambahkan lampiran baru jika ada
+    $lampiranPaths = $acara->lampiran ?? []; // Lampiran yang sudah ada
     if ($request->hasFile('lampiran')) {
       foreach ($request->file('lampiran') as $file) {
-        $lampiranPaths[] = $file->store('lampiran', 'public');
+        $lampiranPaths[] = $file->store('lampiran', 'public'); // Menyimpan lampiran baru
       }
     }
 
-    // Memperbarui data
+    // Menangani lampiran yang dihapus jika ada
+    if ($request->has('deleted_lampiran')) {
+      $deletedFiles = $request->input('deleted_lampiran');
+      foreach ($deletedFiles as $file) {
+        // Menghapus file dari storage
+        Storage::delete('public/' . $file);
+      }
+
+      // Mengupdate daftar lampiran setelah penghapusan
+      $lampiranPaths = array_diff($lampiranPaths, $deletedFiles);
+    }
+
+    // Memperbarui data acara
     $acara->update([
       'judul_acara' => $validatedData['judul_acara'],
       'detail_acara' => $validatedData['detail_acara'],
       'lampiran' => $lampiranPaths,
     ]);
 
+    // Redirect ke halaman daftar acara setelah update
     return redirect()->route('acara_')->with('success', 'Acara berhasil diperbarui!');
   }
+
 
   // Menghapus data acara
   public function destroy($id)

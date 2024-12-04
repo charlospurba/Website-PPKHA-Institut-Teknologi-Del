@@ -8,9 +8,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Acara</title>
     <script>
-        // Fungsi untuk menghapus tampilan lampiran lama
-        function removeAttachment(index) {
-            document.getElementById(`lampiran-item-${index}`).remove();
+        // Fungsi untuk menghapus tampilan lampiran lama dan menandainya sebagai dihapus
+        function removeAttachment(index, file) {
+            // Menghapus tampilan lampiran dari UI
+            const lampiranItem = document.getElementById(`lampiran-item-${index}`);
+            lampiranItem.remove();
+
+            // Menambahkan input hidden yang menandakan bahwa file ini dihapus
+            const inputDeleted = document.createElement('input');
+            inputDeleted.type = 'hidden';
+            inputDeleted.name = 'deleted_lampiran[]'; // Menyimpan file yang dihapus
+            inputDeleted.value = file;
+
+            // Menambahkan input ke form
+            const form = document.querySelector('form');
+            form.appendChild(inputDeleted);
         }
     </script>
 </head>
@@ -64,7 +76,7 @@
                                     <a href="{{ asset('storage/' . $file) }}" target="_blank">Lihat Lampiran</a>
                                     <button type="button" class="btn btn-sm"
                                         style="background-color: #FF0000; color: white; border: none; margin-left: 10px;"
-                                        onclick="removeAttachment({{ $index }})">X</button>
+                                        onclick="removeAttachment({{ $index }}, '{{ $file }}')">X</button>
                                     <input type="hidden" name="existing_lampiran[]" value="{{ $file }}">
                                 </div>
                             @endforeach

@@ -13,11 +13,76 @@
 
     <!-- Bootstrap CSS -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
+
+
+
 </head>
 
 <body>
 
     @include('components.navbar')
+
+    <!-- Berita Terbaru Section -->
+    <section id="berita-terbaru" class="py-5 bg-light">
+        <div class="container">
+
+            <!-- Bootstrap Carousel -->
+            <div id="beritaCarousel" class="carousel slide" data-bs-ride="carousel">
+                <!-- Carousel Inner -->
+                <div class="carousel-inner">
+                    @foreach ($beritaTerbaru as $index => $berita)
+                        <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                            <div class="card h-100 shadow-sm d-flex flex-column position-relative">
+                                <!-- Gambar dengan atribut inline -->
+                                <img src="{{ asset('storage/' . (is_array($berita->gambar) ? $berita->gambar[0] : $berita->gambar)) }}"
+                                    class="d-block w-100" alt="gambar berita" style="object-fit: cover; height: 90vh;">
+
+                                <!-- Teks dan Judul Artikel yang mengarah ke detail -->
+                                <div class="card-body position-absolute bottom-0 start-0 w-100 p-3"
+                                    style="background-color: rgba(0, 0, 0, 0.6); color: white;">
+                                    <small class="text-muted mb-2">{{ $berita->created_at->format('d F Y') }}</small>
+
+                                    <!-- Judul Artikel dengan Tautan ke Halaman Detail -->
+                                    <h5 class="card-title">
+                                        <a href="{{ route('berita.show', $berita->id) }}" class="text-decoration-none"
+                                            style="color: white;">
+                                            {{ $berita->judul_berita }}
+                                        </a>
+                                    </h5>
+
+                                    <p class="card-text">
+                                        {{ \Illuminate\Support\Str::limit($berita->detail_berita, 100) }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+                <!-- Carousel Controls -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#beritaCarousel"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#beritaCarousel"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <style>
+        .carousel-item img {
+            width: 100%;
+            height: 90vh;
+            object-fit: cover;
+        }
+    </style>
+
 
     <!-- Acara Terbaru Section -->
     <section id="acara-terbaru" class="py-5">
@@ -37,7 +102,8 @@
                                         {{ $acara->judul_acara }}
                                     </a>
                                 </h5>
-                                <p class="card-text">{{ \Illuminate\Support\Str::limit($acara->detail_acara, 100) }}
+                                <p class="card-text">
+                                    {{ \Illuminate\Support\Str::limit($acara->detail_acara, 100) }}
                                 </p>
                             </div>
                         </div>
@@ -54,7 +120,7 @@
             <div class="row">
                 @foreach ($artikelTerbaru->take(4) as $artikel)
                     <!-- Menampilkan hanya 4 artikel -->
-                    <div class="col-md-3 mb-4"> <!-- Menampilkan artikel dalam 4 kolom -->
+                    <div class="col-md-3 mb-4">
                         <div class="card h-100 shadow-sm d-flex flex-column">
                             <!-- Gambar Artikel -->
                             <img src="{{ asset('storage/' . $artikel->gambar) }}" class="card-img-top"
@@ -71,7 +137,8 @@
                                 </h5>
 
                                 <!-- Deskripsi Singkat Artikel -->
-                                <p class="card-text">{{ \Illuminate\Support\Str::limit($artikel->isi_artikel, 100) }}
+                                <p class="card-text">
+                                    {{ \Illuminate\Support\Str::limit($artikel->isi_artikel, 100) }}
                                 </p>
                             </div>
                         </div>
@@ -83,22 +150,13 @@
 
 
 
+
+
     @include('components.footer')
 
     <!-- Bootstrap JS -->
     <script src="{{ asset('assets/js/jquery.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/js/slick.min.js') }}"></script>
-    <script src="{{ asset('assets/js/magnific-popup.js') }}"></script>
-    <script src="{{ asset('assets/js/purecounter.js') }}"></script>
-    <script src="{{ asset('assets/js/wow.js') }}"></script>
-    <script src="{{ asset('assets/js/countdown.js') }}"></script>
-    <script src="{{ asset('assets/js/nice-select.js') }}"></script>
-    <script src="{{ asset('assets/js/swiper-bundle.js') }}"></script>
-    <script src="{{ asset('assets/js/isotope-pkgd.js') }}"></script>
-    <script src="{{ asset('assets/js/imagesloaded-pkgd.js') }}"></script>
-    <script src="{{ asset('assets/js/ajax-form.js') }}"></script>
-    <script src="{{ asset('assets/js/main.js') }}"></script>
 
 </body>
 

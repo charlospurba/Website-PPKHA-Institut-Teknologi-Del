@@ -3,21 +3,31 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Acara;
 use App\Models\Artikel;
+use App\Models\Berita;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        // Mengambil acara terbaru (misalnya 3 acara terakhir)
+        // Mengambil acara terbaru
         $acaraTerbaru = Acara::latest()->take(3)->get();
 
-        // Mengambil artikel terbaru (misalnya 3 artikel terakhir)
+        // Mengambil artikel terbaru
         $artikelTerbaru = Artikel::latest()->take(4)->get();
 
-        // Mengirim data ke view
-        return view('web.home', compact('acaraTerbaru', 'artikelTerbaru'));
+        // Mengambil berita terbaru
+        $beritaTerbaru = Berita::latest()->take(5)->get()->map(function ($berita) {
+            // Pastikan 'gambar' berisi string dan bukan array
+            if (is_array($berita->gambar)) {
+                $berita->gambar = $berita->gambar[0]; // Ambil gambar pertama jika gambar adalah array
+            }
+            return $berita;
+        });
+
+        // Kirim data ke view
+        return view('web.home', compact('acaraTerbaru', 'artikelTerbaru', 'beritaTerbaru'));
     }
+
 }

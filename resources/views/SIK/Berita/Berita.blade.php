@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enhanced Navbar</title>
-    <link rel="stylesheet" href={{"https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"}}>
+    <link rel="stylesheet" href={{ 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css' }}>
     <style>
         /* Gaya tombol utama */
         .btn {
@@ -52,7 +52,7 @@
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                  Berita
+                                    Berita
                                 </li>
                             </ol>
                         </div>
@@ -63,7 +63,8 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <div class="text-end">
-                        <button class="btn btn-primary" data-bs-toggle="modal" onclick="location.href='{{ route('berita_.tambah') }}'">Tambah Data</button>
+                        <button class="btn btn-primary" data-bs-toggle="modal"
+                            onclick="location.href='{{ route('berita_.tambah') }}'">Tambah Data</button>
                     </div>
                 </div>
                 <div class="container mt-4">
@@ -73,12 +74,14 @@
                                 <div class="card" style="background-color: #E6EDF4; border-radius: 8px;">
                                     <div class="card-body d-flex align-items-center">
                                         <!-- Cover -->
-                                        
+
 
                                         <!-- Content -->
                                         <div style="flex: 1;">
-                                            <h5 style="font-weight: bold; color: #2c3e50;">{{ $item->judul_berita }}</h5>
-                                            <p style="
+                                            <h5 style="font-weight: bold; color: #2c3e50;">{{ $item->judul_berita }}
+                                            </h5>
+                                            <p
+                                                style="
         color: #6c757d; 
         margin: 0; 
         display: -webkit-box; 
@@ -86,8 +89,8 @@
         -webkit-box-orient: vertical; 
         overflow: hidden; 
         text-overflow: ellipsis;">
-        {{ $item->detail_berita }}
-    </p>
+                                                {{ $item->detail_berita }}
+                                            </p>
                                         </div>
 
                                         <!-- Actions -->
@@ -105,15 +108,13 @@
                                     </div>
                                 </div>
                             </div>
-
-                           
                         @endforeach
                     </div>
                 </div>
-                
+
             </div>
             <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-           
+
 
 
         </main> <!--end::App Main--> <!--begin::Footer-->
@@ -126,82 +127,79 @@
         </footer> <!--end::Footer-->
     </div> <!--end::App Wrapper--> <!--begin::Script--> <!--begin::Third Party Plugin(OverlayScrollbars)-->
 
-   <!-- Modal Hapus -->
-<!-- Modal Hapus -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus Berita</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Apakah Anda yakin ingin menghapus berita <b id="beritaTitle"></b>?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                <button type="button" class="btn btn-danger" id="confirmDeleteButton">Hapus</button>
+    <!-- Modal Hapus -->
+    <!-- Modal Hapus -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus Berita</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah Anda yakin ingin menghapus berita <b id="beritaTitle"></b>?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteButton">Hapus</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
-<script>
-   let selectedId = null;
+    <script>
+        let selectedId = null;
 
-function openDeleteModal(id, title) {
-    selectedId = id; // Simpan ID yang akan dihapus
-    document.getElementById('beritaTitle').innerText = title; // Set judul ke dalam modal
-    const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-    deleteModal.show();
-}
-
-document.getElementById('confirmDeleteButton').addEventListener('click', function () {
-    // Kirim permintaan DELETE ke server
-    fetch(`/berita/${selectedId}`, {
-        method: 'DELETE',
-        headers: {
-            'X-CSRF-TOKEN': '{{ csrf_token() }}', // Pastikan CSRF token dimasukkan dengan benar
-            'Content-Type': 'application/json',
-        },
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Gagal menghapus data.');
+        function openDeleteModal(id, title) {
+            selectedId = id; // Simpan ID yang akan dihapus
+            document.getElementById('beritaTitle').innerText = title; // Set judul ke dalam modal
+            const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+            deleteModal.show();
         }
-        return response.json();
-    })
-    .then(data => {
-        if (data.success) {
-            // Jika berhasil, langsung refresh halaman tanpa notifikasi
-            window.location.href = '{{ route("berita_") }}'; // Redirect ke halaman berita
-        } else {
-            // Tangani error dari server
-            console.error(data.message);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        // Tampilkan error di console untuk debugging
-    });
-});
+
+        document.getElementById('confirmDeleteButton').addEventListener('click', function() {
+            // Kirim permintaan DELETE ke server
+            fetch(`/berita/${selectedId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}', // Pastikan CSRF token dimasukkan dengan benar
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Gagal menghapus data.');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        // Jika berhasil, langsung refresh halaman tanpa notifikasi
+                        window.location.href = '{{ route('berita_') }}'; // Redirect ke halaman berita
+                    } else {
+                        // Tangani error dari server
+                        console.error(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // Tampilkan error di console untuk debugging
+                });
+        });
+    </script>
 
 
-
-</script>
-    
-
-    <script src={{"https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/browser/overlayscrollbars.browser.es6.min.js"}}
+    <script src={{ 'https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/browser/overlayscrollbars.browser.es6.min.js' }}
         integrity="sha256-H2VM7BKda+v2Z4+DRy69uknwxjyDRhszjXFhsL4gD3w=" crossorigin="anonymous"></script>
     <!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Required Plugin(popperjs for Bootstrap 5)-->
-    <script src={{"https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"}}
+    <script src={{ 'https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js' }}
         integrity="sha256-whL0tQWoY1Ku1iskqPFvmZ+CHsvmRWx/PIoEvIeWh4I=" crossorigin="anonymous"></script>
     <!--end::Required Plugin(popperjs for Bootstrap 5)--><!--begin::Required Plugin(Bootstrap 5)-->
-    <script src={{"https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"}}
+    <script src={{ 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js' }}
         integrity="sha256-YMa+wAM6QkVyz999odX7lPRxkoYAan8suedu4k2Zur8=" crossorigin="anonymous"></script>
     <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
-    <script src={{"../../dist/js/adminlte.js"}}></script>
+    <script src={{ '../../dist/js/adminlte.js' }}></script>
     <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
     <script>
         const SELECTOR_SIDEBAR_WRAPPER = ".sidebar-wrapper";
@@ -230,8 +228,8 @@ document.getElementById('confirmDeleteButton').addEventListener('click', functio
         integrity="sha256-+vh8GkaU7C9/wbSLIcwq82tQ2wTf44aOHA8HlBMwRI8=" crossorigin="anonymous"></script>
 
     <script src="{{ asset('assets/js/adminlte.js') }}"></script>
-   
-        <!--end::Script-->
+
+    <!--end::Script-->
 </body><!--end::Body-->
 
 </html>
