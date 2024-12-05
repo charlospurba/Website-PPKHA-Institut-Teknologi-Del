@@ -51,7 +51,7 @@
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                  Daftar Perusahaan
+                                    Daftar Perusahaan
                                 </li>
                             </ol>
                         </div>
@@ -62,7 +62,9 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <div class="text-end">
-                        <button class="btn btn-primary" data-bs-toggle="modal"  style="background-color: #13C56B !important; color: white !important; border: 1px solid #13C56B !important;" onclick="location.href='{{ route('daftar_perusahaan.tambah') }}'">Tambah Data</button>
+                        <button class="btn btn-primary" data-bs-toggle="modal"
+                            style="background-color: #13C56B !important; color: white !important; border: 1px solid #13C56B !important;"
+                            onclick="location.href='{{ route('daftar_perusahaan.tambah') }}'">Tambah Data</button>
                     </div>
                 </div>
                 <div class="container mt-4">
@@ -75,7 +77,8 @@
                                             <!-- Cover -->
                                             <div style="flex: 0 0 80px; margin-right: 16px;">
                                                 @if ($item->cover_perusahaan)
-                                                    <img src="{{ asset('storage/' . $item->cover_perusahaan) }}" alt="Cover"
+                                                    <img src="{{ asset('storage/' . $item->cover_perusahaan) }}"
+                                                        alt="Cover"
                                                         style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
                                                 @else
                                                     <div
@@ -84,13 +87,14 @@
                                                     </div>
                                                 @endif
                                             </div>
-                
+
                                             <!-- Content -->
                                             <div style="flex: 1;">
-                                                <h5 style="font-weight: bold; color: #2c3e50;">{{ $item->nama_perusahaan }}</h5>
+                                                <h5 style="font-weight: bold; color: #2c3e50;">
+                                                    {{ $item->nama_perusahaan }}</h5>
                                                 <p style="color: #6c757d; margin: 0;">{{ $item->link_perusahaan }}</p>
                                             </div>
-                
+
                                             <!-- Actions -->
                                             <div style="flex: 0 0 auto; display: flex; gap: 8px;">
                                                 <a href="{{ route('perusahaan.edit', $item->id) }}" class="btn btn-sm"
@@ -114,11 +118,11 @@
                         @endif
                     </div>
                 </div>
-                
-                
+
+
             </div>
             <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-           
+
 
 
         </main> <!--end::App Main--> <!--begin::Footer-->
@@ -139,7 +143,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Apakah Anda yakin ingin menghapus <strong id="dataTitle"></strong>? Tindakan ini tidak dapat dibatalkan.</p>
+                    <p>Apakah Anda yakin ingin menghapus <strong id="dataTitle"></strong>? Tindakan ini tidak dapat
+                        dibatalkan.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -148,62 +153,60 @@
             </div>
         </div>
     </div>
-    
-    
+
+
     <script>
         let selectedId = null;
 
-function openDeleteModal(id, title) {
-    // Simpan ID yang akan dihapus
-    selectedId = id;
+        function openDeleteModal(id, title) {
+            // Simpan ID yang akan dihapus
+            selectedId = id;
 
-    // Set judul data dalam modal
-    document.getElementById('dataTitle').innerText = title;
+            // Set judul data dalam modal
+            document.getElementById('dataTitle').innerText = title;
 
-    // Tampilkan modal
-    const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-    deleteModal.show();
-}
+            // Tampilkan modal
+            const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+            deleteModal.show();
+        }
 
-// Tambahkan event listener ke tombol konfirmasi
-document.getElementById('confirmDeleteButton').addEventListener('click', function () {
-    if (!selectedId) return;
+        // Tambahkan event listener ke tombol konfirmasi
+        document.getElementById('confirmDeleteButton').addEventListener('click', function() {
+            if (!selectedId) return;
 
-    fetch(`/perusahaan/${selectedId}`, {
-        method: 'DELETE',
-        headers: {
-            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-            'Content-Type': 'application/json',
-        },
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Refresh halaman jika penghapusan berhasil
-                location.reload();
-            } else {
-                // Tampilkan pesan error
-                alert('Gagal menghapus data: ' + (data.message || 'Terjadi kesalahan'));
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Terjadi kesalahan saat mencoba menghapus data.');
+            fetch(`/perusahaan/${selectedId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Refresh halaman jika penghapusan berhasil
+                        location.reload();
+                    } else {
+                        // Tampilkan pesan error
+                        alert('Gagal menghapus data: ' + (data.message || 'Terjadi kesalahan'));
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Terjadi kesalahan saat mencoba menghapus data.');
+                });
         });
-});
-
-    
     </script>
-    <script src={{"https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/browser/overlayscrollbars.browser.es6.min.js"}}
+    <script src={{ 'https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/browser/overlayscrollbars.browser.es6.min.js' }}
         integrity="sha256-H2VM7BKda+v2Z4+DRy69uknwxjyDRhszjXFhsL4gD3w=" crossorigin="anonymous"></script>
     <!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Required Plugin(popperjs for Bootstrap 5)-->
-    <script src={{"https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"}}
+    <script src={{ 'https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js' }}
         integrity="sha256-whL0tQWoY1Ku1iskqPFvmZ+CHsvmRWx/PIoEvIeWh4I=" crossorigin="anonymous"></script>
     <!--end::Required Plugin(popperjs for Bootstrap 5)--><!--begin::Required Plugin(Bootstrap 5)-->
-    <script src={{"https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"}}
+    <script src={{ 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js' }}
         integrity="sha256-YMa+wAM6QkVyz999odX7lPRxkoYAan8suedu4k2Zur8=" crossorigin="anonymous"></script>
     <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
-    <script src={{"../../dist/js/adminlte.js"}}></script>
+    <script src={{ '../../dist/js/adminlte.js' }}></script>
     <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
     <script>
         const SELECTOR_SIDEBAR_WRAPPER = ".sidebar-wrapper";

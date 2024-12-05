@@ -6,26 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Berita</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <style>
-        .btn {
-            background-color: #098ECC !important;
-            color: white !important;
-            border-color: #098ECC !important;
-            transition: all 0.3s ease-in-out;
-        }
 
-        .btn:hover {
-            background-color: #066D9E !important;
-            border-color: #066D9E !important;
-        }
-
-        .btn:active,
-        .btn:focus {
-            background-color: #04577A !important;
-            border-color: #04577A !important;
-            box-shadow: none !important;
-        }
-    </style>
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
@@ -71,48 +52,56 @@
                                             <!-- Cover -->
                                             <div style="flex: 0 0 auto;">
                                                 @php
-                                                // Ambil gambar secara random dari array gambar
-                                                $randomImage = $item->gambar ? $item->gambar[array_rand($item->gambar)] : null;
+                                                    // Ambil gambar secara random dari array gambar
+                                                    $randomImage = $item->gambar
+                                                        ? $item->gambar[array_rand($item->gambar)]
+                                                        : null;
                                                 @endphp
-                                                <img src="{{ asset('storage/' . $randomImage) }}" 
-                                                    class="img-fluid rounded-start" 
-                                                    alt="{{ $item->judul_berita }}" 
+                                                <img src="{{ asset('storage/' . $randomImage) }}"
+                                                    class="img-fluid rounded-start" alt="{{ $item->judul_berita }}"
                                                     style="object-fit: cover; height: 120px; width: 100px; margin-right: 10px;">
                                             </div>
-                                    
+
                                             <!-- Content -->
                                             <div>
-                                                <h5 style="font-weight: bold; color: #2c3e50; margin: 0;">{{ $item->judul_berita }}</h5>
-                                                <p style="color: #6c757d; margin: 5px 0 0 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;">
+                                                <h5 style="font-weight: bold; color: #2c3e50; margin: 0;">
+                                                    {{ $item->judul_berita }}</h5>
+                                                <p
+                                                    style="color: #6c757d; margin: 5px 0 0 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;">
                                                     {{ $item->detail_berita }}
                                                 </p>
                                             </div>
                                         </div>
-                                    
+
                                         <!-- Actions -->
                                         <div style="flex: 0 0 auto; display: flex; gap: 8px; margin-left: auto;">
                                             <a href="{{ route('berita.edit', $item->id) }}" class="btn btn-sm"
-                                                style="background-color: #13C56B !important; border: 1px solid #13C56B !important;">Edit</a>
+                                                style="background-color: #13C56B !important; border: 1px solid #13C56B !important; color: white !important;">
+                                                Edit
+                                            </a>
                                             <button class="btn btn-sm"
-                                                style="background-color: #FF0000 !important; border: 1px solid #FF0000 !important;"
-                                                onclick="openDeleteModal({{ $item->id }}, '{{ $item->judul_berita }}')">Hapus</button>
+                                                style="background-color: #FF0000 !important; border: 1px solid #FF0000 !important; color: white !important;"
+                                                onclick="openDeleteModal({{ $item->id }}, '{{ $item->judul_berita }}')">
+                                                Hapus
+                                            </button>
                                         </div>
+
                                     </div>
-                                    
-                                    </div>
+
                                 </div>
                             </div>
-                        @endforeach
                     </div>
+                    @endforeach
                 </div>
             </div>
-        </main>
+    </div>
+    </main>
 
-        <!-- Footer -->
-        <footer class="app-footer">
-            <div class="float-end d-none d-sm-inline"></div>
-            <strong>Copyright &copy; k3-project-pabwe</strong>
-        </footer>
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="float-end d-none d-sm-inline"></div>
+        <strong>Copyright &copy; k3-project-pabwe</strong>
+    </footer>
     </div>
 
     <!-- Modal Hapus -->
@@ -127,12 +116,18 @@
                     <p>Apakah Kamu yakin ingin menghapus data berita <b id="beritaTitle"></b>?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-danger" id="confirmDeleteButton">Ya, Tetap Hapus</button>
+                    <!-- Tombol Batal dengan warna abu-abu dan teks putih -->
+                    <button type="button" class="btn btn-secondary" style="color: white;"
+                        data-bs-dismiss="modal">Batal</button>
+                    <!-- Tombol Hapus dengan warna merah dan teks putih -->
+                    <button type="button" class="btn"
+                        style="background-color: #FF0000; border: 1px solid #FF0000; color: white;"
+                        id="confirmDeleteButton">Ya, Tetap Hapus</button>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Scripts -->
     <script>
@@ -145,21 +140,21 @@
             deleteModal.show();
         }
 
-        document.getElementById('confirmDeleteButton').addEventListener('click', function () {
+        document.getElementById('confirmDeleteButton').addEventListener('click', function() {
             fetch(`/berita/${selectedId}`, {
-                method: 'DELETE',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    'Content-Type': 'application/json',
-                },
-            })
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json',
+                    },
+                })
                 .then(response => {
                     if (!response.ok) throw new Error('Gagal menghapus data.');
                     return response.json();
                 })
                 .then(data => {
                     if (data.success) {
-                        window.location.href = '{{ route("berita_") }}';
+                        window.location.href = '{{ route('berita_') }}';
                     } else {
                         console.error(data.message);
                     }

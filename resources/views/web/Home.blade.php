@@ -123,8 +123,8 @@
                     <div class="col-md-3 mb-4">
                         <div class="card h-100 shadow-sm d-flex flex-column">
                             <!-- Gambar Artikel -->
-                            <img src="{{ asset('storage/' . $artikel->gambar) }}" class="card-img-top"
-                                alt="gambar artikel" style="height: 200px; object-fit: cover;">
+                            <img src="{{ asset('storage/' . ($artikel->cover_artikel ?? 'default-image.jpg')) }}"
+                                class="card-img-top" alt="gambar artikel" style="height: 200px; object-fit: cover;">
                             <div class="card-body d-flex flex-column">
                                 <!-- Tanggal Dipublikasikan -->
                                 <small class="text-muted mb-2">{{ $artikel->created_at->format('d F Y') }}</small>
@@ -147,9 +147,6 @@
             </div>
         </div>
     </section>
-
-
-
 
 
     @include('components.footer')

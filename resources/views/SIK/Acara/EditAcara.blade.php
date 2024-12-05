@@ -54,20 +54,28 @@
                 <form action="{{ route('acara.update', $acara->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+
+                    <!-- Judul Acara -->
                     <div class="mb-3">
                         <label for="judul_acara">Judul Acara</label>
                         <input type="text" class="form-control" id="judul_acara" name="judul_acara"
                             value="{{ $acara->judul_acara }}" required>
                     </div>
+
+                    <!-- Detail Acara -->
                     <div class="mb-3">
                         <label for="detail_acara">Detail Acara</label>
                         <textarea class="form-control" id="detail_acara" name="detail_acara" rows="4" required>{{ $acara->detail_acara }}</textarea>
                     </div>
+
+                    <!-- Lampiran Baru -->
                     <div class="mb-3">
                         <label for="lampiran">Lampiran Baru</label>
                         <input type="file" class="form-control" id="lampiran" name="lampiran[]" multiple>
                         <small>Format: jpg, png, pdf, docx, xlsx, dll.</small>
                     </div>
+
+                    <!-- Lampiran Lama -->
                     <div class="mb-3">
                         <p>Lampiran Lama:</p>
                         @if ($acara->lampiran)
@@ -84,12 +92,16 @@
                             Tidak ada lampiran
                         @endif
                     </div>
+
                     <!-- Tombol Perbarui dan Batal -->
-                    <button type="submit" class="btn"
-                        style="background-color: #13C56B; color: white; border: none;">
-                        Perbarui
-                    </button>
-                    <a href="{{ route('acara_') }}" class="btn btn-secondary">Batal</a>
+                    <div class="mt-4">
+                        <button type="submit" class="btn"
+                            style="background-color: #13C56B; color: white; border: none;">
+                            Perbarui
+                        </button>
+                        <a href="{{ route('acara_') }}" class="btn btn-secondary">Batal</a>
+                    </div>
+
                 </form>
             </div>
         </main>

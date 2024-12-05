@@ -30,46 +30,56 @@
                 </div>
             </div>
 
-            <div class="card mb-4">
-                <div class="card-header">
-                    <form action="{{ route('artikel.update', $artikel->id) }}" method="POST"
-                        enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
-                        <div class="card-body">
-                            <div class="mb-3">
-                                <label>Judul Artikel</label>
-                                <input type="text" name="judul_artikel" class="form-control"
-                                    value="{{ $artikel->judul_artikel }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label>Isi Artikel</label>
-                                <textarea name="isi_artikel" class="form-control" rows="5" required>{{ $artikel->isi_artikel }}</textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label>Cover</label>
-                                <input type="file" name="cover_artikel" class="form-control">
-                                @if ($artikel->cover_artikel)
-                                    <img src="{{ asset('storage/' . $artikel->cover_artikel) }}" class="mt-2"
-                                        width="100" alt="Cover">
-                                @endif
-                            </div>
-                            <div class="mb-3">
-                                <label>Sumber Artikel</label>
-                                <input type="text" name="sumber_artikel" class="form-control"
-                                    value="{{ $artikel->sumber_artikel }}">
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <button type="submit" class="btn" style="background-color: #13C56B; color: white;">
-                                Simpan
-                            </button>
-                            <a href="{{ route('admin.artikel.index') }}" class="btn btn-secondary">Batal</a>
-                        </div>
-                    </form>
-                </div>
+            <div class="container mt-4">
+                <form action="{{ route('artikel.update', $artikel->id) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <!-- Judul Artikel -->
+                    <div class="mb-3">
+                        <label for="judul_artikel" class="form-label">Judul Artikel</label>
+                        <input type="text" name="judul_artikel" class="form-control"
+                            value="{{ $artikel->judul_artikel }}" required>
+                    </div>
+
+                    <!-- Isi Artikel -->
+                    <div class="mb-3">
+                        <label for="isi_artikel" class="form-label">Isi Artikel</label>
+                        <textarea name="isi_artikel" class="form-control" rows="5" required>{{ $artikel->isi_artikel }}</textarea>
+                    </div>
+
+                    <!-- Cover Artikel -->
+                    <div class="mb-3">
+                        <label for="cover_artikel" class="form-label">Cover</label>
+                        <input type="file" name="cover_artikel" class="form-control">
+                        @if ($artikel->cover_artikel)
+                            <img src="{{ asset('storage/' . $artikel->cover_artikel) }}" class="mt-2" width="100"
+                                alt="Cover">
+                        @endif
+                    </div>
+
+                    <!-- Sumber Artikel -->
+                    <div class="mb-3">
+                        <label for="sumber_artikel" class="form-label">Sumber Artikel</label>
+                        <input type="text" name="sumber_artikel" class="form-control"
+                            value="{{ $artikel->sumber_artikel }}">
+                    </div>
+
+                    <!-- Tombol Submit -->
+                    <div class="mt-3">
+                        <button type="submit" class="btn" style="background-color: #13C56B; color: white;">
+                            Perbarui
+                        </button>
+                        <a href="{{ route('admin.artikel.index') }}" class="btn btn-secondary">Batal</a>
+                    </div>
+                </form>
             </div>
+
         </main>
+
+        <footer class="app-footer"> <!--begin::To the end-->
+            <div class="float-end d-none d-sm-inline"></div> <!--end::To the end-->
+            <strong>© 2024 PPKHA IT Del. All rights reserved.</strong>
+        </footer>
     </div>
 </body>
 

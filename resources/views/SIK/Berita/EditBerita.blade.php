@@ -57,16 +57,18 @@
                         <div id="new-gambar-container">
                             <!-- Input baru akan ditambahkan di sini -->
                         </div>
-                        <button type="button" class="btn btn-sm btn-primary" onclick="addNewInput()">Tambah Gambar</button>
+                        <button type="button" class="btn btn-sm btn-primary" onclick="addNewInput()">Tambah
+                            Gambar</button>
                         <small>Format: jpg, png, pdf, docx, xlsx, dll.</small>
                     </div>
-                    
+
                     <div class="mb-3">
                         <p>Lampiran Lama:</p>
                         @if ($berita->gambar)
                             @foreach ($berita->gambar as $index => $file)
                                 <div id="lampiran-item-{{ $index }}" class="d-flex align-items-center mb-2">
-                                    <a href="{{ asset('storage/' . $file) }}" target="_blank" class="me-2">Lihat Lampiran</a>
+                                    <a href="{{ asset('storage/' . $file) }}" target="_blank" class="me-2">Lihat
+                                        Lampiran</a>
                                     <label>
                                         <input type="checkbox" name="hapus_gambar[]" value="{{ $file }}"> Hapus
                                     </label>
@@ -76,7 +78,7 @@
                             Tidak ada gambar
                         @endif
                     </div>
-                    
+
                     <!-- Tombol Perbarui dan Batal -->
                     <button type="submit" class="btn"
                         style="background-color: #13C56B; color: white; border: none;">
@@ -86,6 +88,10 @@
                 </form>
             </div>
         </main>
+        <footer class="app-footer"> <!--begin::To the end-->
+            <div class="float-end d-none d-sm-inline"></div> <!--end::To the end-->
+            <strong>© 2024 PPKHA IT Del. All rights reserved.</strong>
+        </footer>
     </div>
 </body>
 
