@@ -100,17 +100,14 @@ class ArtikelController extends Controller
 
   public function destroy($id)
   {
-    $artikel = Artikel::findOrFail($id);
-
-    // Hapus cover jika ada
-    if ($artikel->cover_artikel) {
-      Storage::disk('public')->delete($artikel->cover_artikel);
-    }
-
-    // Hapus data artikel
-    $artikel->delete();
-
-    return response()->json(['success' => 'Artikel berhasil dihapus!']);
+      try {
+          $artikel = Artikel::findOrFail($id);
+          $artikel->delete();
+  
+          return response()->json(['success' => true]);
+      } catch (\Exception $e) {
+          return response()->json(['success' => false, 'message' => 'Gagal menghapus berita.'], 500);
+      }
   }
 
   public function show($id)

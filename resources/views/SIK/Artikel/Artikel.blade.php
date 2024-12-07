@@ -112,38 +112,32 @@
         let selectedId = null;
 
         function openDeleteModal(id, title) {
-            selectedId = id; // Simpan ID yang akan dihapus
-            document.getElementById('articleTitle').innerText = title; // Tampilkan judul di modal
+            selectedId = id;
+            document.getElementById('articleTitle').innerText = title;
             const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
             deleteModal.show();
         }
 
         document.getElementById('confirmDeleteButton').addEventListener('click', function() {
-            fetch(`/artikel/delete/${selectedId}`, { // Pastikan route sesuai dengan web.php
+            fetch(`/artikel/${selectedId}`, {
                     method: 'DELETE',
                     headers: {
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
-                            'content'),
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
                         'Content-Type': 'application/json',
                     },
                 })
                 .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Gagal menghapus artikel');
-                    }
+                    if (!response.ok) throw new Error('Gagal menghapus data.');
                     return response.json();
                 })
                 .then(data => {
                     if (data.success) {
-                        location.reload(); // Refresh halaman jika berhasil
+                        window.location.href = '{{ route('artikel_') }}';
                     } else {
-                        alert('Gagal menghapus artikel');
+                        console.error(data.message);
                     }
                 })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Terjadi kesalahan. Artikel gagal dihapus.');
-                });
+                .catch(error => console.error('Error:', error));
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

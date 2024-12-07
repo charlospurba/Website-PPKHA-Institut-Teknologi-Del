@@ -135,20 +135,25 @@
         </footer> <!--end::Footer-->
     </div> <!--end::App Wrapper--> <!--begin::Script--> <!--begin::Third Party Plugin(OverlayScrollbars)-->
 
+    <!-- Modal Hapus -->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus Data</h5>
+                    <h5 class="modal-title" id="deleteModalLabel">Hapus Data Daftar Perusahaan</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Apakah Anda yakin ingin menghapus <strong id="dataTitle"></strong>? Tindakan ini tidak dapat
-                        dibatalkan.</p>
+                    <p>Apakah Kamu yakin ingin menghapus Perusahaan <b id="dataTitle"></b>?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-danger" id="confirmDeleteButton">Hapus</button>
+                    <!-- Tombol Batal dengan warna abu-abu dan teks putih -->
+                    <button type="button" class="btn" style="background-color: #6c757d !important; color: white;"
+                        data-bs-dismiss="modal">Batal</button>
+                    <!-- Tombol Hapus dengan warna merah dan teks putih -->
+                    <button type="button" class="btn"
+                        style="background-color: #FF0000 !important; border: 1px solid #FF0000 !important; color: white !important;"
+                        id="confirmDeleteButton">Ya, Tetap Hapus</button>
                 </div>
             </div>
         </div>
@@ -159,21 +164,13 @@
         let selectedId = null;
 
         function openDeleteModal(id, title) {
-            // Simpan ID yang akan dihapus
             selectedId = id;
-
-            // Set judul data dalam modal
             document.getElementById('dataTitle').innerText = title;
-
-            // Tampilkan modal
             const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
             deleteModal.show();
         }
 
-        // Tambahkan event listener ke tombol konfirmasi
         document.getElementById('confirmDeleteButton').addEventListener('click', function() {
-            if (!selectedId) return;
-
             fetch(`/perusahaan/${selectedId}`, {
                     method: 'DELETE',
                     headers: {
@@ -181,20 +178,18 @@
                         'Content-Type': 'application/json',
                     },
                 })
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) throw new Error('Gagal menghapus data.');
+                    return response.json();
+                })
                 .then(data => {
                     if (data.success) {
-                        // Refresh halaman jika penghapusan berhasil
-                        location.reload();
+                        window.location.href = '{{ route('daftar_perusahaan') }}';
                     } else {
-                        // Tampilkan pesan error
-                        alert('Gagal menghapus data: ' + (data.message || 'Terjadi kesalahan'));
+                        console.error(data.message);
                     }
                 })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Terjadi kesalahan saat mencoba menghapus data.');
-                });
+                .catch(error => console.error('Error:', error));
         });
     </script>
     <script src={{ 'https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/browser/overlayscrollbars.browser.es6.min.js' }}

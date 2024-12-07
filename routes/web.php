@@ -47,7 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/perusahaan', [DaftarPerusahaanController::class, 'store'])->name('perusahaan.store');
     Route::get('/perusahaan/{id}/edit', [DaftarPerusahaanController::class, 'edit'])->name('perusahaan.edit');
     Route::put('/perusahaan/{id}', [DaftarPerusahaanController::class, 'update'])->name('perusahaan.update');
-    Route::put('/perusahaan/{id}', [DaftarPerusahaanController::class, 'destroy'])->name('perusahaan.destroy');
+    Route::delete('/perusahaan/{id}', [DaftarPerusahaanController::class, 'destroy'])->name('perusahaan.destroy');
     Route::get('/perusahaan/{id}', [DaftarPerusahaanController::class, 'show'])->name('perusahaan.show');
 
 
@@ -68,6 +68,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/artikel_', [ArtikelController::class, 'index2'])->name('artikel_');
+    Route::delete('/artikel/{id}', [ArtikelController::class, 'destroy'])->name('artikel.destroy');
 });
 
 //Route Charlos
@@ -84,6 +85,7 @@ Route::get('/lowongan/{id}', [LowonganController::class, 'show'])->name('lowonga
 // Route untuk daftar perusahaan
 Route::get('/daftar-perusahaan', [DaftarPerusahaanController::class, 'index'])->name('daftar.perusahaan');
 Route::get('/perusahaan/{id}', [DaftarPerusahaanController::class, 'show'])->name('perusahaan.show');
+
 
 // Route untuk menyimpan data perusahaan
 Route::post('/daftar-perusahaan', [DaftarPerusahaanController::class, 'store'])->name('store.perusahaan');

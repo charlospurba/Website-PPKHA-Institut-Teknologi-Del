@@ -119,15 +119,15 @@ public function show($id)
 
 
     
-    public function destroy($id)
-    {
-      $perusahaan = Perusahaan::find($id);
+public function destroy($id)
+{
+    try {
+        $perusahaan = Perusahaan::findOrFail($id);
+        $perusahaan->delete();
 
-      if ($perusahaan) {
-          $perusahaan->delete();
-          return response()->json(['success' => true], 200);
-      }
-  
-      return response()->json(['success' => false, 'message' => 'Data tidak ditemukan'], 404);
+        return response()->json(['success' => true]);
+    } catch (\Exception $e) {
+        return response()->json(['success' => false, 'message' => 'Gagal menghapus Perusahaan.'], 500);
     }
+}
 }
