@@ -17,6 +17,7 @@
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
     <div class="app-wrapper">
+        @include('components.navSIK')
         @include('components.sidebar')
 
         <main class="app-main">

@@ -14,6 +14,7 @@
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary"> <!--begin::App Wrapper-->
     <div class="app-wrapper"> <!--begin::Header-->
+        @include('components.navSIK')
 
         @include('components.sidebar')
         <!--end::Sidebar--> <!--begin::App Main-->
@@ -80,7 +81,6 @@
                             <div class="mt-2">
                                 <img src="{{ asset('storage/' . $perusahaan->cover_perusahaan) }}"
                                     alt="Cover Perusahaan" width="150">
-                                <p class="text-muted mt-1">Gambar saat ini</p>
                             </div>
                         @endif
                     </div>

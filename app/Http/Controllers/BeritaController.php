@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class BeritaController extends Controller
 {
-  // Display a listing of the berita
-  // Display a listing of the berita with search functionality
+
 public function index(Request $request)
 {
     // Ambil parameter pencarian
@@ -57,7 +56,7 @@ public function index(Request $request)
     $validatedData = $request->validate([
       'judul_berita' => 'required|string',
       'detail_berita' => 'required|string',
-      'gambar.*' => 'nullable|file|mimes:jpg,jpeg,png,gif,pdf,doc,docx,xlsx,xls|max:5120',
+      'gambar.*' => 'nullable|file|mimes:jpg,jpeg,png',
     ]);
 
     // Mengunggah lampiran jika ada

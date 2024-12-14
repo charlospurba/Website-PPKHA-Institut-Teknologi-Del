@@ -9,7 +9,7 @@ use App\Http\Controllers\DaftarPerusahaanController;
 use App\Http\Controllers\AcaraController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\ArtikelController;
-
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -69,6 +69,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/artikel_', [ArtikelController::class, 'index2'])->name('artikel_');
     Route::delete('/artikel/{id}', [ArtikelController::class, 'destroy'])->name('artikel.destroy');
+
+    Route::get('/kelola_pengguna', [UserController::class, 'index'])->name('kelola_pengguna');
+    Route::post('/kelola_pengguna', [UserController::class, 'store'])->name('users.store');
+    Route::get('/kelola_pengguna', [UserController::class, 'index'])->name('kelola_pengguna');
+    Route::delete('/kelola_pengguna', [UserController::class, 'destroy'])->name('users.destroy');
 });
 
 //Route Charlos

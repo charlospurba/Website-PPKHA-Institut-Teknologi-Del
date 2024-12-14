@@ -31,7 +31,7 @@
                 </div>
             </div>
 
-            <!-- Form Tambah Acara -->
+            <!-- Form Tambah Berita -->
             <div class="container mt-3">
                 <form action="{{ route('berita.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -46,7 +46,7 @@
                     <div class="mb-3">
                         <label for="gambar">gambar</label>
                         <input type="file" class="form-control" id="gambar" name="gambar[]" multiple>
-                        <small>Format: jpg, png, pdf, docx, xlsx, dll.</small>
+                        <small>Format: jpg, jpeg, png.</small>
                     </div>
                     <!-- Tombol Simpan dan Batal -->
                     <button type="submit" class="btn"

@@ -165,28 +165,19 @@
 
                 <!-- Platform Kami -->
                 <li class="nav-item mb-2">
-                    <a href="#" class="nav-link d-flex align-items-center" data-bs-toggle="collapse"
-                        data-bs-target="#platformKamiMenu" aria-expanded="false">
+                    <a href="{{ route('kelola_pengguna') }}" class="nav-link d-flex align-items-center {{ request()->routeIs('kelola_pengguna') ? 'active' : '' }}">
                         <i class="bi bi-app-indicator me-2"></i>
                         <span>Platform Kami</span>
                         </i>
                     </a>
                 </li>
 
-                <!-- Logs -->
-                <li class="nav-header mt-4">Logs</li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link d-flex align-items-center">
-                        <i class="bi bi-journal-code"></i>
-                        <span>Catatan Perubahan</span>
-                    </a>
-                </li>
 
                 <!-- Logout -->
                 <li class="nav-header mt-4">Logout</li>
                 <li class="nav-item">
                     <a href="{{ route('logout') }}"
-                        class="btn btn-logout d-flex align-items-center justify-content-center">
+                        class="btn btn-logout  d-flex align-items-center justify-content-center"  style="background-color: #C82333 !important;">
                         <i class="bi bi-box-arrow-right me-2"></i>
                         <span>Logout</span>
                     </a>

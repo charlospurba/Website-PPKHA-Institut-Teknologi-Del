@@ -25,7 +25,6 @@ class UsersTableSeeder extends Seeder
 
         ]);
 
-        // Membuat 5 akun member secara random 
-        User::factory()->count(5)->create();
+
     }
 }

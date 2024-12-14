@@ -15,6 +15,7 @@
         @include('components.header')
 
         <!-- Sidebar -->
+        @include('components.navSIK')
         @include('components.sidebar')
 
         <!-- Main Content -->
