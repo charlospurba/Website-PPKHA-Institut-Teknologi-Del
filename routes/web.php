@@ -78,7 +78,7 @@ Route::middleware('auth')->group(function () {
 
 //Route Charlos
 Route::get('/lowongan-kerja', [LowonganController::class, 'index2'])->name('lowongan-kerja');
-
+Route::get('/lowongan/cari', [LowonganController::class, 'search'])->name('lowongan.search');
 Route::get('/lowongan_kerja', [LowonganController::class, 'index'])->name('lowongan_kerja');
 Route::get('/lowongan/create', [LowonganController::class, 'create'])->name('lowongan.create');
 Route::post('/lowongan', [LowonganController::class, 'store'])->name('lowongan.store');
@@ -90,6 +90,7 @@ Route::get('/lowongan/{id}', [LowonganController::class, 'show'])->name('lowonga
 // Route untuk daftar perusahaan
 Route::get('/daftar-perusahaan', [DaftarPerusahaanController::class, 'index'])->name('daftar.perusahaan');
 Route::get('/perusahaan/{id}', [DaftarPerusahaanController::class, 'show'])->name('perusahaan.show');
+Route::get('/perusahaan/cari', [DaftarPerusahaanController::class, 'search'])->name('perusahaan.search');
 
 
 // Route untuk menyimpan data perusahaan

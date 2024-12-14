@@ -31,16 +31,16 @@ class LowonganController extends Controller
 
   public function show($id)
   {
-      // Pastikan hanya mendapatkan satu data
-      $lowongan = Lowongan::find($id);
-  
-      if (!$lowongan) {
-          return abort(404, 'Lowongan tidak ditemukan');
-      }
-  
-      return view('web.DetailLowongan', compact('lowongan'));
+    // Pastikan hanya mendapatkan satu data
+    $lowongan = Lowongan::find($id);
+
+    if (!$lowongan) {
+      return abort(404, 'Lowongan tidak ditemukan');
+    }
+
+    return view('web.DetailLowongan', compact('lowongan'));
   }
-  
+
 
 
   // Menyimpan data baru
@@ -110,5 +110,29 @@ class LowonganController extends Controller
 
     $lowongan->delete();
     return response()->json(['success' => 'Lowongan berhasil dihapus!']);
+  }
+
+  // Menampilkan halaman daftar lowongan dengan fitur pencarian
+  public function search(Request $request)
+  {
+    // Ambil query pencarian dari input pengguna
+    $query = $request->input('search');
+
+    // Jika ada kata kunci pencarian
+    if ($query) {
+      // Cari lowongan berdasarkan kata kunci (judul, lokasi, atau nama perusahaan)
+      $lowongan = Lowongan::where('judul', 'like', "%{$query}%")
+        ->orWhere('lokasi', 'like', "%{$query}%")
+        ->orWhereHas('perusahaan', function ($queryBuilder) use ($query) {
+          $queryBuilder->where('nama_perusahaan', 'like', "%{$query}%");
+        })
+        ->get();
+    } else {
+      // Jika tidak ada kata kunci pencarian, tampilkan semua lowongan
+      $lowongan = Lowongan::all();
+    }
+
+    // Tampilkan hasil pencarian atau semua lowongan
+    return view('web.LowonganKerja', compact('lowongan'));
   }
 }

@@ -17,7 +17,7 @@ class DaftarPerusahaanController extends Controller
 
     // Pastikan $perusahaan bukan null atau kosong
     if ($perusahaan->isEmpty()) {
-        return view('web.DaftarPerusahaan', ['perusahaan' => null]); // Bisa tampilkan pesan kosong
+      return view('web.DaftarPerusahaan', ['perusahaan' => null]); // Bisa tampilkan pesan kosong
     }
 
     // Tampilkan view dengan data perusahaan
@@ -31,7 +31,7 @@ class DaftarPerusahaanController extends Controller
     $perusahaan = Perusahaan::all() ?? collect();
 
     if ($perusahaan->isEmpty()) {
-        return view('SIK.Daftarperusahaan.DaftarPerusahaan', ['perusahaan' => null]);
+      return view('SIK.Daftarperusahaan.DaftarPerusahaan', ['perusahaan' => null]);
     }
 
     return view('SIK.Daftarperusahaan.DaftarPerusahaan', compact('perusahaan'));
@@ -43,7 +43,7 @@ class DaftarPerusahaanController extends Controller
     $perusahaan = Perusahaan::all();
 
     if ($perusahaan->isEmpty()) {
-        return view('SIK.Daftarperusahaan.TambahDaftarPerusahaan', ['perusahaan' => null]);
+      return view('SIK.Daftarperusahaan.TambahDaftarPerusahaan', ['perusahaan' => null]);
     }
 
     return view('SIK.Daftarperusahaan.TambahDaftarPerusahaan', compact('perusahaan'));
@@ -80,54 +80,67 @@ class DaftarPerusahaanController extends Controller
   }
 
   public function edit1($id)
-    {
-        $perusahaan = Perusahaan::findOrFail($id);
-        return view('daftar_perusahaan.edit', compact('perusahaan'));
-    }
+  {
+    $perusahaan = Perusahaan::findOrFail($id);
+    return view('daftar_perusahaan.edit', compact('perusahaan'));
+  }
 
-    public function update(Request $request, $id)
-{
+  public function update(Request $request, $id)
+  {
     $validated = $request->validate([
-        'nama_perusahaan' => 'required|string|max:255',
-        'daerah_perusahaan' => 'required|string|max:255',
-        'link_perusahaan' => 'required|url',
-        'deskripsi_perusahaan' => 'required|string',
-        'cover_perusahaan' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+      'nama_perusahaan' => 'required|string|max:255',
+      'daerah_perusahaan' => 'required|string|max:255',
+      'link_perusahaan' => 'required|url',
+      'deskripsi_perusahaan' => 'required|string',
+      'cover_perusahaan' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
     ]);
 
     $perusahaan = Perusahaan::findOrFail($id);
 
     if ($request->hasFile('cover_perusahaan')) {
-        if ($perusahaan->cover_perusahaan) {
-            Storage::disk('public')->delete($perusahaan->cover_perusahaan);
-        }
-        $validated['cover_perusahaan'] = $request->file('cover_perusahaan')->store('perusahaan_covers', 'public');
+      if ($perusahaan->cover_perusahaan) {
+        Storage::disk('public')->delete($perusahaan->cover_perusahaan);
+      }
+      $validated['cover_perusahaan'] = $request->file('cover_perusahaan')->store('perusahaan_covers', 'public');
     }
 
     $perusahaan->update($validated);
 
     return redirect()->route('daftar_perusahaan')->with('success', 'Perusahaan berhasil diperbarui.');
-}
+  }
 
-public function show($id)
-{
-  $perusahaan = Perusahaan::findOrFail($id);
-  $lowongan = Lowongan::where('nama_perusahaan', $perusahaan->nama_perusahaan)->get();
+  public function show($id)
+  {
+    $perusahaan = Perusahaan::findOrFail($id);
+    $lowongan = Lowongan::where('nama_perusahaan', $perusahaan->nama_perusahaan)->get();
 
-  return view('web.DetailPerusahaan', compact('perusahaan', 'lowongan'));
-}
+    return view('web.DetailPerusahaan', compact('perusahaan', 'lowongan'));
+  }
 
 
-    
-public function destroy($id)
-{
+
+  public function destroy($id)
+  {
     try {
-        $perusahaan = Perusahaan::findOrFail($id);
-        $perusahaan->delete();
+      $perusahaan = Perusahaan::findOrFail($id);
+      $perusahaan->delete();
 
-        return response()->json(['success' => true]);
+      return response()->json(['success' => true]);
     } catch (\Exception $e) {
-        return response()->json(['success' => false, 'message' => 'Gagal menghapus Perusahaan.'], 500);
+      return response()->json(['success' => false, 'message' => 'Gagal menghapus Perusahaan.'], 500);
     }
-}
+  }
+  public function search(Request $request)
+  {
+    $query = $request->input('query');
+
+    // Cari perusahaan berdasarkan nama atau daerah perusahaan
+    $perusahaan = Perusahaan::where('nama_perusahaan', 'like', "%{$query}%")
+      ->orWhere('daerah_perusahaan', 'like', "%{$query}%")
+      ->get();
+
+    return view('web.DaftarPerusahaan', compact('perusahaan'));
+  }
+
+
 }
