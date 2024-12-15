@@ -71,6 +71,16 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="kualifikasi" class="form-label">Kualifikasi</label>
+                        <textarea name="kualifikasi" class="form-control" rows="4" required>{{ $lowongan->kualifikasi }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="benefit" class="form-label">Benefit</label>
+                        <textarea name="benefit" class="form-control" rows="4" required>{{ $lowongan->benefit }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
                         <label for="jenis_pekerjaan" class="form-label">Jenis Pekerjaan</label>
                         <select name="jenis_pekerjaan" class="form-select" required>
                             <option value="Full-time" {{ $lowongan->jenis_pekerjaan == 'Full-time' ? 'selected' : '' }}>
@@ -98,7 +108,7 @@
         </main>
         <footer class="app-footer"> <!--begin::To the end-->
             <div class="float-end d-none d-sm-inline"></div> <!--end::To the end-->
-            <strong>© 2024 PPKHA IT Del. All rights reserved.</strong>
+            <strong>Copyright &copy; 2024 PPKHA IT Del</strong>
         </footer>
     </div>
 </body>

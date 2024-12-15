@@ -77,10 +77,12 @@ class LowonganController extends Controller
   public function update(Request $request, $id)
   {
     $validatedData = $request->validate([
-      'judul' => 'required|string|max:255',
-      'nama_perusahaan' => 'required|string|max:255',
-      'lokasi' => 'required|string|max:255',
+      'judul' => 'required|string',
+      'nama_perusahaan' => 'required|string',
+      'lokasi' => 'required|string',
       'deskripsi' => 'required|string',
+      'kualifikasi' => 'required|string',
+      'benefit' => 'required|string',
       'jenis_pekerjaan' => 'required|string',
       'cover' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
     ]);

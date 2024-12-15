@@ -128,9 +128,8 @@
         </main> <!--end::App Main--> <!--begin::Footer-->
         <footer class="app-footer"> <!--begin::To the end-->
             <div class="float-end d-none d-sm-inline"></div> <!--end::To the end-->
-            <!--begin::Copyright--> <strong>
-                Copyright &copy; k3-project-pabwe
-            </strong>
+            <!--begin::Copyright--> 
+            <strong>Copyright &copy; 2024 PPKHA IT Del</strong>
             <!--end::Copyright-->
         </footer> <!--end::Footer-->
     </div> <!--end::App Wrapper--> <!--begin::Script--> <!--begin::Third Party Plugin(OverlayScrollbars)-->

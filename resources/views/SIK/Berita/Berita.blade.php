@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+@include('components.header')
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,10 +13,6 @@
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
     <div class="app-wrapper">
-        <!-- Header -->
-        @include('components.header')
-
-        <!-- Sidebar -->
         @include('components.navSIK')
         @include('components.sidebar')
 
@@ -24,7 +22,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Berita</h3>
+                            <h3 class="mb-0">Daftar Berita</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
@@ -42,58 +40,55 @@
                         style="background-color: #13C56B !important; border: 1px solid #13C56B !important;"
                         onclick="location.href='{{ route('berita_.tambah') }}'">Tambah Data</button>
                 </div>
+
                 <div class="container mt-4">
                     <div class="row">
                         @foreach ($berita as $index => $item)
-                            <div class="col-md-12 mb-3">
-                                <div class="card" style="background-color: #E6EDF4; border-radius: 8px;">
-                                    <div class="card-body d-flex align-items-center justify-content-between">
+                            <div class="col-12 mb-3">
+                                <div class="card" style="background-color: #E6EDF4; border-radius: 8px; overflow: hidden;">
+                                    <div class="card-body d-flex align-items-center">
                                         <!-- Wrapper for Image and Content -->
-                                        <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-center" style="flex: 1;">
                                             <!-- Cover -->
-                                            <div style="flex: 0 0 auto;">
+                                            <div class="me-3">
                                                 @php
-                                                    // Ambil gambar secara random dari array gambar
                                                     $randomImage = $item->gambar
                                                         ? $item->gambar[array_rand($item->gambar)]
                                                         : null;
                                                 @endphp
                                                 <img src="{{ asset('storage/' . $randomImage) }}"
-                                                    class="img-fluid rounded-start" alt="{{ $item->judul_berita }}"
-                                                    style="object-fit: cover; height: 120px; width: 100px; margin-right: 10px;">
+                                                    class="img-fluid rounded"
+                                                    alt="{{ $item->judul_berita }}"
+                                                    style="object-fit: cover; height: 100px; width: 100px;">
                                             </div>
-
+                
                                             <!-- Content -->
-                                            <div>
-                                                <h5 style="font-weight: bold; color: #2c3e50; margin: 0;">
-                                                    {{ $item->judul_berita }}</h5>
-                                                <p
-                                                    style="color: #6c757d; margin: 5px 0 0 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;">
+                                            <div style="flex: 1;">
+                                                <h5 class="fw-bold text-dark mb-1">{{ $item->judul_berita }}</h5>
+                                                <p class="text-secondary mb-0" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;">
                                                     {{ $item->detail_berita }}
                                                 </p>
                                             </div>
                                         </div>
-
+                
                                         <!-- Actions -->
-                                        <div style="flex: 0 0 auto; display: flex; gap: 8px; margin-left: auto;">
-                                            <a href="{{ route('berita.edit', $item->id) }}" class="btn btn-sm"
-                                                style="background-color: #13C56B !important; border: 1px solid #13C56B !important; color: white !important;">
+                                        <div class="ms-auto d-flex gap-2">
+                                            <a href="{{ route('berita.edit', $item->id) }}" class="btn btn-sm btn-success">
                                                 Edit
                                             </a>
-                                            <button class="btn btn-sm"
-                                                style="background-color: #FF0000 !important; border: 1px solid #FF0000 !important; color: white !important;"
+                                            <button class="btn btn-sm btn-danger"
                                                 onclick="openDeleteModal({{ $item->id }}, '{{ $item->judul_berita }}')">
                                                 Hapus
                                             </button>
                                         </div>
-
                                     </div>
-
                                 </div>
                             </div>
+                        @endforeach
                     </div>
-                    @endforeach
                 </div>
+                
+                
             </div>
     </div>
     </main>
@@ -101,7 +96,7 @@
     <!-- Footer -->
     <footer class="app-footer">
         <div class="float-end d-none d-sm-inline"></div>
-        <strong>Copyright &copy; k3-project-pabwe</strong>
+        <strong>Copyright &copy; 2024 PPKHA IT Del</strong>
     </footer>
     </div>
 

@@ -111,7 +111,7 @@ class DaftarPerusahaanController extends Controller
 
   public function show($id)
   {
-    $perusahaan = Perusahaan::findOrFail($id);
+    $perusahaan = Perusahaan::with('lowongan')->findOrFail($id);
     $lowongan = Lowongan::where('nama_perusahaan', $perusahaan->nama_perusahaan)->get();
 
     return view('web.DetailPerusahaan', compact('perusahaan', 'lowongan'));

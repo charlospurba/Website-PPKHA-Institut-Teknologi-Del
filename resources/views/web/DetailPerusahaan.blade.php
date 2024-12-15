@@ -87,7 +87,7 @@
                                 <p style="font-size: 14px; margin-bottom: 4px;"><strong>Perusahaan:</strong> {{ $loker->perusahaan->nama_perusahaan ?? 'Tidak Diketahui' }}</p>
                                 <p style="font-size: 14px; margin-bottom: 4px;"><strong>Lokasi:</strong> {{ $loker->lokasi }}</p>
                                 <p style="font-size: 14px; margin-bottom: 8px;"><strong>Jenis Pekerjaan:</strong> {{ $loker->jenis_pekerjaan }}</p>
-                                <a href="#" class="btn btn-primary btn-sm">Lihat Detail</a>
+                                <a href="{{ route('lowongan.show', $loker->id) }}" class="btn btn-primary btn-sm">Lihat Detail</a>
                             </div>
                         </div>
                     </div>

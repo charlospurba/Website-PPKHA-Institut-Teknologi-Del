@@ -59,7 +59,7 @@
         </main>
         <footer class="app-footer"> <!--begin::To the end-->
             <div class="float-end d-none d-sm-inline"></div> <!--end::To the end-->
-            <strong>© 2024 PPKHA IT Del. All rights reserved.</strong>
+            <strong>Copyright &copy; 2024 PPKHA IT Del</strong>
         </footer>
     </div>
 </body>
