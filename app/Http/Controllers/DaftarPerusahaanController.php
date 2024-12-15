@@ -11,31 +11,33 @@ class DaftarPerusahaanController extends Controller
 {
   // Method untuk menampilkan halaman daftar perusahaan
   public function index()
-  {
-    // Ambil semua data perusahaan dari model
-    $perusahaan = Perusahaan::all();
+{
+    // Ambil semua data perusahaan yang diurutkan berdasarkan 'updated_at' secara menurun (data terbaru di atas)
+    $perusahaan = Perusahaan::orderBy('updated_at', 'desc')->get();
 
     // Pastikan $perusahaan bukan null atau kosong
     if ($perusahaan->isEmpty()) {
-      return view('web.DaftarPerusahaan', ['perusahaan' => null]); // Bisa tampilkan pesan kosong
+        return view('web.DaftarPerusahaan', ['perusahaan' => null]); // Bisa tampilkan pesan kosong
     }
 
     // Tampilkan view dengan data perusahaan
     return view('web.DaftarPerusahaan', compact('perusahaan'));
-  }
+}
+
 
   // Method untuk menampilkan halaman daftar perusahaan
   public function index2()
-  {
-    // Ambil semua data perusahaan dari model
-    $perusahaan = Perusahaan::all() ?? collect();
+{
+    // Ambil semua data perusahaan, diurutkan berdasarkan kolom 'updated_at' secara descending
+    $perusahaan = Perusahaan::orderBy('updated_at', 'desc')->get() ?? collect();
 
     if ($perusahaan->isEmpty()) {
-      return view('SIK.Daftarperusahaan.DaftarPerusahaan', ['perusahaan' => null]);
+        return view('SIK.Daftarperusahaan.DaftarPerusahaan', ['perusahaan' => null]);
     }
 
     return view('SIK.Daftarperusahaan.DaftarPerusahaan', compact('perusahaan'));
-  }
+}
+
 
   public function index3()
   {

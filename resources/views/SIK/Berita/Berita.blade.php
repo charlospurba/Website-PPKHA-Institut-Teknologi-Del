@@ -90,7 +90,7 @@
                 
                 
             </div>
-    </div>
+    
     </main>
 
     <!-- Footer -->
@@ -98,7 +98,7 @@
         <div class="float-end d-none d-sm-inline"></div>
         <strong>Copyright &copy; 2024 PPKHA IT Del</strong>
     </footer>
-    </div>
+</div>
 
     <!-- Modal Hapus -->
         <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">

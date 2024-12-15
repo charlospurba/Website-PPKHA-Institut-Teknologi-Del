@@ -80,8 +80,7 @@
                                             
                                             <td>
                                                 @if ($user->role !== 'Admin')
-                                                    <button type="button" class="btn btn-warning btn-sm"
-                                                        onclick="openEditModal({{ json_encode($user) }})">Edit</button>
+                                                    
                                                     <form action="{{ route('users.destroy', $user->id) }}"
                                                         method="POST" style="display:inline;">
                                                         @csrf

@@ -11,7 +11,7 @@ class AcaraController extends Controller
   // Menampilkan halaman utama acara untuk admin
   public function index()
   {
-    $acara = Acara::all(); // Mengambil semua data acara
+    $acara = Acara::orderBy('created_at', 'desc')->get(); // Mengambil semua data acara
     return view('SIK.Acara.Acara', compact('acara')); // View untuk admin
   }
 

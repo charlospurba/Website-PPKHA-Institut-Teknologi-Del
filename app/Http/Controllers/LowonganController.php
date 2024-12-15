@@ -11,16 +11,22 @@ class LowonganController extends Controller
   // Menampilkan halaman utama Lowongan Kerja
 
   public function index()
-  {
-    $lowongan = Lowongan::all(); // Mengambil semua data lowongan
-    return view('SIK.Lowongankerja.LowonganKerja', compact('lowongan'));
-  }
+{
+    // Ambil semua data lowongan yang diurutkan berdasarkan 'updated_at' secara menurun (data terbaru di atas)
+    $lowongan = Lowongan::orderBy('updated_at', 'desc')->get(); 
 
-  public function index2()
-  {
-    $lowongan = Lowongan::all(); // Ambil data dari model
+    return view('SIK.Lowongankerja.LowonganKerja', compact('lowongan'));
+}
+
+
+public function index2()
+{
+    // Ambil semua data lowongan yang diurutkan berdasarkan 'updated_at' secara menurun
+    $lowongan = Lowongan::orderBy('updated_at', 'desc')->get();
+
     return view('web.LowonganKerja', compact('lowongan'));
-  }
+}
+
 
 
   // Menampilkan halaman tambah lowongan
