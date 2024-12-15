@@ -6,11 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\Acara;
 use App\Models\Artikel;
 use App\Models\Berita;
+use App\Models\Lowongan;
 
 class HomeController extends Controller
 {
     public function index()
     {
+        $lowonganTerbaru = Lowongan::latest()->take(4)->get();
         // Mengambil acara terbaru
         $acaraTerbaru = Acara::latest()->take(3)->get();
 
@@ -27,7 +29,7 @@ class HomeController extends Controller
         });
 
         // Kirim data ke view
-        return view('web.home', compact('acaraTerbaru', 'artikelTerbaru', 'beritaTerbaru'));
+        return view('web.home', compact('acaraTerbaru', 'artikelTerbaru', 'beritaTerbaru', 'lowonganTerbaru'));
     }
 
 }

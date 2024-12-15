@@ -84,6 +84,47 @@
     </style>
 
 
+<section id="lowongan-kerja" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-4">Lowongan Kerja Terbaru</h2>
+        <div class="row">
+            @foreach ($lowonganTerbaru as $loker)
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm" style="background-color: #ffffff; border-radius: 8px;">
+                        <div class="card-body d-flex align-items-center">
+                            <!-- Bagian Gambar -->
+                            <div style="flex: 0 0 150px; margin-right: 20px;">
+                                <img src="{{ asset('storage/' . $loker->cover) }}" alt="Cover"
+                                    style="width: 150px; height: 150px; object-fit: cover; border-radius: 8px;">
+                            </div>
+
+                            <!-- Bagian Konten -->
+                            <div style="flex: 1;">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <h3 style="font-weight: bold; margin: 0; color: #084A89 ">
+                                        {{ $loker->perusahaan->nama_perusahaan ?? 'Tidak Diketahui' }}
+                                    </h3>
+                                    <span
+                                        style="display: inline-block; background-color: #C19A6B; color: white; padding: 3px 5px; border-radius: 10px; font-weight: bold;">
+                                        {{ $loker->jenis_pekerjaan }}
+                                    </span>
+                                </div>
+                                <a class="text-decoration-none" href="{{ route('lowongan.show', $loker->id) }}">
+                                    {{ $loker->judul }}
+                                </a>
+                                <!-- Deskripsi Singkat -->
+                                <p class="card-text" style="color: #6c757d; font-size: 0.9rem;">
+                                    {{ Str::limit($loker->deskripsi, 80, '...') }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
     <!-- Acara Terbaru Section -->
     <section id="acara-terbaru" class="py-5">
         <div class="container">
