@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enhanced Navbar</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
     <style>
         /* Navbar styling */
         .navbar {
-            background: linear-gradient(45deg, #098ECC, #6DAB8D, #098ECC);
+            background: #084A89 !important; /* Pastikan warna diterapkan */
             color: white;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease-in-out;
@@ -84,7 +85,7 @@
 </head>
 
 <body>
-    <nav class="app-header navbar navbar-expand bg-body">
+    <nav class="app-header navbar navbar-expand">
         <!--begin::Container-->
         <div class="container-fluid">
             <!--begin::Start Navbar Links-->
@@ -99,7 +100,7 @@
 
             <!--begin::End Navbar Links-->
             <ul class="navbar-nav ms-auto">
-                <!--begin::Navbar Search-->
+                <!--begin::Fullscreen Toggle-->
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-lte-toggle="fullscreen">
                         <i data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i>
@@ -110,17 +111,15 @@
 
                 <!--begin::User Menu Dropdown-->
                 <li class="nav-item dropdown user-menu">
-                    <a href="#" class="nav-link dropdown-toggle" id="userDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
+                    <a href="#" class="nav-link dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <!-- Gambar Pengguna -->
-                        <img src="{{ asset('assets/img/team/wairor.png') }}" class="user-image shadow" alt="User Image">
+                        <img src="{{ asset('assets\vendor\img\user.png') }}" class="user-image shadow" alt="User Image">
                         <span class="d-none d-md-inline">{{ Auth::user()->name ?? 'Guest' }}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end" aria-labelledby="userDropdown">
                         <!--begin::User Image-->
                         <li class="user-header">
-                            <img src="{{ asset('assets/img/team/wairor.png') }}" class="user-image shadow"
-                                alt="User Image">
+                            <img src="{{ asset('assets\vendor\img\user.png') }}" class="user-image shadow" alt="User Image">
                             <p>
                                 <strong>{{ Auth::user()->name ?? 'Guest' }}</strong>
                                 <small>Member since {{ Auth::user()->created_at->format('M. Y') ?? 'Unknown' }}</small>
@@ -142,6 +141,8 @@
         </div>
         <!--end::Container-->
     </nav>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
