@@ -17,9 +17,9 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:5',
+            'password' => 'required|string',
         ]);
 
         User::create([
@@ -32,17 +32,21 @@ class UserController extends Controller
     }
 
     public function destroy($id)
-    {
-        $user = User::find($id);
+{
+    $user = User::find($id);
 
-        if (!$user) {
-            return redirect()->route('kelola_pengguna')->with('error', 'Pengguna tidak ditemukan.');
-        }
-
-        $user->delete();
-
-        return redirect()->route('kelola_pengguna')->with('success', 'Pengguna berhasil dihapus.');
+    if (!$user) {
+        return response()->json(['success' => false, 'message' => 'Pengguna tidak ditemukan'], 404);
     }
+
+    try {
+        $user->delete();
+        return response()->json(['success' => true, 'message' => 'Pengguna berhasil dihapus']);
+    } catch (\Exception $e) {
+        return response()->json(['success' => false, 'message' => 'Gagal menghapus pengguna: ' . $e->getMessage()], 500);
+    }
+}
+
 
     public function update(Request $request, $id)
     {

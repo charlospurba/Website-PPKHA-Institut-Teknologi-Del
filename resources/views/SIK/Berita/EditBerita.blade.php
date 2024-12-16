@@ -60,16 +60,16 @@
                         </div>
                         <button type="button" class="btn btn-sm btn-primary" onclick="addNewInput()">Tambah
                             Gambar</button>
-                        <small>Format: jpg, png, pdf, docx, xlsx, dll.</small>
+                        <small>Format: jpg, jpeg, png</small>
                     </div>
 
                     <div class="mb-3">
-                        <p>Lampiran Lama:</p>
+                        <p>Gambar Lama:</p>
                         @if ($berita->gambar)
                             @foreach ($berita->gambar as $index => $file)
                                 <div id="lampiran-item-{{ $index }}" class="d-flex align-items-center mb-2">
                                     <a href="{{ asset('storage/' . $file) }}" target="_blank" class="me-2">Lihat
-                                        Lampiran</a>
+                                        Gambar</a>
                                     <label>
                                         <input type="checkbox" name="hapus_gambar[]" value="{{ $file }}"> Hapus
                                     </label>

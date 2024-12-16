@@ -73,7 +73,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/kelola_pengguna', [UserController::class, 'index'])->name('kelola_pengguna');
     Route::post('/kelola_pengguna', [UserController::class, 'store'])->name('users.store');
     Route::get('/kelola_pengguna', [UserController::class, 'index'])->name('kelola_pengguna');
-    Route::delete('/kelola_pengguna', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::delete('/kelola_pengguna/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 });
 
 //Route Charlos

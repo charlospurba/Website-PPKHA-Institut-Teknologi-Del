@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,6 +29,22 @@
             color: white !important;
             box-shadow: none !important;
         }
+
+        /* Animasi slide-in dari atas */
+        @keyframes slideInFromTop {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal.slide-top .modal-dialog {
+            animation: slideInFromTop 0.5s ease-out;
+        }
     </style>
 </head>
 
@@ -45,8 +60,14 @@
                         <div class="col-sm-6">
                             <h3 class="mb-0">Kelola Pengguna</h3>
                         </div>
-                        <div class="col-sm-6 text-end">
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-end">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Kelola Pengguna</li>
+                            </ol>
+                        </div>
+                        <div class="col text-end" style="padding: 10px">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal" style="background-color: #13C56B !important; color: white !important; border: 1px solid #13C56B !important;">
                                 Tambah Pengguna
                             </button>
                         </div>
@@ -67,7 +88,6 @@
                                         <th>No</th>
                                         <th>Nama</th>
                                         <th>Email</th>
-                                      
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -77,20 +97,12 @@
                                             <td>{{ $index + 1 }}</td>
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}</td>
-                                            
                                             <td>
-                                                @if ($user->role !== 'Admin')
-                                                    
-                                                    <form action="{{ route('users.destroy', $user->id) }}"
-                                                        method="POST" style="display:inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm"
-                                                            onclick="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?')">Hapus</button>
-                                                    </form>
-                                                @else
-                                                    <span class="text-muted">Tidak ada aksi</span>
-                                                @endif
+                                                <button class="btn btn-sm"
+                                                    style="background-color: #FF0000 !important; color: white !important; border: 1px solid #FF0000 !important;"
+                                                    onclick="openDeleteModal('{{ $user->id }}', '{{ $user->name }}')">
+                                                    Hapus
+                                                </button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -102,36 +114,76 @@
             </div>
         </main>
 
+        <!-- Modal Hapus -->
+        <div class="modal fade slide-top" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-top">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Hapus Data Pengguna</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Apakah kamu yakin ingin menghapus data pengguna <b id="user"></b>?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="button" class="btn" style="background-color: #FF0000; color: white;" id="confirmDeleteButton">
+                            Ya, Tetap Hapus
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            let selectedId = null;
+
+            function openDeleteModal(userId, userName) {
+                selectedId = userId;
+                document.getElementById('user').innerText = userName;
+                const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+                deleteModal.show();
+            }
+
+            document.getElementById('confirmDeleteButton').addEventListener('click', function () {
+                fetch(`/kelola_pengguna/${selectedId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const deleteModal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
+                        deleteModal.hide();
+                        location.reload();
+                    } else {
+                        alert('Terjadi kesalahan: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Gagal menghapus pengguna.');
+                });
+            });
+        </script>
+
         <footer class="app-footer">
-            <div class="float-end d-none d-sm-inline">Anything you want</div>
-            <strong>
-                Copyright &copy; 2014-2024&nbsp;
-                <a href="https://adminlte.io" class="text-decoration-none">AdminLTE.io</a>.
-            </strong>
-            All rights reserved.
+            <strong>Copyright &copy; 2024 PPKHA IT Del</strong>
         </footer>
     </div>
 
     <script src="{{ asset('assets/js/adminlte.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
-    <script>
-        function openEditModal(user) {
-            document.getElementById('editId').value = user.id;
-            document.getElementById('editName').value = user.name;
-            document.getElementById('editEmail').value = user.email;
-
-            document.getElementById('editUserForm').action = `/users/${user.id}`;
-            var editModal = new bootstrap.Modal(document.getElementById('editUserModal'));
-            editModal.show();
-        }
-    </script>
 
     <!-- Modal Tambah Pengguna -->
     <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addUserLabel">Tambah Pengguna</h5>
+                    <h5 class="modal-title" id="addUserLabel">Tambah Kelola Pengguna</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
@@ -145,21 +197,19 @@
                             <label for="email" class="form-label">Email</label>
                             <input type="email" name="email" id="email" class="form-control" required>
                         </div>
-                       
                         <div class="mb-3">
                             <label for="password" class="form-label">Kata Sandi</label>
                             <input type="password" name="password" id="password" class="form-control" required>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"   style="background-color: #FF0000 !important; border: 1px solid #FF0000 !important; color: white !important;">Batal</button>
+                        <button type="submit" class="btn btn-primary" style="background-color: #13C56B !important; color: white !important; border: 1px solid #13C56B !important;">Simpan</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
 </body>
 
 </html>

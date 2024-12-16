@@ -5,87 +5,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enhanced Navbar</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
-    <style>
-        /* Navbar styling */
-        .navbar {
-            background: #084A89 !important; /* Pastikan warna diterapkan */
-            color: white;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease-in-out;
-        }
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    
+<style>
+    /* Navbar styling */
+    .navbar {
+        background: #084A89 !important;
+        color: white !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
+    }
 
-        /* Navbar hover effect */
-        .navbar-nav .nav-link {
-            color: white !important;
-            transition: all 0.3s ease;
-        }
+    .navbar .nav-link {
+        color: white !important; /* Warna teks link di navbar */
+        transition: color 0.3s ease;
+    }
 
-        .navbar-nav .nav-link:hover {
-            color: #ffc107 !important;
-            text-shadow: 0 0 10px #ffc107;
-        }
+    .navbar .nav-link:hover {
+        color: #ffc107 !important; /* Warna teks saat hover */
+        text-shadow: 0 0 10px #ffc107;
+    }
 
-        /* User dropdown animation */
-        .dropdown-menu {
-            transform: translateY(10px);
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
+    /* Dropdown menu styling */
+    .dropdown-menu {
+        background-color: #084A89 !important; /* Warna latar dropdown */
+        border: none; /* Hilangkan border */
+        transform: translateY(10px);
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
 
-        .dropdown-menu.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
+    .dropdown-menu.show {
+        transform: translateY(0);
+        opacity: 1;
+    }
 
-        /* Profile image */
-        .user-image {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-        }
+    .dropdown-menu .dropdown-item {
+        color: white !important; /* Warna teks dropdown */
+    }
 
-        .user-image:hover {
-            transform: scale(1.1);
-        }
+    .dropdown-menu .dropdown-item:hover {
+        background-color: #098ECC !important; /* Warna saat hover */
+        color: white !important;
+    }
 
-        /* User dropdown header */
-        .user-header {
-            background: linear-gradient(45deg, #098ECC, #098ECC);
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
+    /* User dropdown header */
+    .user-header {
+        background: linear-gradient(45deg, #098ECC, #098ECC);
+        color: white !important; /* Warna teks header dropdown */
+        text-align: center;
+        padding: 20px;
+    }
 
-        .user-header img {
-            margin-bottom: 10px;
-            border: 2px solid white;
-        }
+    .user-header img {
+        margin-bottom: 10px;
+        border: 2px solid white;
+    }
 
-        /* Tombol hover tetap biru */
-        .user-footer .btn:hover,
-        .dropdown-menu .dropdown-item:hover {
-            background-color: #098ECC !important;
-            color: white !important;
-        }
+    /* Tombol di bagian footer dropdown */
+    .user-footer .btn {
+        color: white !important; /* Warna teks tombol */
+        background-color: #084A89 !important;
+        border: none;
+    }
 
-        /* Tetap biru saat diklik */
-        .user-footer .btn:active,
-        .user-footer .btn:focus,
-        .dropdown-menu .dropdown-item:active,
-        .dropdown-menu .dropdown-item:focus {
-            background-color: #098ECC !important;
-            color: white !important;
-            box-shadow: none !important;
-        }
-    </style>
+    .user-footer .btn:hover {
+        background-color: #098ECC !important;
+        color: white !important;
+    }
+</style>
+
+    
 </head>
 
 <body>
-    <nav class="app-header navbar navbar-expand">
+    <nav class="app-header navbar navbar-expand bg-body" style="background: #084A89 !important ">
         <!--begin::Container-->
         <div class="container-fluid">
             <!--begin::Start Navbar Links-->
@@ -100,7 +94,7 @@
 
             <!--begin::End Navbar Links-->
             <ul class="navbar-nav ms-auto">
-                <!--begin::Fullscreen Toggle-->
+                <!--begin::Navbar Search-->
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-lte-toggle="fullscreen">
                         <i data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i>
@@ -111,7 +105,8 @@
 
                 <!--begin::User Menu Dropdown-->
                 <li class="nav-item dropdown user-menu">
-                    <a href="#" class="nav-link dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a href="#" class="nav-link dropdown-toggle" id="userDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
                         <!-- Gambar Pengguna -->
                         <img src="{{ asset('assets\vendor\img\user.png') }}" class="user-image shadow" alt="User Image">
                         <span class="d-none d-md-inline">{{ Auth::user()->name ?? 'Guest' }}</span>
@@ -119,7 +114,8 @@
                     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end" aria-labelledby="userDropdown">
                         <!--begin::User Image-->
                         <li class="user-header">
-                            <img src="{{ asset('assets\vendor\img\user.png') }}" class="user-image shadow" alt="User Image">
+                            <img src="{{ asset('assets\vendor\img\user.png') }}" class="user-image shadow"
+                                alt="User Image">
                             <p>
                                 <strong>{{ Auth::user()->name ?? 'Guest' }}</strong>
                                 <small>Member since {{ Auth::user()->created_at->format('M. Y') ?? 'Unknown' }}</small>
@@ -128,10 +124,7 @@
                         <!--end::User Image-->
 
                         <!--begin::Menu Body-->
-                        <li class="user-footer">
-                            <a href="#" class="btn btn-default btn-flat">Profile</a>
-                            <a href="{{ route('login') }}" class="btn btn-default btn-flat float-end">Sign out</a>
-                        </li>
+                       
                         <!--end::Menu Footer-->
                     </ul>
                 </li>
@@ -141,8 +134,8 @@
         </div>
         <!--end::Container-->
     </nav>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
+
+
