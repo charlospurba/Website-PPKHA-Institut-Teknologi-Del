@@ -19,7 +19,7 @@ class ArtikelController extends Controller
 
   public function index2()
   {
-    $artikel = Artikel::all();
+    $artikel = Artikel::orderBy('created_at', 'desc')->get();
     return view('SIK.Artikel.Artikel', compact('artikel')); // View untuk admin
   }
 

@@ -49,7 +49,7 @@
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
                                     Dasbor
                                 </li>
@@ -61,7 +61,7 @@
 
             <div class="container">
                 <h3 class="text-center">Selamat Datang di menu SIK PPKHA</h3>
-                <h4 class="text-center mt-3">Anda memperoleh otorisasi untuk memanage content Website PPKHA</h4>
+                <h4 class="text-center mt-3">Anda memperoleh otorisasi untuk mengelola content Website PPKHA</h4>
             </div>
             <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
            

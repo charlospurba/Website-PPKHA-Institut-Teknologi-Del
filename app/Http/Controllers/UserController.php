@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::orderBy('created_at', 'desc')->get();
         return view('SIK.Kelolapengguna.KelolaPengguna', compact('users'));
     }
 
@@ -48,22 +48,5 @@ class UserController extends Controller
 }
 
 
-    public function update(Request $request, $id)
-    {
-        $user = User::findOrFail($id);
-
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $id,
-            'password' => 'nullable|string|min:5',
-        ]);
-
-        $user->update([
-            'name' => $validatedData['name'],
-            'email' => $validatedData['email'],
-            'password' => $request->filled('password') ? Hash::make($validatedData['password']) : $user->password,
-        ]);
-
-        return redirect()->route('kelola_pengguna')->with('success', 'Data pengguna berhasil diperbarui.');
-    }
+    
 }
