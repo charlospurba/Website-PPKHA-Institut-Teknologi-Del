@@ -33,7 +33,7 @@
                 <div class="card shadow-sm border-0" style="border-radius: 8px; width: auto;">
                     <div class="card-body p-0">
                         <form action="{{ route('lowongan.search') }}" method="GET" class="d-flex">
-                            <div class="input-group" style="max-width: 300px;">
+                            <div class="input-group" style="max-width: 300px;"> <!-- Adjusted max-width -->
                                 <input type="text" name="query" class="form-control" placeholder="Cari lowongan..."
                                     aria-label="Search"
                                     style="padding-left: 10px; height: 36px; border: 1px solid #ddd;">

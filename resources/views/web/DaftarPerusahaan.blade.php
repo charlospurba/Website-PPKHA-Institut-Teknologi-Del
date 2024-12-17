@@ -31,14 +31,16 @@
                 <div class="card shadow-sm border-0" style="border-radius: 8px; width: auto;">
                     <div class="card-body p-0">
                         <form action="{{ route('perusahaan.search') }}" method="GET" class="d-flex">
-                            <div class="input-group" style="max-width: 300px;">
-                                <input type="text" name="query" class="form-control"
-                                    placeholder="Cari perusahaan..." aria-label="Search">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-search"></i>
+                            <div class="input-group" style="max-width: 300px;"> <!-- Adjusted max-width -->
+                                <input type="text" name="query" class="form-control" placeholder="Cari perusahaan..."
+                                    aria-label="Search"
+                                    style="padding-left: 10px; height: 36px; border: 1px solid #ddd;">
+                                <button type="submit" class="btn btn-primary"
+                                    style="border: 1px solid #ddd; height: 36px; padding: 0 12px; background-color: #007bff; border-radius: 0;">
+                                    <i class="fas fa-search" style="font-size: 18px;"></i>
                                 </button>
                             </div>
-                        </form>
+                        </form>                        
                     </div>
                 </div>
             </div>

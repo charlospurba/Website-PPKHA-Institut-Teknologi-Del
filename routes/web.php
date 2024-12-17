@@ -76,7 +76,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/kelola_pengguna/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 });
 
-//Route Charlos
+//Route 
 Route::get('/lowongan-kerja', [LowonganController::class, 'index2'])->name('lowongan-kerja');
 Route::get('/lowongan/cari', [LowonganController::class, 'search'])->name('lowongan.search');
 Route::get('/lowongan_kerja', [LowonganController::class, 'index'])->name('lowongan_kerja');

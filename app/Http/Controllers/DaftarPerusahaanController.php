@@ -132,17 +132,17 @@ class DaftarPerusahaanController extends Controller
       return response()->json(['success' => false, 'message' => 'Gagal menghapus Perusahaan.'], 500);
     }
   }
+
   public function search(Request $request)
   {
     $query = $request->input('query');
-
-    // Cari perusahaan berdasarkan nama atau daerah perusahaan
     $perusahaan = Perusahaan::where('nama_perusahaan', 'like', "%{$query}%")
-      ->orWhere('daerah_perusahaan', 'like', "%{$query}%")
+      ->orderBy('created_at', 'desc')  // Mengurutkan berdasarkan created_at, 'desc' untuk descending (terbaru)
       ->get();
 
-    return view('web.DaftarPerusahaan', compact('perusahaan'));
-  }
 
+    // Tampilkan view dengan data perusahaan
+    return view('web.DaftarPerusahaan', compact('perusahaan'));  // Pastikan ini sesuai dengan path view Anda
+  }
 
 }

@@ -15,6 +15,8 @@ class LowonganController extends Controller
     // Ambil semua data lowongan yang diurutkan berdasarkan 'updated_at' secara menurun (data terbaru di atas)
     $lowongan = Lowongan::orderBy('updated_at', 'desc')->get(); 
 
+    
+
     return view('SIK.Lowongankerja.LowonganKerja', compact('lowongan'));
 }
 
@@ -123,24 +125,11 @@ public function index2()
   // Menampilkan halaman daftar lowongan dengan fitur pencarian
   public function search(Request $request)
   {
-    // Ambil query pencarian dari input pengguna
-    $query = $request->input('search');
+    $query = $request->input('query');
+    $lowongan = Lowongan::where('judul', 'like', "%{$query}%")
+      ->orderBy('created_at', 'desc')  // Mengurutkan berdasarkan created_at, 'desc' untuk descending (terbaru)
+      ->paginate(10);
 
-    // Jika ada kata kunci pencarian
-    if ($query) {
-      // Cari lowongan berdasarkan kata kunci (judul, lokasi, atau nama perusahaan)
-      $lowongan = Lowongan::where('judul', 'like', "%{$query}%")
-        ->orWhere('lokasi', 'like', "%{$query}%")
-        ->orWhereHas('perusahaan', function ($queryBuilder) use ($query) {
-          $queryBuilder->where('nama_perusahaan', 'like', "%{$query}%");
-        })
-        ->get();
-    } else {
-      // Jika tidak ada kata kunci pencarian, tampilkan semua lowongan
-      $lowongan = Lowongan::all();
-    }
-
-    // Tampilkan hasil pencarian atau semua lowongan
-    return view('web.LowonganKerja', compact('lowongan'));
+    return view('web.LowonganKerja', compact('lowongan'));  // Pastikan ini sesuai dengan path view Anda
   }
 }
