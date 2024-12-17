@@ -126,10 +126,12 @@
                         <p>Apakah kamu yakin ingin menghapus data pengguna <b id="user"></b>?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="button" class="btn" style="background-color: #FF0000; color: white;" id="confirmDeleteButton">
-                            Ya, Tetap Hapus
-                        </button>
+                        <button type="button" class="btn" style="background-color: #6c757d !important; color: white !important;"
+                        data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn" style="background-color: #FF0000 !important; color: white !important;"
+                        id="confirmDeleteButton">
+                        Ya, Tetap Hapus
+                    </button>
                     </div>
                 </div>
             </div>
